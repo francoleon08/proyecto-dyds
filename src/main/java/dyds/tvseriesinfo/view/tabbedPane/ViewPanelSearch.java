@@ -1,28 +1,32 @@
-package dyds.tvseriesinfo.view;
+package dyds.tvseriesinfo.view.tabbedPane;
 
 import dyds.tvseriesinfo.model.entities.SearchResult;
-import dyds.tvseriesinfo.presenter.PresenterView;
+import dyds.tvseriesinfo.presenter.Presenter;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 
-@Getter
-@Setter
-public class ViewPanelSearch extends JPanel {
+public class ViewPanelSearch extends JPanel implements ViewTabbedPane {
     private JPanel searchPanel;
+    @Getter
     private JTextField seriesToSearchTextField;
+    @Getter
     private JTextPane resultTextToSearchHTML;
     private JButton searchButton;
     private JButton saveLocallyButton;
+    private JPopupMenu searchOptionsMenu;
 
+    @Setter @Getter
     String resultTextToSearch = "";
+    @Setter @Getter
     String selectedResultTitle = null;
 
-    private PresenterView presenterView;
-
-    private JPopupMenu searchOptionsMenu;
+    @Setter
+    private Presenter presenterSearchSeries;
+    @Setter
+    private Presenter presenterSaveSeries;
 
     public ViewPanelSearch() {
         initConfig();
@@ -30,21 +34,31 @@ public class ViewPanelSearch extends JPanel {
     }
 
     private void initConfig() {
-        presenterView = PresenterView.getIntance();
-        presenterView.setViewPanelSearch(this);
         searchOptionsMenu = new JPopupMenu("Search Results");
         resultTextToSearchHTML.setContentType("text/html");
     }
 
 
-    private void initListeners() {
-        searchButton.addActionListener(e -> {
-            presenterView.onEventSearchSeries();
-        });
+    public void initListeners() {
+        searchButton.addActionListener(e ->
+                presenterSearchSeries.onEvent()
+        );
 
-        saveLocallyButton.addActionListener(actionEvent -> {
-            presenterView.onEventSaveSeries();
-        });
+        saveLocallyButton.addActionListener(actionEvent ->
+                presenterSaveSeries.onEvent()
+        );
+    }
+
+    @Override
+    public void setWorkingState(boolean working) {
+        for(Component component: this.searchPanel.getComponents())
+            component.setEnabled(!working);
+        resultTextToSearchHTML.setEnabled(!working);
+    }
+
+    @Override
+    public Container getContet() {
+        return this.getContet();
     }
 
     public void showOptionsMenu() {
@@ -57,15 +71,5 @@ public class ViewPanelSearch extends JPanel {
 
     public void addOptionSearchResult(SearchResult sr) {
         searchOptionsMenu.add(sr);
-    }
-
-    public void setWorkingStatus() {
-        for(Component c: this.searchPanel.getComponents()) c.setEnabled(false);
-        resultTextToSearchHTML.setEnabled(false);
-    }
-
-    public void setWatingStatus() {
-        for(Component c: this.searchPanel.getComponents()) c.setEnabled(true);
-        resultTextToSearchHTML.setEnabled(true);
     }
 }

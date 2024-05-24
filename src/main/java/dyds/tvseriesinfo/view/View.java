@@ -1,45 +1,41 @@
 package dyds.tvseriesinfo.view;
 
-import java.awt.*;
-
 import javax.swing.*;
 
-import dyds.tvseriesinfo.model.dataAccess.DataBase;
+import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
+import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
+import lombok.Getter;
 
-public class View {
-  // ventana principal
+import java.awt.*;
+
+public class View implements BaseView {
   private JPanel contentPane;
   private JTabbedPane SeriesTabbedPane;
-
   private JPanel searchPanel;
   private JPanel storagePanel;
+  @Getter
   private ViewPanelSearch viewPanelSearch;
+  @Getter
   private ViewPanelStorage viewPanelStorage;
 
 
   public View() {
     try {
-      // Set System L&F
-      UIManager.put("nimbusSelection", new Color(247,248,250));
-
-      for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-        if ("Nimbus".equals(info.getName())) {
-          UIManager.setLookAndFeel(info.getClassName());
-          break;
-        }
-      }
-    }
-    catch (Exception e) {
-      System.out.println("Something went wrong with UI!");
+      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
   }
 
-  public void show() {
+  public void initView() {
     JFrame frame = new JFrame("TV Series Info Repo");
-
-    frame.setContentPane(new View().contentPane);
+    frame.setContentPane(getContet());
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.pack();
     frame.setVisible(true);
+  }
+
+  public Container getContet() {
+    return contentPane;
   }
 }
