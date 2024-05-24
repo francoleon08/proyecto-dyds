@@ -1,4 +1,4 @@
-package dyds.tvseriesinfo.fulllogic;
+package dyds.tvseriesinfo.model.apiConsummer;
 
 
 import retrofit2.Call;

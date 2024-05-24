@@ -1,4 +1,4 @@
-package dyds.tvseriesinfo.fulllogic;
+package dyds.tvseriesinfo.model.entities;
 
 import javax.swing.*;
 
