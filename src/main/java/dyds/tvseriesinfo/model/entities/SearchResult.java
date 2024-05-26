@@ -1,11 +1,14 @@
 package dyds.tvseriesinfo.model.entities;
 
+import lombok.Getter;
+
 import javax.swing.*;
 
+@Getter
 public class SearchResult extends JMenuItem {
-    public String title;
-    public String pageID;
-    public String snippet;
+    private String title;
+    private String pageID;
+    private String snippet;
 
     public SearchResult(String title, String pageID, String snippet) {
         String itemText = "<html><font face=\"arial\">" + title + ": " + snippet;
