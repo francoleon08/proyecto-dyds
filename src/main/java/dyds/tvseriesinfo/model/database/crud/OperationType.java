@@ -4,5 +4,6 @@ public enum OperationType {
     DELETE,
     SAVE,
     SEARCH,
-    SAVE_CHANGES
+    SAVE_CHANGES,
+    GET
 }

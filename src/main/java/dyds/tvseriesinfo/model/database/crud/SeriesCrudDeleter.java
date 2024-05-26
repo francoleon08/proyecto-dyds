@@ -3,31 +3,37 @@ package dyds.tvseriesinfo.model.database.crud;
 import dyds.tvseriesinfo.model.database.DatabaseConnectionManager;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class SeriesCrudDeleter extends SeriesCrudDatabase {
+    private static final String DELETE_FROM_CATALOG_WHERE_TITLE = "DELETE FROM catalog WHERE title = ?";
+    private static SeriesCrudDeleter instance;
 
-    public SeriesCrudDeleter() {
+    private SeriesCrudDeleter() {
         super();
     }
 
-    public void deleteSeriesByTitle(String title) {
+    public static synchronized SeriesCrudDeleter getInstance() {
+        if (instance == null) {
+            instance = new SeriesCrudDeleter();
+        }
+        return instance;
+    }
 
-        Connection connection = null;
-        try {
-            connection = DatabaseConnectionManager.createConnection();
-            connection = DatabaseConnectionManager.createConnection();
-            Statement statement = DatabaseConnectionManager.createStatement(connection);
-
-            statement.executeUpdate("DELETE FROM catalog WHERE title = '" + title + "'");
-
+    public synchronized void deleteSeriesByTitle(String title) {
+        try (Connection connection = DatabaseConnectionManager.createConnection()) {
+            executeUpdateSeries(title, connection);
+            notifyListenersSuccess(OperationType.DELETE);
         } catch (SQLException e) {
             System.err.println("Get title error " + e.getMessage());
-        } finally {
-            DatabaseConnectionManager.closeConnection(connection);
         }
+    }
 
-        notifyListenersSuccess(OperationType.DELETE);
+    private void executeUpdateSeries(String title, Connection connection) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_CATALOG_WHERE_TITLE)) {
+            preparedStatement.setString(1, title);
+            preparedStatement.executeUpdate();
+        }
     }
 }

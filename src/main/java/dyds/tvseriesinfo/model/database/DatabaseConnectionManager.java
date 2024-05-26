@@ -1,6 +1,9 @@
 package dyds.tvseriesinfo.model.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseConnectionManager {
     private static final String DATABASE_URL = "jdbc:sqlite:./dictionary.db";
