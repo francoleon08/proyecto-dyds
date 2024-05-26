@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class SeriesCrudGetter extends SeriesCrudDatabase {
+public class SeriesCRUDGetter extends SeriesCRUD {
 
     private static final String SELECT_FROM_CATALOG = "select * from catalog";
     private static final String SELECT_FROM_CATALOG_WHERE_TITLE = "select * from catalog WHERE title = ?";
@@ -15,16 +15,16 @@ public class SeriesCrudGetter extends SeriesCrudDatabase {
     private ArrayList<String> lastTitlesSeries;
     @Getter
     private String lastSeriesExtactByTitle;
-    private static SeriesCrudGetter instance;
+    private static SeriesCRUDGetter instance;
 
-    private SeriesCrudGetter() {
+    private SeriesCRUDGetter() {
         super();
         lastTitlesSeries = new ArrayList<>();
     }
 
-    public static synchronized SeriesCrudGetter getInstance() {
+    public static synchronized SeriesCRUDGetter getInstance() {
         if (instance == null) {
-            instance = new SeriesCrudGetter();
+            instance = new SeriesCRUDGetter();
         }
         return instance;
     }

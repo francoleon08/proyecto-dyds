@@ -1,20 +1,20 @@
 package dyds.tvseriesinfo.presenter;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCrudSaver;
+import dyds.tvseriesinfo.model.database.crud.SeriesCRUDSaver;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
 import java.util.Objects;
 
 public class PresenterSaveSeries implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
-    private final SeriesCrudSaver seriesSaver;
+    private final SeriesCRUDSaver seriesSaver;
     private final PresenterGetterSeries presenterGetterSeries;
     private Thread taskThread;
 
     public PresenterSaveSeries(ViewPanelSearch viewPanelSearch, PresenterGetterSeries presenterGetterSeries) {
         this.viewPanelSearch = viewPanelSearch;
-        this.seriesSaver = SeriesCrudSaver.getInstance();
+        this.seriesSaver = SeriesCRUDSaver.getInstance();
         this.presenterGetterSeries = presenterGetterSeries;
         this.viewPanelSearch.setPresenterSaveSeries(this);
         initListener();

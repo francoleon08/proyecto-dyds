@@ -1,7 +1,7 @@
 package dyds.tvseriesinfo.presenter;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCrudDeleter;
+import dyds.tvseriesinfo.model.database.crud.SeriesCRUDDeleter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,13 +10,13 @@ public class PresenterDeleteSeries implements Presenter {
     @Setter
     @Getter
     private ViewPanelStorage viewPanelStorage;
-    private final SeriesCrudDeleter seriesDeleter;
+    private final SeriesCRUDDeleter seriesDeleter;
     private final PresenterGetterSeries presenterGetterSeries;
     private Thread taskThread;
 
     public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage, PresenterGetterSeries presenterGetterSeries) {
         this.viewPanelStorage = viewPanelStorage;
-        this.seriesDeleter = SeriesCrudDeleter.getInstance();
+        this.seriesDeleter = SeriesCRUDDeleter.getInstance();
         this.presenterGetterSeries = presenterGetterSeries;
         this.viewPanelStorage.setPresenterDeleteSeries(this);
         initListener();

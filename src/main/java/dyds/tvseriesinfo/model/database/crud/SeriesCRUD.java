@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class SeriesCrudDatabase {
+public abstract class SeriesCRUD {
     protected HashMap<OperationType, List<ListenerModelSeries>> listeners;
 
-    public SeriesCrudDatabase() {
+    public SeriesCRUD() {
         initListenersConfiguration();
     }
 

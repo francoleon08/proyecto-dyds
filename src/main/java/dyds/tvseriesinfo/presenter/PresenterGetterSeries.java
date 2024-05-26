@@ -1,17 +1,17 @@
 package dyds.tvseriesinfo.presenter;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
+import dyds.tvseriesinfo.model.database.crud.SeriesCRUDGetter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
 public class PresenterGetterSeries implements Presenter {
     private final ViewPanelStorage viewPanelStorage;
-    private final SeriesCrudGetter seriesGetter;
+    private final SeriesCRUDGetter seriesGetter;
     private Thread taskThread;
 
     public PresenterGetterSeries(ViewPanelStorage viewPanelStorage) {
         this.viewPanelStorage = viewPanelStorage;
-        this.seriesGetter = SeriesCrudGetter.getInstance();
+        this.seriesGetter = SeriesCRUDGetter.getInstance();
         this.viewPanelStorage.setPresenterGetterSeries(this);
         loadSeriesInViewPanelStorage();
         initListener();

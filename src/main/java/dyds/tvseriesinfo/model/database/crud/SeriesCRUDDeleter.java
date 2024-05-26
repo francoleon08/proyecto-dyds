@@ -6,17 +6,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SeriesCrudDeleter extends SeriesCrudDatabase {
+public class SeriesCRUDDeleter extends SeriesCRUD {
     private static final String DELETE_FROM_CATALOG_WHERE_TITLE = "DELETE FROM catalog WHERE title = ?";
-    private static SeriesCrudDeleter instance;
+    private static SeriesCRUDDeleter instance;
 
-    private SeriesCrudDeleter() {
+    private SeriesCRUDDeleter() {
         super();
     }
 
-    public static synchronized SeriesCrudDeleter getInstance() {
+    public static synchronized SeriesCRUDDeleter getInstance() {
         if (instance == null) {
-            instance = new SeriesCrudDeleter();
+            instance = new SeriesCRUDDeleter();
         }
         return instance;
     }

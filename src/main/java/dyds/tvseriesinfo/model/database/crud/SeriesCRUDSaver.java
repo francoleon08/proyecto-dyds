@@ -6,17 +6,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SeriesCrudSaver extends SeriesCrudDatabase {
+public class SeriesCRUDSaver extends SeriesCRUD {
     private static final String REPLACE_INTO_CATALOG = "replace into catalog values(null, ?, ?, 1)";
-    private static SeriesCrudSaver instance;
+    private static SeriesCRUDSaver instance;
 
-    private SeriesCrudSaver() {
+    private SeriesCRUDSaver() {
         super();
     }
 
-    public static synchronized SeriesCrudSaver getInstance() {
+    public static synchronized SeriesCRUDSaver getInstance() {
         if (instance == null) {
-            instance = new SeriesCrudSaver();
+            instance = new SeriesCRUDSaver();
         }
         return instance;
     }
