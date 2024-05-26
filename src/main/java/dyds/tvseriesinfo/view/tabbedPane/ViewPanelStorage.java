@@ -1,6 +1,5 @@
 package dyds.tvseriesinfo.view.tabbedPane;
 
-import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
 import dyds.tvseriesinfo.presenter.Presenter;
 import lombok.Setter;
 
@@ -19,6 +18,8 @@ public class ViewPanelStorage extends JPanel implements ViewTabbedPane {
     private Presenter presenterDeleteSeries;
     @Setter
     private Presenter presenterSaveChangesSeries;
+    @Setter
+    private Presenter presenterGetterSeries;
 
 
     public ViewPanelStorage() {
@@ -26,14 +27,14 @@ public class ViewPanelStorage extends JPanel implements ViewTabbedPane {
         initListeners();
     }
 
-    private void initConfig(){
+    private void initConfig() {
         detailsSeries.setContentType("text/html");
         initConfigPopupMenu();
     }
 
     public void initListeners() {
         seriesComboBox.addActionListener(actionEvent ->
-                this.setDetailsSeries(SeriesCrudGetter.getDetailsSeriesByTitle(this.getItemSelectedComboBox()))
+                presenterGetterSeries.onEvent()
         );
         deleteItem.addActionListener(actionEvent ->
                 presenterDeleteSeries.onEvent()
@@ -49,11 +50,6 @@ public class ViewPanelStorage extends JPanel implements ViewTabbedPane {
             component.setEnabled(!working);
         }
         detailsSeries.setEnabled(!working);
-    }
-
-    @Override
-    public Container getContet() {
-        return this.getContet();
     }
 
     public boolean isItemSelected() {

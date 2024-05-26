@@ -18,9 +18,11 @@ public class ViewPanelSearch extends JPanel implements ViewTabbedPane {
     private JButton saveLocallyButton;
     private JPopupMenu searchOptionsMenu;
 
-    @Setter @Getter
+    @Setter
+    @Getter
     String resultTextToSearch = "";
-    @Setter @Getter
+    @Setter
+    @Getter
     String selectedResultTitle = null;
 
     @Setter
@@ -51,14 +53,9 @@ public class ViewPanelSearch extends JPanel implements ViewTabbedPane {
 
     @Override
     public void setWorkingState(boolean working) {
-        for(Component component: this.searchPanel.getComponents())
+        for (Component component : this.searchPanel.getComponents())
             component.setEnabled(!working);
         resultTextToSearchHTML.setEnabled(!working);
-    }
-
-    @Override
-    public Container getContet() {
-        return this.getContet();
     }
 
     public void showOptionsMenu() {

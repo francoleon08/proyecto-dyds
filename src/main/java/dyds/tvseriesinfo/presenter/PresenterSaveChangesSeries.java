@@ -1,18 +1,18 @@
 package dyds.tvseriesinfo.presenter;
 
-import dyds.tvseriesinfo.model.database.ListenerModelSeries;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCrudSaver;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
-public class PresenterSaveChangesSeries implements Presenter, ListenerModelSeries {
-    private ViewPanelStorage viewPanelStorage;
-    private SeriesCrudSaver modelSaver;
+public class PresenterSaveChangesSeries implements Presenter {
+    private final ViewPanelStorage viewPanelStorage;
+    private final SeriesCrudSaver seriesSaver;
     private Thread taskThread;
 
-    public PresenterSaveChangesSeries(ViewPanelStorage viewPanelStorage, SeriesCrudSaver modelSaver) {
+    public PresenterSaveChangesSeries(ViewPanelStorage viewPanelStorage) {
         this.viewPanelStorage = viewPanelStorage;
-        this.modelSaver = modelSaver;
+        this.seriesSaver = SeriesCrudSaver.getInstance();
+        this.viewPanelStorage.setPresenterSaveChangesSeries(this);
         initListener();
     }
 
@@ -24,11 +24,11 @@ public class PresenterSaveChangesSeries implements Presenter, ListenerModelSerie
 
     public void handleSaveChangesSeries() {
         viewPanelStorage.setWorkingState(true);
-        modelSaver.saveSeries(viewPanelStorage.getItemSelectedComboBox().replace("'", "`"), viewPanelStorage.getDetailsSeries(), OperationType.SAVE_CHANGES);
+        seriesSaver.saveSeries(viewPanelStorage.getItemSelectedComboBox().replace("'", "`"), viewPanelStorage.getDetailsSeries(), OperationType.SAVE_CHANGES);
     }
 
     private void initListener() {
-        modelSaver.addListener(OperationType.SAVE_CHANGES, this);
+        seriesSaver.addListener(OperationType.SAVE_CHANGES, this);
     }
 
     @Override

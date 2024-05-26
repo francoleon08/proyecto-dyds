@@ -1,25 +1,24 @@
 package dyds.tvseriesinfo.presenter;
 
-import dyds.tvseriesinfo.model.database.ListenerModelSeries;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCrudDeleter;
-import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PresenterDeleteSeries implements Presenter, ListenerModelSeries {
-    @Setter @Getter
+public class PresenterDeleteSeries implements Presenter {
+    @Setter
+    @Getter
     private ViewPanelStorage viewPanelStorage;
-    private SeriesCrudDeleter seriesDeleter;
-    private SeriesCrudGetter seriesGetter;
-
+    private final SeriesCrudDeleter seriesDeleter;
+    private final PresenterGetterSeries presenterGetterSeries;
     private Thread taskThread;
 
-    public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage, SeriesCrudDeleter seriesDeleter, SeriesCrudGetter seriesGetter) {
+    public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage, PresenterGetterSeries presenterGetterSeries) {
         this.viewPanelStorage = viewPanelStorage;
-        this.seriesDeleter = seriesDeleter;
-        this.seriesGetter = seriesGetter;
+        this.seriesDeleter = SeriesCrudDeleter.getInstance();
+        this.presenterGetterSeries = presenterGetterSeries;
+        this.viewPanelStorage.setPresenterDeleteSeries(this);
         initListener();
     }
 
@@ -31,7 +30,7 @@ public class PresenterDeleteSeries implements Presenter, ListenerModelSeries {
 
     private void handleDeleteSeries() {
         viewPanelStorage.setWorkingState(true);
-        if(viewPanelStorage.isItemSelected()){
+        if (viewPanelStorage.isItemSelected()) {
             seriesDeleter.deleteSeriesByTitle(viewPanelStorage.getItemSelectedComboBox());
         }
     }
@@ -42,7 +41,7 @@ public class PresenterDeleteSeries implements Presenter, ListenerModelSeries {
 
     @Override
     public void hasFinishedOperation() {
-        viewPanelStorage.setSeriesComboBox(seriesGetter.getTitlesSeries().stream().sorted().toArray());
+        presenterGetterSeries.loadSeriesInViewPanelStorage();
         viewPanelStorage.setDetailsSeries("");
         viewPanelStorage.setWorkingState(false);
     }

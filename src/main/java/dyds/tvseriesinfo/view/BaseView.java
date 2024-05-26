@@ -4,5 +4,5 @@ import java.awt.*;
 
 public interface BaseView {
 
-    public Container getContet();
+    Container getContet();
 }

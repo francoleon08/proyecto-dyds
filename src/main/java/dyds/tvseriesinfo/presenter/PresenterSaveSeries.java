@@ -1,26 +1,22 @@
 package dyds.tvseriesinfo.presenter;
 
-import dyds.tvseriesinfo.model.database.ListenerModelSeries;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
 import dyds.tvseriesinfo.model.database.crud.SeriesCrudSaver;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
-import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
 import java.util.Objects;
 
-public class PresenterSaveSeries implements Presenter, ListenerModelSeries {
-    private ViewPanelSearch viewPanelSearch;
-    private ViewPanelStorage viewPanelStorage;
-    private SeriesCrudSaver seriesSaver;
-    private SeriesCrudGetter seriesGetter;
+public class PresenterSaveSeries implements Presenter {
+    private final ViewPanelSearch viewPanelSearch;
+    private final SeriesCrudSaver seriesSaver;
+    private final PresenterGetterSeries presenterGetterSeries;
     private Thread taskThread;
 
-    public PresenterSaveSeries(ViewPanelStorage viewPanelStorage, ViewPanelSearch viewPanelSearch, SeriesCrudSaver seriesSaver, SeriesCrudGetter seriesGetter) {
+    public PresenterSaveSeries(ViewPanelSearch viewPanelSearch, PresenterGetterSeries presenterGetterSeries) {
         this.viewPanelSearch = viewPanelSearch;
-        this.viewPanelStorage = viewPanelStorage;
-        this.seriesSaver = seriesSaver;
-        this.seriesGetter = seriesGetter;
+        this.seriesSaver = SeriesCrudSaver.getInstance();
+        this.presenterGetterSeries = presenterGetterSeries;
+        this.viewPanelSearch.setPresenterSaveSeries(this);
         initListener();
     }
 
@@ -36,7 +32,7 @@ public class PresenterSaveSeries implements Presenter, ListenerModelSeries {
 
     private void handleSaveSeries() {
         String resultTextToSearch = viewPanelSearch.getResultTextToSearch();
-        if(isValidForSave(resultTextToSearch)){
+        if (isValidForSave(resultTextToSearch)) {
             seriesSaver.saveSeries(viewPanelSearch.getSelectedResultTitle().replace("'", "`"), resultTextToSearch, OperationType.SAVE);
         }
     }
@@ -47,6 +43,6 @@ public class PresenterSaveSeries implements Presenter, ListenerModelSeries {
 
     @Override
     public void hasFinishedOperation() {
-        viewPanelStorage.setSeriesComboBox(seriesGetter.getTitlesSeries().stream().sorted().toArray());
+        presenterGetterSeries.loadSeriesInViewPanelStorage();
     }
 }

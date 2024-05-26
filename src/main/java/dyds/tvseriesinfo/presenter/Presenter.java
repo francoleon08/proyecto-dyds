@@ -1,6 +1,8 @@
 package dyds.tvseriesinfo.presenter;
 
-public interface Presenter {
+import dyds.tvseriesinfo.model.database.ListenerModelSeries;
 
-    public void onEvent();
+public interface Presenter extends ListenerModelSeries {
+
+    void onEvent();
 }

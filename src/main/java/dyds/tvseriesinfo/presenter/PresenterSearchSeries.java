@@ -6,30 +6,31 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaPageAPI;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaSearchAPI;
+import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
 import dyds.tvseriesinfo.model.entities.SearchResult;
-import dyds.tvseriesinfo.model.database.ListenerModelSeries;
-import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.utils.HTMLTextConverter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class PresenterSearchSeries implements Presenter, ListenerModelSeries {
-    private ViewPanelSearch viewPanelSearch;
+public class PresenterSearchSeries implements Presenter {
+    private final ViewPanelSearch viewPanelSearch;
     private WikipediaSearchAPI searchAPI;
     private WikipediaPageAPI pageAPI;
-    private SeriesCrudGetter modelGetter;
+    private final SeriesCrudGetter modelGetter;
     private Thread taskThread;
 
-    public PresenterSearchSeries(ViewPanelSearch viewPanelSearch, SeriesCrudGetter modelGetter) {
+    public PresenterSearchSeries(ViewPanelSearch viewPanelSearch) {
         this.viewPanelSearch = viewPanelSearch;
-        this.modelGetter = modelGetter;
+        this.modelGetter = SeriesCrudGetter.getInstance();
+        this.viewPanelSearch.setPresenterSearchSeries(this);
         initListener();
         configureAPIs();
     }
