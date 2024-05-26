@@ -6,10 +6,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaPageAPI;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaSearchAPI;
-import dyds.tvseriesinfo.model.database.DataBase;
+import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
 import dyds.tvseriesinfo.model.entities.SearchResult;
 import dyds.tvseriesinfo.model.database.ListenerModelSeries;
-import dyds.tvseriesinfo.model.database.OperationType;
+import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.utils.HTMLTextConverter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import retrofit2.Response;
@@ -24,12 +24,12 @@ public class PresenterSearchSeries implements Presenter, ListenerModelSeries {
     private ViewPanelSearch viewPanelSearch;
     private WikipediaSearchAPI searchAPI;
     private WikipediaPageAPI pageAPI;
-    private DataBase model;
+    private SeriesCrudGetter modelGetter;
     private Thread taskThread;
 
-    public PresenterSearchSeries(ViewPanelSearch viewPanelSearch, DataBase model) {
+    public PresenterSearchSeries(ViewPanelSearch viewPanelSearch, SeriesCrudGetter modelGetter) {
         this.viewPanelSearch = viewPanelSearch;
-        this.model = model;
+        this.modelGetter = modelGetter;
         initListener();
         configureAPIs();
     }
@@ -124,7 +124,7 @@ public class PresenterSearchSeries implements Presenter, ListenerModelSeries {
     }
 
     private void initListener() {
-        model.addListener(OperationType.SEARCH, this);
+        modelGetter.addListener(OperationType.SEARCH, this);
     }
 
     @Override

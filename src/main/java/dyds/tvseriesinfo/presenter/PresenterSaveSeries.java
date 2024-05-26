@@ -1,8 +1,9 @@
 package dyds.tvseriesinfo.presenter;
 
-import dyds.tvseriesinfo.model.database.DataBase;
 import dyds.tvseriesinfo.model.database.ListenerModelSeries;
-import dyds.tvseriesinfo.model.database.OperationType;
+import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
+import dyds.tvseriesinfo.model.database.crud.SeriesCrudSaver;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
@@ -11,18 +12,20 @@ import java.util.Objects;
 public class PresenterSaveSeries implements Presenter, ListenerModelSeries {
     private ViewPanelSearch viewPanelSearch;
     private ViewPanelStorage viewPanelStorage;
-    private DataBase model;
+    private SeriesCrudSaver seriesSaver;
+    private SeriesCrudGetter seriesGetter;
     private Thread taskThread;
 
-    public PresenterSaveSeries(ViewPanelStorage viewPanelStorage, ViewPanelSearch viewPanelSearch, DataBase model) {
+    public PresenterSaveSeries(ViewPanelStorage viewPanelStorage, ViewPanelSearch viewPanelSearch, SeriesCrudSaver seriesSaver, SeriesCrudGetter seriesGetter) {
         this.viewPanelSearch = viewPanelSearch;
         this.viewPanelStorage = viewPanelStorage;
-        this.model = model;
+        this.seriesSaver = seriesSaver;
+        this.seriesGetter = seriesGetter;
         initListener();
     }
 
     private void initListener() {
-        model.addListener(OperationType.SAVE, this);
+        seriesSaver.addListener(OperationType.SAVE, this);
     }
 
     @Override
@@ -34,7 +37,7 @@ public class PresenterSaveSeries implements Presenter, ListenerModelSeries {
     private void handleSaveSeries() {
         String resultTextToSearch = viewPanelSearch.getResultTextToSearch();
         if(isValidForSave(resultTextToSearch)){
-            model.saveInfo(viewPanelSearch.getSelectedResultTitle().replace("'", "`"), resultTextToSearch, OperationType.SAVE);
+            seriesSaver.saveSeries(viewPanelSearch.getSelectedResultTitle().replace("'", "`"), resultTextToSearch, OperationType.SAVE);
         }
     }
 
@@ -44,6 +47,6 @@ public class PresenterSaveSeries implements Presenter, ListenerModelSeries {
 
     @Override
     public void hasFinishedOperation() {
-        viewPanelStorage.setSeriesComboBox(model.getTitles().stream().sorted().toArray());
+        viewPanelStorage.setSeriesComboBox(seriesGetter.getTitlesSeries().stream().sorted().toArray());
     }
 }

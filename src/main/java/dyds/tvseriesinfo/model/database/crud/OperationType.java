@@ -1,4 +1,4 @@
-package dyds.tvseriesinfo.model.database;
+package dyds.tvseriesinfo.model.database.crud;
 
 public enum OperationType {
     DELETE,

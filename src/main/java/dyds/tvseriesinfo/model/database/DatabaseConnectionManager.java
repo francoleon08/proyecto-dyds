@@ -3,42 +3,47 @@ package dyds.tvseriesinfo.model.database;
 import java.sql.*;
 
 public class DatabaseConnectionManager {
-    private static final String URL_DATABASE = "jdbc:sqlite:./dictionary.db";
-    private static Connection connection;
+    private static final String DATABASE_URL = "jdbc:sqlite:./dictionary.db";
+    private static final int QUERY_TIMEOUT = 30;
 
-    public static Connection getConnection() {
-        if (connection == null) {
-            try {
-                connection = DriverManager.getConnection(URL_DATABASE);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        return connection;
-    }
-
-    public static void closeConnection() {
+    public static Connection createConnection() {
         try {
-            if (connection != null) {
-                connection.close();
-            }
+            return DriverManager.getConnection(DATABASE_URL);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Error connecting to the database: " + e.getMessage());
+            return null;
         }
     }
 
-    public static void loadDatabase() {
-        try  {
-            connection = getConnection();
-            DatabaseMetaData meta = connection.getMetaData();
-            System.out.println("The driver name is " + meta.getDriverName());
+    public static void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing the database connection: " + e.getMessage());
+            }
+        }
+    }
 
+    public static Statement createStatement(Connection connection) {
+        try {
             Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
-
-            statement.executeUpdate("create table catalog (id INTEGER, title string PRIMARY KEY, extract string, source integer)");
+            statement.setQueryTimeout(QUERY_TIMEOUT);
+            return statement;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Error creating statement: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public static void initializeDatabase() {
+        try (Connection connection = createConnection();
+             Statement statement = createStatement(connection)) {
+            if (statement != null) {
+                statement.executeUpdate("CREATE TABLE IF NOT EXISTS catalog (id INTEGER PRIMARY KEY, title TEXT, extract TEXT, source INTEGER)");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error initializing database: " + e.getMessage());
         }
     }
 }

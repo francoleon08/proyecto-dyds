@@ -1,6 +1,6 @@
 package dyds.tvseriesinfo.view.tabbedPane;
 
-import dyds.tvseriesinfo.model.database.DataBase;
+import dyds.tvseriesinfo.model.database.crud.SeriesCrudGetter;
 import dyds.tvseriesinfo.presenter.Presenter;
 import lombok.Setter;
 
@@ -33,7 +33,7 @@ public class ViewPanelStorage extends JPanel implements ViewTabbedPane {
 
     public void initListeners() {
         seriesComboBox.addActionListener(actionEvent ->
-                this.setDetailsSeries(DataBase.getExtract(this.getItemSelectedComboBox()))
+                this.setDetailsSeries(SeriesCrudGetter.getDetailsSeriesByTitle(this.getItemSelectedComboBox()))
         );
         deleteItem.addActionListener(actionEvent ->
                 presenterDeleteSeries.onEvent()
