@@ -1,6 +1,7 @@
 package dyds.tvseriesinfo.model.database.crud;
 
 import dyds.tvseriesinfo.model.database.DatabaseConnectionManager;
+import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import lombok.Getter;
 
 import java.sql.*;
@@ -11,6 +12,7 @@ public class SeriesCRUDGetter extends SeriesCRUD {
     private static final String SELECT_FROM_CATALOG = "select * from catalog";
     private static final String SELECT_FROM_CATALOG_WHERE_TITLE = "select * from catalog WHERE title = ?";
     private static final String COLUMN_LABEL_EXTRACT = "extract";
+    public static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
     @Getter
     private ArrayList<String> lastTitlesSeries;
     @Getter
@@ -29,12 +31,12 @@ public class SeriesCRUDGetter extends SeriesCRUD {
         return instance;
     }
 
-    public synchronized void getTitlesSeries() {
+    public synchronized void getTitlesSeries() throws SeriesSearchException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {
             lastTitlesSeries = executeGetterSeries(connection);
             notifyListenersSuccess(OperationType.GET);
         } catch (SQLException e) {
-            System.err.println("Get titles error " + e.getMessage());
+            throw new SeriesSearchException(ERROR_DATABASE_CONNECTION);
         }
     }
 
@@ -48,12 +50,12 @@ public class SeriesCRUDGetter extends SeriesCRUD {
         }
     }
 
-    public void getExtractSeriesByTitle(String title) {
+    public void getExtractSeriesByTitle(String title) throws SeriesSearchException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {
             lastSeriesExtactByTitle = executeGetExtractSeriesByTitle(title, connection);
             notifyListenersSuccess(OperationType.GET);
         } catch (SQLException e) {
-            System.err.println("Get title error " + e.getMessage());
+            throw new SeriesSearchException(ERROR_DATABASE_CONNECTION);
         }
     }
 

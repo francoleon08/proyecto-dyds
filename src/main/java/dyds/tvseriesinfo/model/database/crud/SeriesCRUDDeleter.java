@@ -1,6 +1,7 @@
 package dyds.tvseriesinfo.model.database.crud;
 
 import dyds.tvseriesinfo.model.database.DatabaseConnectionManager;
+import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 
 public class SeriesCRUDDeleter extends SeriesCRUD {
     private static final String DELETE_FROM_CATALOG_WHERE_TITLE = "DELETE FROM catalog WHERE title = ?";
+    public static final String ERROR_DELETE_SERIES = "Error al eliminar la serie";
     private static SeriesCRUDDeleter instance;
 
     private SeriesCRUDDeleter() {
@@ -21,12 +23,12 @@ public class SeriesCRUDDeleter extends SeriesCRUD {
         return instance;
     }
 
-    public synchronized void deleteSeriesByTitle(String title) {
+    public synchronized void deleteSeriesByTitle(String title) throws SeriesDeleteException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {
             executeUpdateSeries(title, connection);
             notifyListenersSuccess(OperationType.DELETE);
         } catch (SQLException e) {
-            System.err.println("Get title error " + e.getMessage());
+            throw new SeriesDeleteException(ERROR_DELETE_SERIES);
         }
     }
 

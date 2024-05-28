@@ -1,6 +1,12 @@
 package dyds.tvseriesinfo.view.tabbedPane;
 
-public interface ViewTabbedPane {
+import javax.swing.*;
 
-    void setWorkingState(boolean working);
+public abstract class ViewTabbedPane extends JPanel {
+
+    public abstract void setWorkingState(boolean working);
+
+    public void showMessageDialog(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
 }

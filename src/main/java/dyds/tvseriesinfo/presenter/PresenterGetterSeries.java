@@ -2,6 +2,7 @@ package dyds.tvseriesinfo.presenter;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUDGetter;
+import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
 public class PresenterGetterSeries implements Presenter {
@@ -13,13 +14,17 @@ public class PresenterGetterSeries implements Presenter {
         this.viewPanelStorage = viewPanelStorage;
         this.seriesGetter = SeriesCRUDGetter.getInstance();
         this.viewPanelStorage.setPresenterGetterSeries(this);
-        loadSeriesInViewPanelStorage();
         initListener();
+        loadSeriesInViewPanelStorage();
     }
 
     public void loadSeriesInViewPanelStorage() {
-        seriesGetter.getTitlesSeries();
-        viewPanelStorage.setSeriesComboBox(seriesGetter.getLastTitlesSeries().stream().sorted().toArray());
+        try {
+            seriesGetter.getTitlesSeries();
+            viewPanelStorage.setSeriesComboBox(seriesGetter.getLastTitlesSeries().stream().sorted().toArray());
+        } catch (SeriesSearchException e) {
+            hasFinishedOperationError(e.getMessage());
+        }
     }
 
     private void initListener() {
@@ -28,18 +33,30 @@ public class PresenterGetterSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleGetExtraxtSeries);
+        taskThread = new Thread(this::handleGetExtractSeries);
         taskThread.start();
     }
 
-    private void handleGetExtraxtSeries() {
+    private void handleGetExtractSeries() {
         viewPanelStorage.setWorkingState(true);
-        seriesGetter.getExtractSeriesByTitle(viewPanelStorage.getItemSelectedComboBox());
+        doGetExtractSeries();
+    }
+
+    private void doGetExtractSeries() {
+        try {
+            seriesGetter.getExtractSeriesByTitle(viewPanelStorage.getItemSelectedComboBox());
+        } catch (SeriesSearchException e) {
+            hasFinishedOperationError(e.getMessage());
+        }
     }
 
     @Override
-    public void hasFinishedOperation() {
+    public void hasFinishedOperationSucces() {
         viewPanelStorage.setDetailsSeries(seriesGetter.getLastSeriesExtactByTitle());
         viewPanelStorage.setWorkingState(false);
+    }
+
+    private void hasFinishedOperationError(String messageError) {
+        viewPanelStorage.showMessageDialog(messageError);
     }
 }

@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewPanelSearch extends JPanel implements ViewTabbedPane {
+public class ViewPanelSearch extends ViewTabbedPane {
     private JPanel searchPanel;
     @Getter
     private JTextField seriesToSearchTextField;

@@ -2,6 +2,7 @@ package dyds.tvseriesinfo.presenter;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUDDeleter;
+import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,10 @@ public class PresenterDeleteSeries implements Presenter {
         initListener();
     }
 
+    private void initListener() {
+        seriesDeleter.addListener(OperationType.DELETE, this);
+    }
+
     @Override
     public void onEvent() {
         taskThread = new Thread(this::handleDeleteSeries);
@@ -31,18 +36,30 @@ public class PresenterDeleteSeries implements Presenter {
     private void handleDeleteSeries() {
         viewPanelStorage.setWorkingState(true);
         if (viewPanelStorage.isItemSelected()) {
-            seriesDeleter.deleteSeriesByTitle(viewPanelStorage.getItemSelectedComboBox());
+            doDeleteSeries();
+        } else {
+            hasFinishedOperationError("No seleccionó una serie para eliminar.");
         }
     }
 
-    private void initListener() {
-        seriesDeleter.addListener(OperationType.DELETE, this);
+    private void doDeleteSeries() {
+        try {
+            seriesDeleter.deleteSeriesByTitle(viewPanelStorage.getItemSelectedComboBox());
+        } catch (SeriesDeleteException e) {
+            hasFinishedOperationError(e.getMessage());
+        }
+    }
+
+    public void hasFinishedOperationError(String messageError) {
+        viewPanelStorage.showMessageDialog(messageError);
+        viewPanelStorage.setWorkingState(false);
     }
 
     @Override
-    public void hasFinishedOperation() {
+    public void hasFinishedOperationSucces() {
         presenterGetterSeries.loadSeriesInViewPanelStorage();
         viewPanelStorage.setDetailsSeries("");
         viewPanelStorage.setWorkingState(false);
+        viewPanelStorage.showMessageDialog("La serie se ha eliminado correctamente.");
     }
 }

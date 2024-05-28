@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewPanelStorage extends JPanel implements ViewTabbedPane {
+public class ViewPanelStorage extends ViewTabbedPane {
     private JPanel storagePanel;
     private JComboBox seriesComboBox;
     private JTextPane detailsSeries;

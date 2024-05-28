@@ -1,6 +1,5 @@
 package dyds.tvseriesinfo.model.entities;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +12,8 @@ public class SearchResult extends JMenuItem {
     private String snippet;
     @Setter
     private String extract;
+    @Setter
+    private String url;
 
     public SearchResult(String title, String pageID, String snippet) {
         String itemText = "<html><font face=\"arial\">" + title + ": " + snippet;

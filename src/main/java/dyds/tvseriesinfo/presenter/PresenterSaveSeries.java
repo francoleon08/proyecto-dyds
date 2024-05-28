@@ -2,6 +2,7 @@ package dyds.tvseriesinfo.presenter;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUDSaver;
+import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
 import java.util.Objects;
@@ -33,7 +34,9 @@ public class PresenterSaveSeries implements Presenter {
     private void handleSaveSeries() {
         String resultTextToSearch = viewPanelSearch.getResultTextToSearch();
         if (isValidForSave(resultTextToSearch)) {
-            seriesSaver.saveSeries(viewPanelSearch.getSelectedResultTitle().replace("'", "`"), resultTextToSearch, OperationType.SAVE);
+            doSaveSeries(resultTextToSearch);
+        } else {
+            hasFinishedOperationError("No seleccionó ninguna serie para guardar");
         }
     }
 
@@ -41,8 +44,25 @@ public class PresenterSaveSeries implements Presenter {
         return !Objects.equals(resultTextToSearch, "");
     }
 
+    private void doSaveSeries(String resultTextToSearch) {
+        try {
+            seriesSaver.saveSeries(getSeriesTitle(), resultTextToSearch);
+        } catch (SeriesSaveException e) {
+            hasFinishedOperationError(e.getMessage());
+        }
+    }
+
+    private String getSeriesTitle() {
+        return viewPanelSearch.getSelectedResultTitle().replace("'", "`");
+    }
+
     @Override
-    public void hasFinishedOperation() {
+    public void hasFinishedOperationSucces() {
         presenterGetterSeries.loadSeriesInViewPanelStorage();
+        viewPanelSearch.showMessageDialog("La serie se ha guardado correctamente.");
+    }
+
+    private void hasFinishedOperationError(String messageError) {
+        viewPanelSearch.showMessageDialog(messageError);
     }
 }

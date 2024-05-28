@@ -1,6 +1,7 @@
 package dyds.tvseriesinfo.model.database.crud;
 
 import dyds.tvseriesinfo.model.database.DatabaseConnectionManager;
+import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,8 @@ import java.sql.SQLException;
 
 public class SeriesCRUDSaver extends SeriesCRUD {
     private static final String REPLACE_INTO_CATALOG = "replace into catalog values(null, ?, ?, 1)";
+    public static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
+    public static final String ERROR_SAVE_SERIES = "Error al guardar la serie.";
     private static SeriesCRUDSaver instance;
 
     private SeriesCRUDSaver() {
@@ -21,12 +24,24 @@ public class SeriesCRUDSaver extends SeriesCRUD {
         return instance;
     }
 
-    public synchronized void saveSeries(String title, String extract, OperationType operationType) {
+    public void saveSeries(String title, String extract) throws SeriesSaveException {
+        doSaveSeries(title, extract);
+        notifyListenersSuccess(OperationType.SAVE);
+    }
+
+    public void saveChangesSeries(String title, String extract) throws SeriesSaveException {
+        doSaveSeries(title, extract);
+        notifyListenersSuccess(OperationType.SAVE_CHANGES);
+    }
+
+    private synchronized void doSaveSeries(String title, String extract) throws SeriesSaveException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {
             executeSaveSeries(title, extract, connection);
-            notifyListenersSuccess(operationType);
         } catch (SQLException e) {
-            System.err.println("Error saving " + e.getMessage());
+            throw new SeriesSaveException(ERROR_DATABASE_CONNECTION);
+        }
+        catch (Exception e) {
+            throw new SeriesSaveException(ERROR_SAVE_SERIES);
         }
 
     }

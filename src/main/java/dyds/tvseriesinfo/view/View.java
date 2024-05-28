@@ -17,7 +17,6 @@ public class View implements BaseView {
     @Getter
     private ViewPanelStorage viewPanelStorage;
 
-
     public View() {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -28,10 +27,15 @@ public class View implements BaseView {
 
     public void initView() {
         JFrame frame = new JFrame("TV Series Info Repo");
+        configureJFrame(frame);
+    }
+
+    private void configureJFrame(JFrame frame) {
         frame.setContentPane(getContet());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
     public Container getContet() {

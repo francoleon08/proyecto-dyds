@@ -3,6 +3,7 @@ package dyds.tvseriesinfo.presenter;
 import dyds.tvseriesinfo.model.apiConsummer.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.SearchResult;
+import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
 public class PresenterSearchSeries implements Presenter {
@@ -27,8 +28,16 @@ public class PresenterSearchSeries implements Presenter {
     public void handleSearchSeries() {
         viewPanelSearch.setWorkingState(true);
         viewPanelSearch.clearOptionsMenu();
-        String seriesToSearch = viewPanelSearch.getSeriesToSearchTextField().getText() + TV_SERIES_ARTICLETOPIC_TELEVISION;
-        modelWikipediaAPI.searchSeries(seriesToSearch);
+        doSearchSeries();
+    }
+
+    private void doSearchSeries() {
+        try {
+            String seriesToSearch = viewPanelSearch.getSeriesToSearchTextField().getText() + TV_SERIES_ARTICLETOPIC_TELEVISION;
+            modelWikipediaAPI.searchSeries(seriesToSearch);
+        } catch (SeriesSearchException e) {
+            hasFinishedOperationError(e.getMessage());
+        }
     }
 
     private void initListener() {
@@ -36,7 +45,7 @@ public class PresenterSearchSeries implements Presenter {
     }
 
     @Override
-    public void hasFinishedOperation() {
+    public void hasFinishedOperationSucces() {
         for (SearchResult searchResult : modelWikipediaAPI.getLastSearchResult()) {
             viewPanelSearch.addOptionSearchResult(searchResult);
             initListenerSearchResult(searchResult);
@@ -60,5 +69,10 @@ public class PresenterSearchSeries implements Presenter {
         viewPanelSearch.getResultTextToSearchHTML().setText(searchResult.getExtract());
         viewPanelSearch.getResultTextToSearchHTML().setCaretPosition(0);
         viewPanelSearch.setResultTextToSearch(searchResult.getExtract());
+    }
+
+    private void hasFinishedOperationError(String messageError) {
+        viewPanelSearch.showMessageDialog(messageError);
+        viewPanelSearch.setWorkingState(false);
     }
 }
