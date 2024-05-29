@@ -1,4 +1,4 @@
-package dyds.tvseriesinfo.model.database;
+package dyds.tvseriesinfo.model.database.SQLmanager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

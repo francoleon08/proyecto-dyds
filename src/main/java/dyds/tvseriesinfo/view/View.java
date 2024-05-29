@@ -18,11 +18,7 @@ public class View implements BaseView {
     private ViewPanelStorage viewPanelStorage;
 
     public View() {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
     public void initView() {

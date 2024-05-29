@@ -1,7 +1,5 @@
 package dyds.tvseriesinfo.utils;
 
-import com.google.gson.JsonElement;
-
 public class HTMLTextConverter {
 
     private static final String FONT_FACE_ARIAL = "<font face=\"arial\">";

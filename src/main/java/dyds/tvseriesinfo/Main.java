@@ -1,6 +1,6 @@
 package dyds.tvseriesinfo;
 
-import dyds.tvseriesinfo.model.database.DatabaseConnectionManager;
+import dyds.tvseriesinfo.model.database.SQLmanager.DatabaseConnectionManager;
 import dyds.tvseriesinfo.presenter.*;
 import dyds.tvseriesinfo.view.View;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
@@ -11,6 +11,12 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         DatabaseConnectionManager.initializeDatabase();
+
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         View view = new View();
         ViewPanelStorage viewPanelStorage = view.getViewPanelStorage();
