@@ -1,12 +1,14 @@
 package dyds.tvseriesinfo.view.tabbedPane;
 
-import dyds.tvseriesinfo.model.entities.SearchResult;
+import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.presenter.Presenter;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ViewPanelSearch extends ViewTabbedPane {
     private JPanel searchPanel;
@@ -16,6 +18,9 @@ public class ViewPanelSearch extends ViewTabbedPane {
     private JTextPane resultTextToSearchHTML;
     private JButton searchButton;
     private JButton saveLocallyButton;
+    private JPanel punctuationPanel;
+    private JCheckBox checkBoxEnablePuntuaction;
+    private JComboBox comboBoxPuntaction;
     private JPopupMenu searchOptionsMenu;
 
     @Setter
@@ -38,6 +43,7 @@ public class ViewPanelSearch extends ViewTabbedPane {
     private void initConfig() {
         searchOptionsMenu = new JPopupMenu("Search Results");
         resultTextToSearchHTML.setContentType("text/html");
+        comboBoxPuntaction.setEnabled(false);
     }
 
 
@@ -46,8 +52,19 @@ public class ViewPanelSearch extends ViewTabbedPane {
                 presenterSearchSeries.onEvent()
         );
 
-        saveLocallyButton.addActionListener(actionEvent ->
+        seriesToSearchTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                presenterSearchSeries.onEvent();
+            }
+        });
+
+        saveLocallyButton.addActionListener(e ->
                 presenterSaveSeries.onEvent()
+        );
+
+        checkBoxEnablePuntuaction.addActionListener(e ->
+                comboBoxPuntaction.setEnabled(checkBoxEnablePuntuaction.isSelected())
         );
     }
 
@@ -66,7 +83,7 @@ public class ViewPanelSearch extends ViewTabbedPane {
         searchOptionsMenu.removeAll();
     }
 
-    public void addOptionSearchResult(SearchResult sr) {
+    public void addOptionSearchResult(Series sr) {
         searchOptionsMenu.add(sr);
     }
 }

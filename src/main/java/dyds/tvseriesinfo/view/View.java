@@ -1,5 +1,6 @@
 package dyds.tvseriesinfo.view;
 
+import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import lombok.Getter;
@@ -12,10 +13,14 @@ public class View implements BaseView {
     private JTabbedPane SeriesTabbedPane;
     private JPanel searchPanel;
     private JPanel storagePanel;
+    private JPanel punctuactionPanel;
     @Getter
     private ViewPanelSearch viewPanelSearch;
     @Getter
     private ViewPanelStorage viewPanelStorage;
+    @Getter
+    private ViewPanelPuntuaction viewPanelPuntuaction;
+
 
     public View() {
 
@@ -30,8 +35,9 @@ public class View implements BaseView {
         frame.setContentPane(getContet());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     public Container getContet() {

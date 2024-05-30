@@ -7,6 +7,6 @@ public abstract class ViewTabbedPane extends JPanel {
     public abstract void setWorkingState(boolean working);
 
     public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message);
+        JOptionPane.showMessageDialog(this, message);
     }
 }
