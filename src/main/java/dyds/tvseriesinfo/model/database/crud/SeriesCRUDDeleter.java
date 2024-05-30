@@ -2,12 +2,15 @@ package dyds.tvseriesinfo.model.database.crud;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLDelete;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
+import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
 public class SeriesCRUDDeleter extends SeriesCRUD {
     private static SeriesCRUDDeleter instance;
+    private SeriesCRUDGetter seriesGetter;
 
     private SeriesCRUDDeleter() {
         super();
+        seriesGetter = SeriesCRUDGetter.getInstance();
     }
 
     public static synchronized SeriesCRUDDeleter getInstance() {
@@ -17,8 +20,9 @@ public class SeriesCRUDDeleter extends SeriesCRUD {
         return instance;
     }
 
-    public synchronized void deleteSeriesByTitle(String title) throws SeriesDeleteException {
+    public synchronized void deleteSeriesByTitle(String title) throws SeriesDeleteException, SeriesSearchException {
         SQLDelete.deleteSeriesByTitle(title);
         notifyListenersSuccess(OperationType.DELETE);
+        seriesGetter.getTitlesSeries();
     }
 }

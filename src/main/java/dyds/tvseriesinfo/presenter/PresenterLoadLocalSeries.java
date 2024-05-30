@@ -5,36 +5,31 @@ import dyds.tvseriesinfo.model.database.crud.SeriesCRUDGetter;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
-public class PresenterGetterSeries implements Presenter {
+public class PresenterLoadLocalSeries implements Presenter {
     private final ViewPanelStorage viewPanelStorage;
     private final SeriesCRUDGetter seriesGetter;
     private Thread taskThread;
 
-    public PresenterGetterSeries(ViewPanelStorage viewPanelStorage) {
+    public PresenterLoadLocalSeries(ViewPanelStorage viewPanelStorage) {
         this.viewPanelStorage = viewPanelStorage;
         this.seriesGetter = SeriesCRUDGetter.getInstance();
-        this.viewPanelStorage.setPresenterGetterSeries(this);
         initListener();
+        onEvent();
     }
 
     private void initListener() {
-        seriesGetter.addListener(OperationType.GET, this);
+        seriesGetter.addListener(OperationType.LOAD_LOCAL_SERIES, this);
     }
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleGetExtractSeries);
+        taskThread = new Thread(this::handleLoadLocalSeries);
         taskThread.start();
     }
 
-    private void handleGetExtractSeries() {
-        viewPanelStorage.setWorkingState(true);
-        doGetExtractSeries();
-    }
-
-    private void doGetExtractSeries() {
+    private void handleLoadLocalSeries() {
         try {
-            seriesGetter.getExtractSeriesByTitle(viewPanelStorage.getItemSelectedComboBox());
+            seriesGetter.getTitlesSeries();
         } catch (SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
         }
@@ -42,8 +37,7 @@ public class PresenterGetterSeries implements Presenter {
 
     @Override
     public void hasFinishedOperationSucces() {
-        viewPanelStorage.setDetailsSeries(seriesGetter.getLastSeriesExtactByTitle());
-        viewPanelStorage.setWorkingState(false);
+        viewPanelStorage.setSeriesComboBox(seriesGetter.getLastTitlesSeries().stream().sorted().toArray());
     }
 
     private void hasFinishedOperationError(String messageError) {

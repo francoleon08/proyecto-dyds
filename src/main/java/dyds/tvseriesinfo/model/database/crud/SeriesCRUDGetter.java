@@ -27,11 +27,10 @@ public class SeriesCRUDGetter extends SeriesCRUD {
 
     public synchronized void getTitlesSeries() throws SeriesSearchException {
         lastTitlesSeries = SQLSelect.getTitlesSeries();
-        notifyListenersSuccess(OperationType.GET);
+        notifyListenersSuccess(OperationType.LOAD_LOCAL_SERIES);
     }
 
     public synchronized void getExtractSeriesByTitle(String title) throws SeriesSearchException {
-
         lastSeriesExtactByTitle = SQLSelect.getExtractSeriesByTitle(title);
         notifyListenersSuccess(OperationType.GET);
     }

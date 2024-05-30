@@ -3,6 +3,7 @@ package dyds.tvseriesinfo.presenter;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUDSaver;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
+import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
 import java.util.Objects;
@@ -10,13 +11,11 @@ import java.util.Objects;
 public class PresenterSaveSeries implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
     private final SeriesCRUDSaver seriesSaver;
-    private final PresenterGetterSeries presenterGetterSeries;
     private Thread taskThread;
 
-    public PresenterSaveSeries(ViewPanelSearch viewPanelSearch, PresenterGetterSeries presenterGetterSeries) {
+    public PresenterSaveSeries(ViewPanelSearch viewPanelSearch) {
         this.viewPanelSearch = viewPanelSearch;
         this.seriesSaver = SeriesCRUDSaver.getInstance();
-        this.presenterGetterSeries = presenterGetterSeries;
         this.viewPanelSearch.setPresenterSaveSeries(this);
         initListener();
     }
@@ -47,7 +46,7 @@ public class PresenterSaveSeries implements Presenter {
     private void doSaveSeries(String resultTextToSearch) {
         try {
             seriesSaver.saveSeries(getSeriesTitle(), resultTextToSearch);
-        } catch (SeriesSaveException e) {
+        } catch (SeriesSaveException | SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
         }
     }
@@ -58,7 +57,6 @@ public class PresenterSaveSeries implements Presenter {
 
     @Override
     public void hasFinishedOperationSucces() {
-        presenterGetterSeries.loadSeriesInViewPanelStorage();
         viewPanelSearch.showMessageDialog("La serie se ha guardado correctamente.");
     }
 

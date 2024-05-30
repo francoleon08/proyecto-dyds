@@ -7,7 +7,7 @@ public abstract class SeriesCRUD {
     protected EventModelSeriesManager eventModelSeriesManager;
 
     public SeriesCRUD() {
-        eventModelSeriesManager = new EventModelSeriesManager();
+        eventModelSeriesManager = EventModelSeriesManager.getInstance();
     }
 
     public void addListener(OperationType operationType, ListenerModelSeries listener) {

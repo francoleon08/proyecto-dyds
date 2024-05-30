@@ -5,8 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
-import dyds.tvseriesinfo.model.entities.SearchResult;
-import dyds.tvseriesinfo.model.entities.SearchResultServices;
+import dyds.tvseriesinfo.model.entities.Series;
+import dyds.tvseriesinfo.model.entities.SeriesServices;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.utils.HTMLTextConverter;
 
@@ -18,7 +18,7 @@ import java.util.Map;
 public class ModelWikipediaAPI extends SeriesCRUD {
     public static final String SEARCH_FAILED = "No fue posible realizar la búsqueda. Intente nuevamente.";
     private WikipediaAPIService wikipediaAPIService;
-    private Map<String, SearchResult> lastSearchResult;
+    private Map<String, Series> lastSearchResult;
     private static ModelWikipediaAPI instance;
 
     private ModelWikipediaAPI() {
@@ -34,7 +34,7 @@ public class ModelWikipediaAPI extends SeriesCRUD {
         return instance;
     }
 
-    public Collection<SearchResult> getLastSearchResult() {
+    public Collection<Series> getLastSearchResult() {
         return lastSearchResult.values();
     }
 
@@ -52,9 +52,9 @@ public class ModelWikipediaAPI extends SeriesCRUD {
     private void processSearchResults(JsonArray jsonResultsSeries) throws SeriesSearchException {
         for (JsonElement jsonSeries : jsonResultsSeries) {
             JsonObject jsonObject = jsonSeries.getAsJsonObject();
-            SearchResult searchResult = SearchResultServices.createSearchResultFromJsonObject(jsonObject);
-            JsonElement extractElement = getSeriesExtractByPageID(searchResult.getPageID());
-            addSearchResultToMap(searchResult, extractElement);
+            Series series = SeriesServices.createSearchResultFromJsonObject(jsonObject);
+            JsonElement extractElement = getSeriesExtractByPageID(series.getPageID());
+            addSearchResultToMap(series, extractElement);
         }
     }
 
@@ -66,14 +66,14 @@ public class ModelWikipediaAPI extends SeriesCRUD {
         }
     }
 
-    private void addSearchResultToMap(SearchResult searchResult, JsonElement extractElement) {
-        String resultTextToSearch = formatSearchResultText(searchResult, extractElement);
-        searchResult.setExtract(resultTextToSearch);
-        lastSearchResult.put(searchResult.getPageID(), searchResult);
+    private void addSearchResultToMap(Series series, JsonElement extractElement) {
+        String resultTextToSearch = formatSearchResultText(series, extractElement);
+        series.setExtract(resultTextToSearch);
+        lastSearchResult.put(series.getPageID(), series);
     }
 
-    private String formatSearchResultText(SearchResult searchResult, JsonElement extractElement) {
-        String title = HTMLTextConverter.formatTitle(searchResult.getTitle());
+    private String formatSearchResultText(Series series, JsonElement extractElement) {
+        String title = HTMLTextConverter.formatTitle(series.getTitle());
         String content = HTMLTextConverter.formatContent(extractElement.getAsString());
         return HTMLTextConverter.textToHtml(title + content);
     }

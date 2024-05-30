@@ -2,12 +2,12 @@ package dyds.tvseriesinfo.model.entities;
 
 import com.google.gson.JsonObject;
 
-public class SearchResultServices {
+public class SeriesServices {
 
-    public static SearchResult createSearchResultFromJsonObject(JsonObject jsonObject) {
+    public static Series createSearchResultFromJsonObject(JsonObject jsonObject) {
         String title = jsonObject.get("title").getAsString();
         String pageId = jsonObject.get("pageid").getAsString();
         String snippet = jsonObject.get("snippet").getAsString();
-        return new SearchResult(title, pageId, snippet);
+        return new Series(title, pageId, snippet);
     }
 }

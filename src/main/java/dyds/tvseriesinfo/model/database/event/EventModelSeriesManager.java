@@ -7,10 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 
 public class EventModelSeriesManager {
+    private static EventModelSeriesManager instance;
     private HashMap<OperationType, List<ListenerModelSeries>> listeners;
 
-    public EventModelSeriesManager() {
+    private EventModelSeriesManager() {
         initListeners();
+    }
+
+    public static EventModelSeriesManager getInstance() {
+        if (instance == null) {
+            instance = new EventModelSeriesManager();
+        }
+        return instance;
     }
 
     private void initListeners() {

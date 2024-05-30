@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SQLSave {
+public class SQLInsert {
     private static final String REPLACE_INTO_CATALOG = "replace into catalog values(null, ?, ?, 1)";
     public static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
     public static final String ERROR_SAVE_SERIES = "Error al guardar la serie.";

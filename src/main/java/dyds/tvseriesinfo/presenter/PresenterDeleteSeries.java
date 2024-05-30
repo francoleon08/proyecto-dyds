@@ -3,6 +3,8 @@ package dyds.tvseriesinfo.presenter;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUDDeleter;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
+import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
+import dyds.tvseriesinfo.utils.HTMLTextConverter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,13 +14,11 @@ public class PresenterDeleteSeries implements Presenter {
     @Getter
     private ViewPanelStorage viewPanelStorage;
     private final SeriesCRUDDeleter seriesDeleter;
-    private final PresenterGetterSeries presenterGetterSeries;
     private Thread taskThread;
 
-    public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage, PresenterGetterSeries presenterGetterSeries) {
+    public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage) {
         this.viewPanelStorage = viewPanelStorage;
         this.seriesDeleter = SeriesCRUDDeleter.getInstance();
-        this.presenterGetterSeries = presenterGetterSeries;
         this.viewPanelStorage.setPresenterDeleteSeries(this);
         initListener();
     }
@@ -35,17 +35,21 @@ public class PresenterDeleteSeries implements Presenter {
 
     private void handleDeleteSeries() {
         viewPanelStorage.setWorkingState(true);
-        if (viewPanelStorage.isItemSelected()) {
+        if (thereIsASerieSelected()) {
             doDeleteSeries();
         } else {
             hasFinishedOperationError("No seleccionó una serie para eliminar.");
         }
     }
 
+    private boolean thereIsASerieSelected() {
+        return viewPanelStorage.isItemSelected();
+    }
+
     private void doDeleteSeries() {
         try {
             seriesDeleter.deleteSeriesByTitle(viewPanelStorage.getItemSelectedComboBox());
-        } catch (SeriesDeleteException e) {
+        } catch (SeriesDeleteException | SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
         }
     }
@@ -57,7 +61,6 @@ public class PresenterDeleteSeries implements Presenter {
 
     @Override
     public void hasFinishedOperationSucces() {
-        presenterGetterSeries.loadSeriesInViewPanelStorage();
         viewPanelStorage.setDetailsSeries("");
         viewPanelStorage.setWorkingState(false);
         viewPanelStorage.showMessageDialog("La serie se ha eliminado correctamente.");

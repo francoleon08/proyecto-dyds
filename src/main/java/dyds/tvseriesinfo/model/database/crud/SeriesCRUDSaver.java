@@ -1,13 +1,16 @@
 package dyds.tvseriesinfo.model.database.crud;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLSave;
+import dyds.tvseriesinfo.model.database.SQLmanager.SQLInsert;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
+import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
 public class SeriesCRUDSaver extends SeriesCRUD {
     private static SeriesCRUDSaver instance;
+    private SeriesCRUDGetter seriesGetter;
 
     private SeriesCRUDSaver() {
         super();
+        seriesGetter = SeriesCRUDGetter.getInstance();
     }
 
     public static synchronized SeriesCRUDSaver getInstance() {
@@ -17,13 +20,14 @@ public class SeriesCRUDSaver extends SeriesCRUD {
         return instance;
     }
 
-    public synchronized void saveSeries(String title, String extract) throws SeriesSaveException {
-        SQLSave.saveSeries(title, extract);
+    public synchronized void saveSeries(String title, String extract) throws SeriesSaveException, SeriesSearchException {
+        SQLInsert.saveSeries(title, extract);
         notifyListenersSuccess(OperationType.SAVE);
+        seriesGetter.getTitlesSeries();
     }
 
     public synchronized void saveChangesSeries(String title, String extract) throws SeriesSaveException {
-        SQLSave.saveSeries(title, extract);
+        SQLInsert.saveSeries(title, extract);
         notifyListenersSuccess(OperationType.SAVE_CHANGES);
     }
 }
