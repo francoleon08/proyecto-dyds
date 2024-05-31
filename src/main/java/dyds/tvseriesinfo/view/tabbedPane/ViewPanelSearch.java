@@ -91,7 +91,15 @@ public class ViewPanelSearch extends ViewTabbedPane {
         searchOptionsMenu.removeAll();
     }
 
-    public void addOptionSearchResult(Series sr) {
-        searchOptionsMenu.add(sr);
+    public void addOptionSearchResult(Series series) {
+        searchOptionsMenu.add(series);
+    }
+
+    public boolean isCheckBoxSelected() {
+        return checkBoxEnablePuntuaction.isSelected();
+    }
+
+    public String getSelectedPuntuaction() {
+        return comboBoxPuntaction.getSelectedItem().toString();
     }
 }

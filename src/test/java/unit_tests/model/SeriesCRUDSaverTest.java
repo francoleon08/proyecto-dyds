@@ -1,6 +1,6 @@
 package unit_tests.model;
 
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.crud.series.SeriesCRUDSaver;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -5,6 +5,7 @@ public enum OperationType {
     SAVE,
     SEARCH,
     SAVE_CHANGES,
+    SAVE_PUNTUACTION,
     GET_SERIES,
     GET_RATED_SERIES,
     LOAD_LOCAL_SERIES,

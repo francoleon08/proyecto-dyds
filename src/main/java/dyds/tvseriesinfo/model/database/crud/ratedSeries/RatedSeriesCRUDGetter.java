@@ -1,6 +1,8 @@
-package dyds.tvseriesinfo.model.database.crud;
+package dyds.tvseriesinfo.model.database.crud.ratedSeries;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
+import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import lombok.Getter;

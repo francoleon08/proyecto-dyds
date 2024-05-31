@@ -1,7 +1,7 @@
 package dyds.tvseriesinfo.presenter.storage;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.crud.series.SeriesCRUDSaver;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;

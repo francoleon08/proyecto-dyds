@@ -15,6 +15,8 @@ public class ViewPanelPuntuaction extends ViewTabbedPane {
 
     @Setter
     private Presenter presenterGetterRatedSeries;
+    @Setter
+    private Presenter presenterSavePutuaction;
 
     public ViewPanelPuntuaction() {
         initListeners();

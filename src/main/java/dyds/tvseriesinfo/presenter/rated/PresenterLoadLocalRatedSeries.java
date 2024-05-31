@@ -1,7 +1,7 @@
 package dyds.tvseriesinfo.presenter.rated;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.RatedSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
