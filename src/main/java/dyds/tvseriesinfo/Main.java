@@ -1,9 +1,17 @@
 package dyds.tvseriesinfo;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import dyds.tvseriesinfo.model.database.SQLmanager.DatabaseConnectionManager;
 import dyds.tvseriesinfo.presenter.*;
+import dyds.tvseriesinfo.presenter.rated.PresenterGetterRatedSeries;
+import dyds.tvseriesinfo.presenter.rated.PresenterLoadLocalRatedSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterLoadLocalSeries;
+import dyds.tvseriesinfo.presenter.search.PresenterSavePuntuaction;
+import dyds.tvseriesinfo.presenter.search.PresenterSaveSeries;
+import dyds.tvseriesinfo.presenter.search.PresenterSearchSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterDeleteSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterGetterSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterSaveChangesSeries;
 import dyds.tvseriesinfo.view.View;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
@@ -14,19 +22,22 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         setLookAndFel();
-        DatabaseConnectionManager.initializeDatabase();
+        DatabaseConnectionManager.initializeDatabases();
 
         View view = new View();
         ViewPanelStorage viewPanelStorage = view.getViewPanelStorage();
         ViewPanelSearch viewPanelSearch = view.getViewPanelSearch();
         ViewPanelPuntuaction viewPanelPuntuaction = view.getViewPanelPuntuaction();
 
+        Presenter presenterSavePuntuaction = new PresenterSavePuntuaction(viewPanelSearch, viewPanelPuntuaction);
         Presenter presenterGetterSeries = new PresenterGetterSeries(viewPanelStorage);
         Presenter presenterLoadLocalSeries = new PresenterLoadLocalSeries(viewPanelStorage);
         Presenter presenterDeleteSeries = new PresenterDeleteSeries(viewPanelStorage);
         Presenter presenterSaveChangesSeries = new PresenterSaveChangesSeries(viewPanelStorage);
         Presenter presenterSaveSeries = new PresenterSaveSeries(viewPanelSearch);
         Presenter presenterSearchSeries = new PresenterSearchSeries(viewPanelSearch);
+        Presenter prestererGetterRatedSeries = new PresenterGetterRatedSeries(viewPanelPuntuaction);
+        Presenter presenterLoadLocalRatedSeries = new PresenterLoadLocalRatedSeries(viewPanelPuntuaction);
 
         SwingUtilities.invokeLater(view::initView);
     }

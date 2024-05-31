@@ -1,9 +1,10 @@
-package dyds.tvseriesinfo.presenter;
+package dyds.tvseriesinfo.presenter.search;
 
 import dyds.tvseriesinfo.model.apiConsummer.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
+import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
 public class PresenterSearchSeries implements Presenter {

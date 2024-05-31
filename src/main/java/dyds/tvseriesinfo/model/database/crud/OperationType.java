@@ -5,7 +5,9 @@ public enum OperationType {
     SAVE,
     SEARCH,
     SAVE_CHANGES,
-    GET,
+    GET_SERIES,
+    GET_RATED_SERIES,
     LOAD_LOCAL_SERIES,
-    WIKIPEDIA_SEARCH
+    WIKIPEDIA_SEARCH,
+    LOAD_RATED_SERIES
 }

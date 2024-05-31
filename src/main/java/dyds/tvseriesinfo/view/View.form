@@ -18,7 +18,9 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font size="14"/>
+        </properties>
         <border type="none"/>
         <children>
           <grid id="ba75" binding="searchPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -61,7 +63,7 @@
           <grid id="d82f2" binding="punctuactionPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <tabbedpane title="Puntuaction"/>
+              <tabbedpane title="Rated Series"/>
             </constraints>
             <properties/>
             <border type="none"/>

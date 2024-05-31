@@ -1,10 +1,10 @@
-package dyds.tvseriesinfo.presenter;
+package dyds.tvseriesinfo.presenter.storage;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUDDeleter;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
-import dyds.tvseriesinfo.utils.HTMLTextConverter;
+import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import lombok.Getter;
 import lombok.Setter;

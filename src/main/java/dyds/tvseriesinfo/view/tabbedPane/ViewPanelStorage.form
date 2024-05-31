@@ -14,6 +14,7 @@
         </constraints>
         <properties>
           <editable value="false"/>
+          <font size="16"/>
           <model/>
         </properties>
       </component>
@@ -26,7 +27,9 @@
         <children>
           <component id="c7ab7" class="javax.swing.JTextPane" binding="detailsSeries">
             <constraints/>
-            <properties/>
+            <properties>
+              <font size="16"/>
+            </properties>
           </component>
         </children>
       </scrollpane>

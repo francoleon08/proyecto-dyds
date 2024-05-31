@@ -32,6 +32,6 @@ public class SeriesCRUDGetter extends SeriesCRUD {
 
     public synchronized void getExtractSeriesByTitle(String title) throws SeriesSearchException {
         lastSeriesExtactByTitle = SQLSelect.getExtractSeriesByTitle(title);
-        notifyListenersSuccess(OperationType.GET);
+        notifyListenersSuccess(OperationType.GET_SERIES);
     }
 }

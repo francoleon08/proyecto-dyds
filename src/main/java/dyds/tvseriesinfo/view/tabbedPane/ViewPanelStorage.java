@@ -69,7 +69,7 @@ public class ViewPanelStorage extends ViewTabbedPane {
     }
 
     public void setSeriesComboBox(Object[] series) {
-        seriesComboBox.setModel(new DefaultComboBoxModel(series));
+        seriesComboBox.setModel(new DefaultComboBoxModel<>(series));
     }
 
 

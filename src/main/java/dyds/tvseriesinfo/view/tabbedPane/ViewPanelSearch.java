@@ -21,6 +21,7 @@ public class ViewPanelSearch extends ViewTabbedPane {
     private JPanel punctuationPanel;
     private JCheckBox checkBoxEnablePuntuaction;
     private JComboBox comboBoxPuntaction;
+    private JButton savePuntuactionButton;
     private JPopupMenu searchOptionsMenu;
 
     @Setter
@@ -34,6 +35,8 @@ public class ViewPanelSearch extends ViewTabbedPane {
     private Presenter presenterSearchSeries;
     @Setter
     private Presenter presenterSaveSeries;
+    @Setter
+    private Presenter presenterSavePuntuaction;
 
     public ViewPanelSearch() {
         initConfig();
@@ -63,8 +66,13 @@ public class ViewPanelSearch extends ViewTabbedPane {
                 presenterSaveSeries.onEvent()
         );
 
-        checkBoxEnablePuntuaction.addActionListener(e ->
-                comboBoxPuntaction.setEnabled(checkBoxEnablePuntuaction.isSelected())
+        checkBoxEnablePuntuaction.addActionListener(e -> {
+            comboBoxPuntaction.setEnabled(checkBoxEnablePuntuaction.isSelected());
+            savePuntuactionButton.setEnabled(checkBoxEnablePuntuaction.isSelected());
+        });
+
+        savePuntuactionButton.addActionListener(e ->
+                presenterSavePuntuaction.onEvent()
         );
     }
 

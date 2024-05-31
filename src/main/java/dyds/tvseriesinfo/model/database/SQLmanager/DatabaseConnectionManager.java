@@ -8,6 +8,8 @@ import java.sql.Statement;
 public class DatabaseConnectionManager {
     private static final String DATABASE_URL = "jdbc:sqlite:./dictionary.db";
     private static final int QUERY_TIMEOUT = 30;
+    public static final String DATABASE_CATALOG = "CREATE TABLE IF NOT EXISTS catalog (id INTEGER PRIMARY KEY, title TEXT, extract TEXT, source INTEGER)";
+    public static final String DATABASE_PUNTACTION = "CREATE TABLE IF NOT EXISTS rated_series (title TEXT PRIMARY KEY, puntaction INTEGER, rating_date TEXT, rating_time TEXT)";
 
     public static Connection createConnection() {
         try {
@@ -39,11 +41,16 @@ public class DatabaseConnectionManager {
         }
     }
 
-    public static void initializeDatabase() {
+    public static void initializeDatabases() {
+        initializeDatabaseCatalog(DATABASE_CATALOG);
+        initializeDatabaseCatalog(DATABASE_PUNTACTION);
+    }
+
+    private static void initializeDatabaseCatalog(String databaseName) {
         try (Connection connection = createConnection();
              Statement statement = createStatement(connection)) {
             if (statement != null) {
-                statement.executeUpdate("CREATE TABLE IF NOT EXISTS catalog (id INTEGER PRIMARY KEY, title TEXT, extract TEXT, source INTEGER)");
+                statement.executeUpdate(databaseName);
             }
         } catch (SQLException e) {
             System.err.println("Error initializing database: " + e.getMessage());

@@ -1,9 +1,10 @@
-package dyds.tvseriesinfo.presenter;
+package dyds.tvseriesinfo.presenter.search;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUDSaver;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
+import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
 import java.util.Objects;
