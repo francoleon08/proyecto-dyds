@@ -1,12 +1,11 @@
 package dyds.tvseriesinfo.model.database.SQLmanager;
 
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
-import jdk.jfr.Timestamp;
 
 import java.sql.*;
 
 public class SQLInsert {
-    private static final String REPLACE_INTO_CATALOG = "replace into catalog values(null, ?, ?, 1)";
+    private static final String REPLACE_INTO_CATALOG = "replace into catalog values(?, ?)";
     private static final String REPLACE_INTO_RATED_SERIES = "replace into rated_series values(?,?,?,?)";
     public static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
     public static final String ERROR_SAVE_SERIES = "Error al guardar la serie.";

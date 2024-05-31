@@ -22,7 +22,7 @@ public class PresenterSaveSeries implements Presenter {
     }
 
     private void initListener() {
-        seriesSaver.addListener(OperationType.SAVE, this);
+        seriesSaver.addListener(OperationType.SAVE_SERIES, this);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PresenterSaveSeries implements Presenter {
     }
 
     private void handleSaveSeries() {
-        String resultTextToSearch = viewPanelSearch.getResultTextToSearch();
+        String resultTextToSearch = viewPanelSearch.getResultTextToSearchHTML().getText();
         if (isValidForSave(resultTextToSearch)) {
             doSaveSeries(resultTextToSearch);
         } else {

@@ -22,7 +22,7 @@ public class PresenterSavePuntuaction implements Presenter {
     }
 
     private void initListener() {
-        ratedSeriesCRUDSaver.addListener(OperationType.SAVE_PUNTUACTION, this);
+        ratedSeriesCRUDSaver.addListener(OperationType.SAVE_RATED, this);
     }
 
     @Override

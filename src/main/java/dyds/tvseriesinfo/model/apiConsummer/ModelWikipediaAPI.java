@@ -75,6 +75,7 @@ public class ModelWikipediaAPI extends SeriesCRUD {
     private String formatSearchResultText(Series series, JsonElement extractElement) {
         String title = HTMLTextConverter.formatTitle(series.getTitle());
         String content = HTMLTextConverter.formatContent(extractElement.getAsString());
-        return HTMLTextConverter.textToHtml(title + content);
+        String url = HTMLTextConverter.formatHyperlink(wikipediaAPIService.getWikipediaURL(series.getTitle()), "ABRIR EN EL NAVEGADOR!");
+        return HTMLTextConverter.textToHtml(title + content + url);
     }
 }

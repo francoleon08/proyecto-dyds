@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class WikipediaAPIService {
     private static final String BASE_URL = "https://en.wikipedia.org/w/";
+    private static final String BASE_WIKI_URL = "https://en.wikipedia.org/wiki/";
     private final WikipediaSearchAPI searchAPI;
     private final WikipediaPageAPI pageAPI;
 
@@ -41,5 +42,9 @@ public class WikipediaAPIService {
                 .map(Map.Entry::getValue)
                 .map(pageJson -> pageJson.getAsJsonObject().get("extract"))
                 .orElse(null);
+    }
+
+    public String getWikipediaURL(String title){
+        return BASE_WIKI_URL + title.replace(' ', '_');
     }
 }

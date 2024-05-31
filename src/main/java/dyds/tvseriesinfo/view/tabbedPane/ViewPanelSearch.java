@@ -6,9 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class ViewPanelSearch extends ViewTabbedPane {
     private JPanel searchPanel;
@@ -25,7 +29,6 @@ public class ViewPanelSearch extends ViewTabbedPane {
     private JPopupMenu searchOptionsMenu;
 
     @Setter
-    @Getter
     String resultTextToSearch = "";
     @Setter
     @Getter
@@ -37,6 +40,8 @@ public class ViewPanelSearch extends ViewTabbedPane {
     private Presenter presenterSaveSeries;
     @Setter
     private Presenter presenterSavePuntuaction;
+    @Setter
+    private Presenter presenterOpenHyperLink;
 
     public ViewPanelSearch() {
         initConfig();
@@ -74,6 +79,12 @@ public class ViewPanelSearch extends ViewTabbedPane {
         savePuntuactionButton.addActionListener(e ->
                 presenterSavePuntuaction.onEvent()
         );
+
+        resultTextToSearchHTML.addHyperlinkListener(e -> {
+            if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
+                presenterOpenHyperLink.onEvent();
+            }
+        });
     }
 
     @Override

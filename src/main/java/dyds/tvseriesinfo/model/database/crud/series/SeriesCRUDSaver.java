@@ -8,11 +8,9 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
 public class SeriesCRUDSaver extends SeriesCRUD {
     private static SeriesCRUDSaver instance;
-    private SeriesCRUDGetter seriesGetter;
 
     private SeriesCRUDSaver() {
         super();
-        seriesGetter = SeriesCRUDGetter.getInstance();
     }
 
     public static synchronized SeriesCRUDSaver getInstance() {
@@ -24,8 +22,8 @@ public class SeriesCRUDSaver extends SeriesCRUD {
 
     public synchronized void saveSeries(String title, String extract) throws SeriesSaveException, SeriesSearchException {
         SQLInsert.saveSeries(title, extract);
-        notifyListenersSuccess(OperationType.SAVE);
-        seriesGetter.getTitlesSeries();
+        notifyListenersSuccess(OperationType.SAVE_SERIES);
+        notifyListenersSuccess(OperationType.LOAD_LOCAL_SERIES_AFTER_CHANGE);
     }
 
     public synchronized void saveChangesSeries(String title, String extract) throws SeriesSaveException {

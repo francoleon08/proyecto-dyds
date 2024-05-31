@@ -8,11 +8,9 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
 public class SeriesCRUDDeleter extends SeriesCRUD {
     private static SeriesCRUDDeleter instance;
-    private SeriesCRUDGetter seriesGetter;
 
     private SeriesCRUDDeleter() {
         super();
-        seriesGetter = SeriesCRUDGetter.getInstance();
     }
 
     public static synchronized SeriesCRUDDeleter getInstance() {
@@ -24,7 +22,7 @@ public class SeriesCRUDDeleter extends SeriesCRUD {
 
     public synchronized void deleteSeriesByTitle(String title) throws SeriesDeleteException, SeriesSearchException {
         SQLDelete.deleteSeriesByTitle(title);
-        notifyListenersSuccess(OperationType.DELETE);
-        seriesGetter.getTitlesSeries();
+        notifyListenersSuccess(OperationType.DELETE_SERIES);
+        notifyListenersSuccess(OperationType.LOAD_LOCAL_SERIES_AFTER_CHANGE);
     }
 }

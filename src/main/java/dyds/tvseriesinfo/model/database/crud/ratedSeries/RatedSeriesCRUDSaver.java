@@ -24,7 +24,7 @@ public class RatedSeriesCRUDSaver extends SeriesCRUD {
 
     public synchronized void saveRatedSeries(String title, int puntuaction) throws SeriesSaveException, SearchRatedSeriesException {
         SQLInsert.savePuntuaction(title, puntuaction);
-        notifyListenersSuccess(OperationType.SAVE_PUNTUACTION);
+        notifyListenersSuccess(OperationType.SAVE_RATED);
         seriesGetter.getRatedSeries();
     }
 }

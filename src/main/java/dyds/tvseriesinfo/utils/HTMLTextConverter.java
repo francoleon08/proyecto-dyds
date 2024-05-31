@@ -2,17 +2,10 @@ package dyds.tvseriesinfo.utils;
 
 public class HTMLTextConverter {
 
-    private static final String FONT_FACE_ARIAL = "<font face=\"arial\">";
-    private static final String FONT_END = "</font>";
-
     public static String textToHtml(String text) {
         StringBuilder builder = new StringBuilder();
-        builder.append(FONT_FACE_ARIAL);
-
         String fixedText = fixText(text);
         builder.append(fixedText);
-
-        builder.append(FONT_END);
         return builder.toString();
     }
 
@@ -34,5 +27,11 @@ public class HTMLTextConverter {
 
     public static String formatHyperlink(String url, String text) {
         return "<a href=\"" + url + "\">" + text + "</a>";
+    }
+
+    public static String getURLtoTextHTML(String textHTML) {
+        String[] parts = textHTML.split("href=\"");
+        String[] parts2 = parts[1].split("\">");
+        return parts2[0];
     }
 }

@@ -5,6 +5,7 @@ import dyds.tvseriesinfo.model.database.SQLmanager.DatabaseConnectionManager;
 import dyds.tvseriesinfo.presenter.*;
 import dyds.tvseriesinfo.presenter.rated.PresenterGetterRatedSeries;
 import dyds.tvseriesinfo.presenter.rated.PresenterLoadLocalRatedSeries;
+import dyds.tvseriesinfo.presenter.search.PresenterOpenHyperLink;
 import dyds.tvseriesinfo.presenter.storage.PresenterLoadLocalSeries;
 import dyds.tvseriesinfo.presenter.search.PresenterSavePuntuaction;
 import dyds.tvseriesinfo.presenter.search.PresenterSaveSeries;
@@ -38,6 +39,7 @@ public class Main {
         Presenter presenterSearchSeries = new PresenterSearchSeries(viewPanelSearch);
         Presenter prestererGetterRatedSeries = new PresenterGetterRatedSeries(viewPanelPuntuaction);
         Presenter presenterLoadLocalRatedSeries = new PresenterLoadLocalRatedSeries(viewPanelPuntuaction);
+        Presenter presenterOpenHyperLink = new PresenterOpenHyperLink(viewPanelSearch);
 
         SwingUtilities.invokeLater(view::initView);
     }

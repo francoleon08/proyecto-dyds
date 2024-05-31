@@ -24,7 +24,7 @@ public class PresenterDeleteSeries implements Presenter {
     }
 
     private void initListener() {
-        seriesDeleter.addListener(OperationType.DELETE, this);
+        seriesDeleter.addListener(OperationType.DELETE_SERIES, this);
     }
 
     @Override

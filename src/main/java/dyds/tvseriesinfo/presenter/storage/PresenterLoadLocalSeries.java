@@ -20,6 +20,7 @@ public class PresenterLoadLocalSeries implements Presenter {
 
     private void initListener() {
         seriesGetter.addListener(OperationType.LOAD_LOCAL_SERIES, this);
+        seriesGetter.addListener(OperationType.LOAD_LOCAL_SERIES_AFTER_CHANGE, this::handleLoadLocalSeries);
     }
 
     @Override

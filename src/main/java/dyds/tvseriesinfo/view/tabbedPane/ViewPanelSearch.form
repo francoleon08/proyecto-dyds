@@ -15,6 +15,7 @@
           </grid>
         </constraints>
         <properties>
+          <editable value="true"/>
           <font size="14"/>
         </properties>
       </component>
@@ -109,6 +110,7 @@
           <component id="aa835" class="javax.swing.JTextPane" binding="resultTextToSearchHTML">
             <constraints/>
             <properties>
+              <editable value="false"/>
               <font size="14"/>
               <maximumSize width="7" height="24"/>
             </properties>
