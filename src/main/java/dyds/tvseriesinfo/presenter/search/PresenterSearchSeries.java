@@ -7,6 +7,8 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
+import javax.swing.*;
+
 public class PresenterSearchSeries implements Presenter {
     public static final String TV_SERIES_ARTICLETOPIC_TELEVISION = " (Tv series) articletopic:\"television\"";
     private final ViewPanelSearch viewPanelSearch;
@@ -34,8 +36,8 @@ public class PresenterSearchSeries implements Presenter {
 
     private void doSearchSeries() {
         try {
-            String seriesToSearch = viewPanelSearch.getSeriesToSearchTextField().getText() + TV_SERIES_ARTICLETOPIC_TELEVISION;
-            modelWikipediaAPI.searchSeries(seriesToSearch);
+            String termToSearch = viewPanelSearch.getSeriesToSearchTextField().getText() + TV_SERIES_ARTICLETOPIC_TELEVISION;
+            modelWikipediaAPI.searchSeries(termToSearch);
         } catch (SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
         }
@@ -48,6 +50,7 @@ public class PresenterSearchSeries implements Presenter {
     @Override
     public void hasFinishedOperationSucces() {
         for (Series series : modelWikipediaAPI.getLastSearchResult()) {
+            setRatedSeries(series);
             viewPanelSearch.addOptionSearchResult(series);
             initListenerSearchResult(series);
         }
@@ -55,13 +58,17 @@ public class PresenterSearchSeries implements Presenter {
         viewPanelSearch.setWorkingState(false);
     }
 
+    private void setRatedSeries(Series series) {
+        if (series.getRated() != 0) {
+            series.setIcon( new ImageIcon("assets/check.png"));
+        } else {
+            series.setIcon( new ImageIcon("assets/x.png"));
+        }
+    }
+
     private void initListenerSearchResult(Series series) {
         series.addActionListener(actionEvent -> {
-            try {
-                updateViewWithSearchResultsSeries(series);
-            } catch (Exception e) {
-                System.err.println("Error processing response: " + e.getMessage());
-            }
+            updateViewWithSearchResultsSeries(series);
         });
     }
 
@@ -70,6 +77,13 @@ public class PresenterSearchSeries implements Presenter {
         viewPanelSearch.getResultTextToSearchHTML().setText(series.getExtract());
         viewPanelSearch.getResultTextToSearchHTML().setCaretPosition(0);
         viewPanelSearch.setResultTextToSearch(series.getExtract());
+        setRatedSeriesWithSearchView(series);
+    }
+
+    private void setRatedSeriesWithSearchView(Series series) {
+        if (series.getRated() != 0) {
+            viewPanelSearch.setRatedSeries(series.getRated() - 1);
+        }
     }
 
     private void hasFinishedOperationError(String messageError) {

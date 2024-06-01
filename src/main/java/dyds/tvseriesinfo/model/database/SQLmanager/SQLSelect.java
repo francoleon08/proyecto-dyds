@@ -70,13 +70,23 @@ public class SQLSelect {
             preparedStatement.setString(1, title);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            return new RatedSeries(
-                    resultSet.getString("title"),
-                    resultSet.getInt("puntaction"),
-                    resultSet.getString("rating_date"),
-                    resultSet.getString("rating_time")
-            );
+            return RatedSeries.builder()
+                    .title(resultSet.getString("title"))
+                    .rating(resultSet.getInt("puntaction"))
+                    .dateModified(resultSet.getString("rating_date"))
+                    .timeModified(resultSet.getString("rating_time"))
+                    .build();
         }
     }
 
+    public static int setRatedSeriesByTitle(String title) {
+        try {
+            RatedSeries ratedSeries = getRatedSeriesByTitle(title);
+            if(ratedSeries.getTitle() != null)
+                return ratedSeries.getRating();
+            return 0;
+        } catch (SearchRatedSeriesException e) {
+            return 0;
+        }
+    }
 }

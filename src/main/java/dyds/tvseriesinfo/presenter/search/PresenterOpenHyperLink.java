@@ -3,11 +3,7 @@ package dyds.tvseriesinfo.presenter.search;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.utils.HTMLTextConverter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
-
-import java.awt.*;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class PresenterOpenHyperLink implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
@@ -20,6 +16,16 @@ public class PresenterOpenHyperLink implements Presenter {
     @Override
     public void onEvent() {
         String URL = HTMLTextConverter.getURLtoTextHTML(viewPanelSearch.getResultTextToSearchHTML().getText());
+        doOpeningDefaultBrowser(URL);
+    }
+
+    private void doOpeningDefaultBrowser(String URL) {
+        try {
+            new ProcessBuilder("xdg-open", URL).start();
+            hasFinishedOperationSucces();
+        } catch (IOException e) {
+            hasFinishedOperationError("Error opening the browser: " + e.getMessage());
+        }
     }
 
     private void hasFinishedOperationError(String messageError){

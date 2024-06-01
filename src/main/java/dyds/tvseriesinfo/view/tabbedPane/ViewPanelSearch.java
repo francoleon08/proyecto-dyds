@@ -110,6 +110,10 @@ public class ViewPanelSearch extends ViewTabbedPane {
         return checkBoxEnablePuntuaction.isSelected();
     }
 
+    public void setRatedSeries(int rated) {
+        comboBoxPuntaction.setSelectedIndex(rated);
+    }
+
     public String getSelectedPuntuaction() {
         return comboBoxPuntaction.getSelectedItem().toString();
     }

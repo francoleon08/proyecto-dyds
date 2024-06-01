@@ -3,6 +3,7 @@ package dyds.tvseriesinfo.model.apiConsummer;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
 import dyds.tvseriesinfo.model.entities.Series;
@@ -53,8 +54,9 @@ public class ModelWikipediaAPI extends SeriesCRUD {
         for (JsonElement jsonSeries : jsonResultsSeries) {
             JsonObject jsonObject = jsonSeries.getAsJsonObject();
             Series series = SeriesServices.createSearchResultFromJsonObject(jsonObject);
+            series.setRated(SQLSelect.setRatedSeriesByTitle(series.getTitle()));
             JsonElement extractElement = getSeriesExtractByPageID(series.getPageID());
-            addSearchResultToMap(series, extractElement);
+            addSeriesToMap(series, extractElement);
         }
     }
 
@@ -66,13 +68,13 @@ public class ModelWikipediaAPI extends SeriesCRUD {
         }
     }
 
-    private void addSearchResultToMap(Series series, JsonElement extractElement) {
-        String resultTextToSearch = formatSearchResultText(series, extractElement);
+    private void addSeriesToMap(Series series, JsonElement extractElement) {
+        String resultTextToSearch = formatSeriesExtractToHTML(series, extractElement);
         series.setExtract(resultTextToSearch);
         lastSearchResult.put(series.getPageID(), series);
     }
 
-    private String formatSearchResultText(Series series, JsonElement extractElement) {
+    private String formatSeriesExtractToHTML(Series series, JsonElement extractElement) {
         String title = HTMLTextConverter.formatTitle(series.getTitle());
         String content = HTMLTextConverter.formatContent(extractElement.getAsString());
         String url = HTMLTextConverter.formatHyperlink(wikipediaAPIService.getWikipediaURL(series.getTitle()), "ABRIR EN EL NAVEGADOR!");

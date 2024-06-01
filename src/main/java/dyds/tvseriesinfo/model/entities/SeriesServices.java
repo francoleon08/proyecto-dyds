@@ -8,6 +8,20 @@ public class SeriesServices {
         String title = jsonObject.get("title").getAsString();
         String pageId = jsonObject.get("pageid").getAsString();
         String snippet = jsonObject.get("snippet").getAsString();
-        return new Series(title, pageId, snippet);
+        String itemText = cleanHTMLText(title, snippet);
+        Series series = Series.builder()
+                .title(title)
+                .pageID(pageId)
+                .snippet(snippet)
+                .build();
+        series.setText(itemText);
+        return series;
+    }
+
+    private static String cleanHTMLText(String title, String snippet) {
+        String cleanText = "<html><font face=\"arial\">" + title + ": " + snippet;
+        cleanText = cleanText.replace("<span class=\"searchmatch\">", "")
+                .replace("</span>", "");
+        return cleanText;
     }
 }
