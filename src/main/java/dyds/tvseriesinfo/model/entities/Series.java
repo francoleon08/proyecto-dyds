@@ -15,7 +15,5 @@ public class Series extends JMenuItem {
     @Setter
     private String extract;
     @Setter
-    private String url;
-    @Setter
     private int rated;
 }

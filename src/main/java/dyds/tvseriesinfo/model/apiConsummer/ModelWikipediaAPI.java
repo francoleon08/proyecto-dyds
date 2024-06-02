@@ -18,8 +18,8 @@ import java.util.Map;
 
 public class ModelWikipediaAPI extends SeriesCRUD {
     public static final String SEARCH_FAILED = "No fue posible realizar la búsqueda. Intente nuevamente.";
-    private WikipediaAPIService wikipediaAPIService;
-    private Map<String, Series> lastSearchResult;
+    private final WikipediaAPIService wikipediaAPIService;
+    private final Map<String, Series> lastSearchResult;
     private static ModelWikipediaAPI instance;
 
     private ModelWikipediaAPI() {
@@ -39,12 +39,21 @@ public class ModelWikipediaAPI extends SeriesCRUD {
         return lastSearchResult.values();
     }
 
-    public void searchSeries(String seriesToSearch) throws SeriesSearchException {
+    public void searchOneSeries(String seriesToSearch) throws SeriesSearchException {
+        searchSeries(seriesToSearch, 1);
+        notifyListenersSuccess(OperationType.GET_RATED_SERIES_BY_TITLE);
+    }
+
+    public void searchAmountOfSeries(String seriesToSearch, int amount) throws SeriesSearchException {
+        searchSeries(seriesToSearch, amount);
+        notifyListenersSuccess(OperationType.WIKIPEDIA_SEARCH);
+    }
+
+    private void searchSeries(String seriesToSearch, int limitResult) throws SeriesSearchException {
         try {
             lastSearchResult.clear();
-            JsonArray jsonResultsSeries = wikipediaAPIService.searchForTerm(seriesToSearch);
+            JsonArray jsonResultsSeries = wikipediaAPIService.searchForTerm(seriesToSearch, limitResult);
             processSearchResults(jsonResultsSeries);
-            notifyListenersSuccess(OperationType.WIKIPEDIA_SEARCH);
         } catch (IOException e) {
             throw new SeriesSearchException(SEARCH_FAILED);
         }

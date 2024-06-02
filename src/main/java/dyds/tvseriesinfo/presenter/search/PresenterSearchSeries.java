@@ -11,8 +11,9 @@ import javax.swing.*;
 
 public class PresenterSearchSeries implements Presenter {
     public static final String TV_SERIES_ARTICLETOPIC_TELEVISION = " (Tv series) articletopic:\"television\"";
+    public static final int LIMIT_RESULT = 5;
     private final ViewPanelSearch viewPanelSearch;
-    private ModelWikipediaAPI modelWikipediaAPI;
+    private final ModelWikipediaAPI modelWikipediaAPI;
     private Thread taskThread;
 
     public PresenterSearchSeries(ViewPanelSearch viewPanelSearch) {
@@ -37,7 +38,7 @@ public class PresenterSearchSeries implements Presenter {
     private void doSearchSeries() {
         try {
             String termToSearch = viewPanelSearch.getSeriesToSearchTextField().getText() + TV_SERIES_ARTICLETOPIC_TELEVISION;
-            modelWikipediaAPI.searchSeries(termToSearch);
+            modelWikipediaAPI.searchAmountOfSeries(termToSearch, LIMIT_RESULT);
         } catch (SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
         }
@@ -60,9 +61,9 @@ public class PresenterSearchSeries implements Presenter {
 
     private void setRatedSeries(Series series) {
         if (series.getRated() != 0) {
-            series.setIcon( new ImageIcon("assets/check.png"));
+            series.setIcon(new ImageIcon("assets/check.png"));
         } else {
-            series.setIcon( new ImageIcon("assets/x.png"));
+            series.setIcon(new ImageIcon("assets/x.png"));
         }
     }
 

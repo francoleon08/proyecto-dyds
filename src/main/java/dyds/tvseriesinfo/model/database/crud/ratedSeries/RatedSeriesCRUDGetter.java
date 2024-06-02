@@ -8,10 +8,12 @@ import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class RatedSeriesCRUDGetter extends SeriesCRUD {
     @Getter
-    private ArrayList<String> lastRatedSeries;
+    private ArrayList<RatedSeries> lastRatedSeries;
     @Getter
     private RatedSeries lastRatedSerieByTitle;
     private static RatedSeriesCRUDGetter instance;
@@ -30,11 +32,11 @@ public class RatedSeriesCRUDGetter extends SeriesCRUD {
 
     public void getRatedSeries() throws SearchRatedSeriesException {
         lastRatedSeries = SQLSelect.getRatedSeries();
+        orderRatedSeriesByRating();
         notifyListenersSuccess(OperationType.LOAD_RATED_SERIES);
     }
 
-    public void getRatedSeriesByTitle(String title) throws SearchRatedSeriesException {
-        lastRatedSerieByTitle = SQLSelect.getRatedSeriesByTitle(title);
-        notifyListenersSuccess(OperationType.GET_RATED_SERIES);
+    private void orderRatedSeriesByRating() {
+        lastRatedSeries = lastRatedSeries.stream().sorted(Comparator.comparingInt(RatedSeries::getRating)).collect(Collectors.toCollection(ArrayList::new));
     }
 }

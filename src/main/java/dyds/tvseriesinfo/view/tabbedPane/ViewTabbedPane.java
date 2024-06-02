@@ -9,4 +9,8 @@ public abstract class ViewTabbedPane extends JPanel {
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
+
+    public void setSelectedTab(int index) {
+
+    }
 }

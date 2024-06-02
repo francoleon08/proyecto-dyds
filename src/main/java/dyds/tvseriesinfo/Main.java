@@ -2,16 +2,16 @@ package dyds.tvseriesinfo;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import dyds.tvseriesinfo.model.database.SQLmanager.DatabaseConnectionManager;
-import dyds.tvseriesinfo.presenter.*;
-import dyds.tvseriesinfo.presenter.rated.PresenterGetterRatedSeries;
+import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.presenter.rated.PresenterLoadLocalRatedSeries;
+import dyds.tvseriesinfo.presenter.rated.PresenterSearchRatingSeries;
 import dyds.tvseriesinfo.presenter.search.PresenterOpenHyperLink;
-import dyds.tvseriesinfo.presenter.storage.PresenterLoadLocalSeries;
 import dyds.tvseriesinfo.presenter.search.PresenterSavePuntuaction;
 import dyds.tvseriesinfo.presenter.search.PresenterSaveSeries;
 import dyds.tvseriesinfo.presenter.search.PresenterSearchSeries;
 import dyds.tvseriesinfo.presenter.storage.PresenterDeleteSeries;
 import dyds.tvseriesinfo.presenter.storage.PresenterGetterSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterLoadLocalSeries;
 import dyds.tvseriesinfo.presenter.storage.PresenterSaveChangesSeries;
 import dyds.tvseriesinfo.view.View;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
@@ -37,7 +37,7 @@ public class Main {
         Presenter presenterSaveChangesSeries = new PresenterSaveChangesSeries(viewPanelStorage);
         Presenter presenterSaveSeries = new PresenterSaveSeries(viewPanelSearch);
         Presenter presenterSearchSeries = new PresenterSearchSeries(viewPanelSearch);
-        Presenter prestererGetterRatedSeries = new PresenterGetterRatedSeries(viewPanelPuntuaction);
+        Presenter prestererGetterRatedSeries = new PresenterSearchRatingSeries(view);
         Presenter presenterLoadLocalRatedSeries = new PresenterLoadLocalRatedSeries(viewPanelPuntuaction);
         Presenter presenterOpenHyperLink = new PresenterOpenHyperLink(viewPanelSearch);
 

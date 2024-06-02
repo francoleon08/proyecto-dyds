@@ -24,8 +24,8 @@ public class WikipediaAPIService {
         pageAPI = retrofit.create(WikipediaPageAPI.class);
     }
 
-    public JsonArray searchForTerm(String term) throws IOException {
-        Response<String> response = searchAPI.searchForTerm(term).execute();
+    public JsonArray searchForTerm(String term, int limitResult) throws IOException {
+        Response<String> response = searchAPI.searchForTerm(term, limitResult).execute();
         JsonObject jsonObject = new Gson().fromJson(response.body(), JsonObject.class);
         JsonObject query = jsonObject.get("query").getAsJsonObject();
         return query.get("search").getAsJsonArray();
@@ -44,7 +44,7 @@ public class WikipediaAPIService {
                 .orElse(null);
     }
 
-    public String getWikipediaURL(String title){
+    public String getWikipediaURL(String title) {
         return BASE_WIKI_URL + title.replace(' ', '_');
     }
 }

@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class View implements BaseView {
     private JPanel contentPane;
+    @Getter
     private JTabbedPane SeriesTabbedPane;
     private JPanel searchPanel;
     private JPanel storagePanel;
@@ -20,11 +21,6 @@ public class View implements BaseView {
     private ViewPanelStorage viewPanelStorage;
     @Getter
     private ViewPanelPuntuaction viewPanelPuntuaction;
-
-
-    public View() {
-
-    }
 
     public void initView() {
         JFrame frame = new JFrame("TV Series Info Repo");
@@ -42,5 +38,9 @@ public class View implements BaseView {
 
     public Container getContet() {
         return contentPane;
+    }
+
+    public void setSelectTab(int index) {
+        SeriesTabbedPane.setSelectedIndex(index);
     }
 }

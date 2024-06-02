@@ -1,6 +1,7 @@
 package dyds.tvseriesinfo.model.database.SQLmanager;
 
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

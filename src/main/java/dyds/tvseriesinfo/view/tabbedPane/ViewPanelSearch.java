@@ -7,12 +7,9 @@ import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class ViewPanelSearch extends ViewTabbedPane {
     private JPanel searchPanel;

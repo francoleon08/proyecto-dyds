@@ -7,7 +7,7 @@ import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 
 public class RatedSeriesCRUDSaver extends SeriesCRUD {
-    private RatedSeriesCRUDGetter seriesGetter;
+    private final RatedSeriesCRUDGetter seriesGetter;
     private static RatedSeriesCRUDSaver instance;
 
     private RatedSeriesCRUDSaver() {

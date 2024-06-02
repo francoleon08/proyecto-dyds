@@ -9,7 +9,7 @@ import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 public class PresenterSavePuntuaction implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
     private final ViewPanelPuntuaction viewPanelPuntuaction;
-    private RatedSeriesCRUDSaver ratedSeriesCRUDSaver;
+    private final RatedSeriesCRUDSaver ratedSeriesCRUDSaver;
     private Thread taskThread;
 
     public PresenterSavePuntuaction(ViewPanelSearch viewPanelSearch, ViewPanelPuntuaction viewPanelPuntuaction) {
@@ -17,7 +17,7 @@ public class PresenterSavePuntuaction implements Presenter {
         this.viewPanelPuntuaction = viewPanelPuntuaction;
         this.ratedSeriesCRUDSaver = RatedSeriesCRUDSaver.getInstance();
         this.viewPanelSearch.setPresenterSavePuntuaction(this);
-        this.viewPanelPuntuaction.setPresenterSavePutuaction(this);
+        this.viewPanelPuntuaction.setPresenterSearchRatingSeries(this);
         initListener();
     }
 

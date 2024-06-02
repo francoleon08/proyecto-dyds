@@ -3,6 +3,7 @@ package dyds.tvseriesinfo.presenter.search;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.utils.HTMLTextConverter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
+
 import java.io.IOException;
 
 public class PresenterOpenHyperLink implements Presenter {
@@ -28,7 +29,7 @@ public class PresenterOpenHyperLink implements Presenter {
         }
     }
 
-    private void hasFinishedOperationError(String messageError){
+    private void hasFinishedOperationError(String messageError) {
         viewPanelSearch.showMessageDialog(messageError);
     }
 

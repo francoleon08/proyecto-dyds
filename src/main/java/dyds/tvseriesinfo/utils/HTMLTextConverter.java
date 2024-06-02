@@ -9,6 +9,10 @@ public class HTMLTextConverter {
         return builder.toString();
     }
 
+    public static String formatTextToHTML(String text) {
+        return "<html>" + text + "</html>";
+    }
+
     private static String fixText(String text) {
         return text.replace("'", "`");
     }
@@ -17,12 +21,12 @@ public class HTMLTextConverter {
         return "<h1>" + title + "</h1>";
     }
 
-    public static String formatContent(String extractElement) {
-        return extractElement.replace("\\n", "\n");
+    public static String formatParagraph(String paragraph) {
+        return "<p>" + paragraph + "</p>";
     }
 
-    public static String formatImage(String url) {
-        return "<img src=\"" + url + "\">";
+    public static String formatContent(String extractElement) {
+        return extractElement.replace("\\n", "\n");
     }
 
     public static String formatHyperlink(String url, String text) {

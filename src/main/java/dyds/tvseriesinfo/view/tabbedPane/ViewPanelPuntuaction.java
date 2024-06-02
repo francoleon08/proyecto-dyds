@@ -1,5 +1,6 @@
 package dyds.tvseriesinfo.view.tabbedPane;
 
+import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.presenter.Presenter;
 import lombok.Setter;
 
@@ -8,19 +9,9 @@ import java.awt.*;
 
 public class ViewPanelPuntuaction extends ViewTabbedPane {
     private JPanel puntuactionPanel;
-    private JComboBox seriesPuntuactionComboBox;
-    private JTextField puntuactionSeries;
-    private JTextField lastModificationSeries;
-    private JTextField titleSeries;
-
+    private JList<RatedSeries> listRatedSeriesPanel;
     @Setter
-    private Presenter presenterGetterRatedSeries;
-    @Setter
-    private Presenter presenterSavePutuaction;
-
-    public ViewPanelPuntuaction() {
-        initListeners();
-    }
+    private Presenter presenterSearchRatingSeries;
 
     @Override
     public void setWorkingState(boolean working) {
@@ -29,33 +20,22 @@ public class ViewPanelPuntuaction extends ViewTabbedPane {
         }
     }
 
+    public void setRatedSeriesList(DefaultListModel<RatedSeries> listModel) {
+        listRatedSeriesPanel.setModel(listModel);
+        initListeners();
+    }
+
     private void initListeners() {
-        seriesPuntuactionComboBox.addActionListener(e ->
-                presenterGetterRatedSeries.onEvent()
-        );
+        listRatedSeriesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    presenterSearchRatingSeries.onEvent();
+                }
+            }
+        });
     }
 
-    public boolean isItemSelected() {
-        return seriesPuntuactionComboBox.getSelectedIndex() > -1;
-    }
-
-    public String getItemSelectedComboBox() {
-        return seriesPuntuactionComboBox.getSelectedItem().toString();
-    }
-
-    public void setRatedSeriesComboBox(Object[] ratedSeries) {
-        seriesPuntuactionComboBox.setModel(new DefaultComboBoxModel<>(ratedSeries));
-    }
-
-    public void setTitleRatedSeries(String title) {
-        titleSeries.setText(title);
-    }
-
-    public void setPuntuactionRadetSeries(String puntuaction) {
-        puntuactionSeries.setText(puntuaction);
-    }
-
-    public void setLastModificationRatedSeries(String lastModification) {
-        lastModificationSeries.setText(lastModification);
+    public String getTitleRatedSeriesSelected() {
+        return listRatedSeriesPanel.getSelectedValue().getTitle();
     }
 }

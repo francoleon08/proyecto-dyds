@@ -2,13 +2,17 @@ package dyds.tvseriesinfo.presenter.rated;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
 
+import javax.swing.*;
+import java.util.ArrayList;
+
 public class PresenterLoadLocalRatedSeries implements Presenter {
-    private RatedSeriesCRUDGetter ratedSeriesCRUDGetter;
-    private ViewPanelPuntuaction viewPanelPuntuaction;
+    private final RatedSeriesCRUDGetter ratedSeriesCRUDGetter;
+    private final ViewPanelPuntuaction viewPanelPuntuaction;
     private Thread taskThread;
 
     public PresenterLoadLocalRatedSeries(ViewPanelPuntuaction viewPanelPuntuaction) {
@@ -44,7 +48,17 @@ public class PresenterLoadLocalRatedSeries implements Presenter {
 
     @Override
     public void hasFinishedOperationSucces() {
-        viewPanelPuntuaction.setRatedSeriesComboBox(ratedSeriesCRUDGetter.getLastRatedSeries().toArray());
+        ArrayList<RatedSeries> ratedSeries = ratedSeriesCRUDGetter.getLastRatedSeries();
+        DefaultListModel<RatedSeries> listModel = createItemsToRatedSeriesList(ratedSeries);
+        viewPanelPuntuaction.setRatedSeriesList(listModel);
         viewPanelPuntuaction.setWorkingState(false);
+    }
+
+    private DefaultListModel<RatedSeries> createItemsToRatedSeriesList(ArrayList<RatedSeries> ratedSeries) {
+        DefaultListModel<RatedSeries> listModel = new DefaultListModel<>();
+        for (RatedSeries ratedSerie : ratedSeries) {
+            listModel.addElement(ratedSerie);
+        }
+        return listModel;
     }
 }
