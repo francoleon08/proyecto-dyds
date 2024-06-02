@@ -8,7 +8,7 @@ import lombok.Getter;
 import javax.swing.*;
 import java.awt.*;
 
-public class View implements BaseView {
+public class GeneralView implements BaseView {
     private JPanel contentPane;
     @Getter
     private JTabbedPane SeriesTabbedPane;

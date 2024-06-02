@@ -5,7 +5,7 @@ import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
-import dyds.tvseriesinfo.view.View;
+import dyds.tvseriesinfo.view.GeneralView;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
@@ -14,13 +14,13 @@ public class PresenterSearchRatingSeries implements Presenter {
     private final ViewPanelPuntuaction viewPanelPuntuaction;
     private final ViewPanelSearch viewPanelSearch;
     private Thread taskThread;
-    private final View view;
+    private final GeneralView generalView;
 
-    public PresenterSearchRatingSeries(View view) {
+    public PresenterSearchRatingSeries(GeneralView generalView) {
         this.modelWikipediaAPI = ModelWikipediaAPI.getInstance();
-        this.view = view;
-        this.viewPanelPuntuaction = view.getViewPanelPuntuaction();
-        this.viewPanelSearch = view.getViewPanelSearch();
+        this.generalView = generalView;
+        this.viewPanelPuntuaction = generalView.getViewPanelPuntuaction();
+        this.viewPanelSearch = generalView.getViewPanelSearch();
         this.viewPanelPuntuaction.setPresenterSearchRatingSeries(this);
         initListener();
     }
@@ -57,7 +57,7 @@ public class PresenterSearchRatingSeries implements Presenter {
     public void hasFinishedOperationSucces() {
         Series series = modelWikipediaAPI.getLastSearchResult().iterator().next();
         updateViewWithSearchResultsSeries(series);
-        view.setSelectTab(0);
+        generalView.setSelectTab(0);
         viewPanelPuntuaction.setWorkingState(false);
     }
 

@@ -13,7 +13,7 @@ import dyds.tvseriesinfo.presenter.storage.PresenterDeleteSeries;
 import dyds.tvseriesinfo.presenter.storage.PresenterGetterSeries;
 import dyds.tvseriesinfo.presenter.storage.PresenterLoadLocalSeries;
 import dyds.tvseriesinfo.presenter.storage.PresenterSaveChangesSeries;
-import dyds.tvseriesinfo.view.View;
+import dyds.tvseriesinfo.view.GeneralView;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
@@ -25,10 +25,10 @@ public class Main {
         setLookAndFel();
         DatabaseConnectionManager.initializeDatabases();
 
-        View view = new View();
-        ViewPanelStorage viewPanelStorage = view.getViewPanelStorage();
-        ViewPanelSearch viewPanelSearch = view.getViewPanelSearch();
-        ViewPanelPuntuaction viewPanelPuntuaction = view.getViewPanelPuntuaction();
+        GeneralView generalView = new GeneralView();
+        ViewPanelStorage viewPanelStorage = generalView.getViewPanelStorage();
+        ViewPanelSearch viewPanelSearch = generalView.getViewPanelSearch();
+        ViewPanelPuntuaction viewPanelPuntuaction = generalView.getViewPanelPuntuaction();
 
         Presenter presenterSavePuntuaction = new PresenterSavePuntuaction(viewPanelSearch, viewPanelPuntuaction);
         Presenter presenterGetterSeries = new PresenterGetterSeries(viewPanelStorage);
@@ -37,11 +37,11 @@ public class Main {
         Presenter presenterSaveChangesSeries = new PresenterSaveChangesSeries(viewPanelStorage);
         Presenter presenterSaveSeries = new PresenterSaveSeries(viewPanelSearch);
         Presenter presenterSearchSeries = new PresenterSearchSeries(viewPanelSearch);
-        Presenter prestererGetterRatedSeries = new PresenterSearchRatingSeries(view);
+        Presenter prestererGetterRatedSeries = new PresenterSearchRatingSeries(generalView);
         Presenter presenterLoadLocalRatedSeries = new PresenterLoadLocalRatedSeries(viewPanelPuntuaction);
         Presenter presenterOpenHyperLink = new PresenterOpenHyperLink(viewPanelSearch);
 
-        SwingUtilities.invokeLater(view::initView);
+        SwingUtilities.invokeLater(generalView::initView);
     }
 
     private static void setLookAndFel() {
