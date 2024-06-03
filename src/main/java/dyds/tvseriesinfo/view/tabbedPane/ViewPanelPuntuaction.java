@@ -15,9 +15,7 @@ public class ViewPanelPuntuaction extends ViewTabbedPane {
 
     @Override
     public void setWorkingState(boolean working) {
-        for (Component component : this.puntuactionPanel.getComponents()) {
-            component.setEnabled(!working);
-        }
+        listRatedSeriesPanel.setEnabled(!working);
     }
 
     public void setRatedSeriesList(DefaultListModel<RatedSeries> listModel) {

@@ -1,6 +1,6 @@
 package dyds.tvseriesinfo.presenter.search;
 
-import dyds.tvseriesinfo.model.apiConsummer.ModelWikipediaAPI;
+import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
@@ -46,6 +46,12 @@ public class PresenterSearchSeries implements Presenter {
 
     private void initListener() {
         modelWikipediaAPI.addListener(OperationType.WIKIPEDIA_SEARCH, this);
+        modelWikipediaAPI.addListener(OperationType.GET_RATED_SERIES_BY_TITLE, this::handleLoadRatedSeriesByTitle);
+    }
+
+    private void handleLoadRatedSeriesByTitle() {
+        Series series = modelWikipediaAPI.getLastSearchResult().iterator().next();
+        updateViewWithSearchResultsSeries(series);
     }
 
     @Override

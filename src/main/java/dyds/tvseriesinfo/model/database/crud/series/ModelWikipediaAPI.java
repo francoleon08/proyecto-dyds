@@ -1,8 +1,9 @@
-package dyds.tvseriesinfo.model.apiConsummer;
+package dyds.tvseriesinfo.model.database.crud.series;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dyds.tvseriesinfo.model.apiConsummer.WikipediaAPIService;
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;

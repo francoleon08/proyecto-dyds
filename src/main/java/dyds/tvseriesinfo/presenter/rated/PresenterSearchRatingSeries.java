@@ -1,6 +1,6 @@
 package dyds.tvseriesinfo.presenter.rated;
 
-import dyds.tvseriesinfo.model.apiConsummer.ModelWikipediaAPI;
+import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
@@ -55,23 +55,7 @@ public class PresenterSearchRatingSeries implements Presenter {
 
     @Override
     public void hasFinishedOperationSucces() {
-        Series series = modelWikipediaAPI.getLastSearchResult().iterator().next();
-        updateViewWithSearchResultsSeries(series);
         generalView.setSelectTab(0);
         viewPanelPuntuaction.setWorkingState(false);
-    }
-
-    private void updateViewWithSearchResultsSeries(Series series) {
-        viewPanelSearch.setSelectedResultTitle(series.getTitle());
-        viewPanelSearch.getResultTextToSearchHTML().setText(series.getExtract());
-        viewPanelSearch.getResultTextToSearchHTML().setCaretPosition(0);
-        viewPanelSearch.setResultTextToSearch(series.getExtract());
-        setRatedSeriesWithSearchView(series);
-    }
-
-    private void setRatedSeriesWithSearchView(Series series) {
-        if (series.getRated() != 0) {
-            viewPanelSearch.setRatedSeries(series.getRated() - 1);
-        }
     }
 }
