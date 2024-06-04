@@ -3,10 +3,10 @@ package dyds.tvseriesinfo.model.database.crud;
 import dyds.tvseriesinfo.model.database.event.EventModelSeriesManager;
 import dyds.tvseriesinfo.model.database.event.ListenerModelSeries;
 
-public abstract class SeriesCRUD {
+public abstract class ModelSeriesCRUD {
     protected EventModelSeriesManager eventModelSeriesManager;
 
-    public SeriesCRUD() {
+    public ModelSeriesCRUD() {
         eventModelSeriesManager = EventModelSeriesManager.getInstance();
     }
 

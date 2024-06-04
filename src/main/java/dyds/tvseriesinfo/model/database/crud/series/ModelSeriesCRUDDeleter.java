@@ -2,20 +2,20 @@ package dyds.tvseriesinfo.model.database.crud.series;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLDelete;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
-public class SeriesCRUDDeleter extends SeriesCRUD {
-    private static SeriesCRUDDeleter instance;
+public class ModelSeriesCRUDDeleter extends ModelSeriesCRUD {
+    private static ModelSeriesCRUDDeleter instance;
 
-    private SeriesCRUDDeleter() {
+    private ModelSeriesCRUDDeleter() {
         super();
     }
 
-    public static synchronized SeriesCRUDDeleter getInstance() {
+    public static synchronized ModelSeriesCRUDDeleter getInstance() {
         if (instance == null) {
-            instance = new SeriesCRUDDeleter();
+            instance = new ModelSeriesCRUDDeleter();
         }
         return instance;
     }

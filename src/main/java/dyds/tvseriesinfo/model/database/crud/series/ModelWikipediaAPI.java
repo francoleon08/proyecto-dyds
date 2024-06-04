@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaAPIService;
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.entities.SeriesServices;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModelWikipediaAPI extends SeriesCRUD {
+public class ModelWikipediaAPI extends ModelSeriesCRUD {
     private static final String TV_SERIES_ARTICLETOPIC_TELEVISION = " (Tv series) articletopic:\"television\"";
     private static final String SEARCH_FAILED = "No fue posible realizar la búsqueda. Intente nuevamente.";
     private static final String SEARCH_EMPTY = "No se encontraron resultados para la búsqueda. Intente con otro término.";

@@ -2,7 +2,7 @@ package dyds.tvseriesinfo.model.database.crud.ratedSeries;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import lombok.Getter;
@@ -11,21 +11,21 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public class RatedSeriesCRUDGetter extends SeriesCRUD {
+public class RatedModelSeriesCRUDGetter extends ModelSeriesCRUD {
     @Getter
     private ArrayList<RatedSeries> lastRatedSeries;
     @Getter
     private RatedSeries lastRatedSerieByTitle;
-    private static RatedSeriesCRUDGetter instance;
+    private static RatedModelSeriesCRUDGetter instance;
 
-    private RatedSeriesCRUDGetter() {
+    private RatedModelSeriesCRUDGetter() {
         super();
         lastRatedSeries = new ArrayList<>();
     }
 
-    public static synchronized RatedSeriesCRUDGetter getInstance() {
+    public static synchronized RatedModelSeriesCRUDGetter getInstance() {
         if (instance == null) {
-            instance = new RatedSeriesCRUDGetter();
+            instance = new RatedModelSeriesCRUDGetter();
         }
         return instance;
     }

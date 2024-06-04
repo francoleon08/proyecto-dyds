@@ -2,27 +2,27 @@ package dyds.tvseriesinfo.model.database.crud.series;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import lombok.Getter;
 
 import java.util.ArrayList;
 
-public class SeriesCRUDGetter extends SeriesCRUD {
+public class ModelSeriesCRUDGetter extends ModelSeriesCRUD {
     @Getter
     private ArrayList<String> lastTitlesSeries;
     @Getter
     private String lastSeriesExtactByTitle;
-    private static SeriesCRUDGetter instance;
+    private static ModelSeriesCRUDGetter instance;
 
-    private SeriesCRUDGetter() {
+    private ModelSeriesCRUDGetter() {
         super();
         lastTitlesSeries = new ArrayList<>();
     }
 
-    public static synchronized SeriesCRUDGetter getInstance() {
+    public static synchronized ModelSeriesCRUDGetter getInstance() {
         if (instance == null) {
-            instance = new SeriesCRUDGetter();
+            instance = new ModelSeriesCRUDGetter();
         }
         return instance;
     }

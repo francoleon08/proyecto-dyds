@@ -1,7 +1,7 @@
 package dyds.tvseriesinfo.presenter.search;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.series.SeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDSaver;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
@@ -11,10 +11,10 @@ import java.util.Objects;
 
 public class PresenterSaveSeries implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
-    private final SeriesCRUDSaver seriesSaver;
+    private final ModelSeriesCRUDSaver seriesSaver;
     private Thread taskThread;
 
-    public PresenterSaveSeries(ViewPanelSearch viewPanelSearch, SeriesCRUDSaver seriesSaver) {
+    public PresenterSaveSeries(ViewPanelSearch viewPanelSearch, ModelSeriesCRUDSaver seriesSaver) {
         this.viewPanelSearch = viewPanelSearch;
         this.seriesSaver = seriesSaver;
         this.viewPanelSearch.setPresenterSaveSeries(this);

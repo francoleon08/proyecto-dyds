@@ -5,27 +5,27 @@ import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.series.*;
 
 public class ModelFactory {
-    public RatedSeriesCRUDGetter getRatedSeriesCRUDGetter() {
-        return RatedSeriesCRUDGetter.getInstance();
+    public RatedModelSeriesCRUDGetter getRatedSeriesCRUDGetter() {
+        return RatedModelSeriesCRUDGetter.getInstance();
     }
 
-    public RatedSeriesCRUDSaver getRatedSeriesCRUDSaver() {
-        return RatedSeriesCRUDSaver.getInstance();
+    public RatedModelSeriesCRUDSaver getRatedSeriesCRUDSaver() {
+        return RatedModelSeriesCRUDSaver.getInstance();
     }
 
     public ModelWikipediaAPI getModelWikipediaAPI() {
         return ModelWikipediaAPI.getInstance();
     }
 
-    public SeriesCRUDDeleter getSeriesCRUDDeleter() {
-        return SeriesCRUDDeleter.getInstance();
+    public ModelSeriesCRUDDeleter getSeriesCRUDDeleter() {
+        return ModelSeriesCRUDDeleter.getInstance();
     }
 
-    public SeriesCRUDGetter getSeriesCRUDGetter() {
-        return SeriesCRUDGetter.getInstance();
+    public ModelSeriesCRUDGetter getSeriesCRUDGetter() {
+        return ModelSeriesCRUDGetter.getInstance();
     }
 
-    public SeriesCRUDSaver getSeriesCRUDSaver() {
-        return SeriesCRUDSaver.getInstance();
+    public ModelSeriesCRUDSaver getSeriesCRUDSaver() {
+        return ModelSeriesCRUDSaver.getInstance();
     }
 }

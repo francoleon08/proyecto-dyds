@@ -1,7 +1,7 @@
 package dyds.tvseriesinfo.presenter.rated;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.presenter.Presenter;
@@ -11,11 +11,11 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class PresenterLoadLocalRatedSeries implements Presenter {
-    private final RatedSeriesCRUDGetter ratedSeriesCRUDGetter;
+    private final RatedModelSeriesCRUDGetter ratedSeriesCRUDGetter;
     private final ViewPanelPuntuaction viewPanelPuntuaction;
     private Thread taskThread;
 
-    public PresenterLoadLocalRatedSeries(ViewPanelPuntuaction viewPanelPuntuaction, RatedSeriesCRUDGetter ratedSeriesCRUDGetter) {
+    public PresenterLoadLocalRatedSeries(ViewPanelPuntuaction viewPanelPuntuaction, RatedModelSeriesCRUDGetter ratedSeriesCRUDGetter) {
         this.ratedSeriesCRUDGetter = ratedSeriesCRUDGetter;
         this.viewPanelPuntuaction = viewPanelPuntuaction;
         initListener();

@@ -1,7 +1,7 @@
 package dyds.tvseriesinfo.presenter.search;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedSeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDSaver;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
@@ -9,10 +9,10 @@ import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 public class PresenterSavePuntuaction implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
     private final ViewPanelPuntuaction viewPanelPuntuaction;
-    private final RatedSeriesCRUDSaver ratedSeriesCRUDSaver;
+    private final RatedModelSeriesCRUDSaver ratedSeriesCRUDSaver;
     private Thread taskThread;
 
-    public PresenterSavePuntuaction(ViewPanelSearch viewPanelSearch, ViewPanelPuntuaction viewPanelPuntuaction, RatedSeriesCRUDSaver ratedSeriesCRUDSaver) {
+    public PresenterSavePuntuaction(ViewPanelSearch viewPanelSearch, ViewPanelPuntuaction viewPanelPuntuaction, RatedModelSeriesCRUDSaver ratedSeriesCRUDSaver) {
         this.viewPanelSearch = viewPanelSearch;
         this.viewPanelPuntuaction = viewPanelPuntuaction;
         this.ratedSeriesCRUDSaver = ratedSeriesCRUDSaver;

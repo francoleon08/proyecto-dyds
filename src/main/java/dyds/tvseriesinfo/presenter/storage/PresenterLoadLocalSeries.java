@@ -1,17 +1,17 @@
 package dyds.tvseriesinfo.presenter.storage;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.series.SeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
 public class PresenterLoadLocalSeries implements Presenter {
     private final ViewPanelStorage viewPanelStorage;
-    private final SeriesCRUDGetter seriesGetter;
+    private final ModelSeriesCRUDGetter seriesGetter;
     private Thread taskThread;
 
-    public PresenterLoadLocalSeries(ViewPanelStorage viewPanelStorage, SeriesCRUDGetter seriesGetter) {
+    public PresenterLoadLocalSeries(ViewPanelStorage viewPanelStorage, ModelSeriesCRUDGetter seriesGetter) {
         this.viewPanelStorage = viewPanelStorage;
         this.seriesGetter = seriesGetter;
         initListener();

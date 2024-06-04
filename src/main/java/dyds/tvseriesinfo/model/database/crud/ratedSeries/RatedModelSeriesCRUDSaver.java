@@ -2,22 +2,22 @@ package dyds.tvseriesinfo.model.database.crud.ratedSeries;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLInsert;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 
-public class RatedSeriesCRUDSaver extends SeriesCRUD {
-    private final RatedSeriesCRUDGetter seriesGetter;
-    private static RatedSeriesCRUDSaver instance;
+public class RatedModelSeriesCRUDSaver extends ModelSeriesCRUD {
+    private final RatedModelSeriesCRUDGetter seriesGetter;
+    private static RatedModelSeriesCRUDSaver instance;
 
-    private RatedSeriesCRUDSaver() {
+    private RatedModelSeriesCRUDSaver() {
         super();
-        seriesGetter = RatedSeriesCRUDGetter.getInstance();
+        seriesGetter = RatedModelSeriesCRUDGetter.getInstance();
     }
 
-    public static synchronized RatedSeriesCRUDSaver getInstance() {
+    public static synchronized RatedModelSeriesCRUDSaver getInstance() {
         if (instance == null) {
-            instance = new RatedSeriesCRUDSaver();
+            instance = new RatedModelSeriesCRUDSaver();
         }
         return instance;
     }

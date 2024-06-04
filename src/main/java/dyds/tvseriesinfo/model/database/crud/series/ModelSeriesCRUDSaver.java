@@ -2,20 +2,20 @@ package dyds.tvseriesinfo.model.database.crud.series;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLInsert;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.SeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
-public class SeriesCRUDSaver extends SeriesCRUD {
-    private static SeriesCRUDSaver instance;
+public class ModelSeriesCRUDSaver extends ModelSeriesCRUD {
+    private static ModelSeriesCRUDSaver instance;
 
-    private SeriesCRUDSaver() {
+    private ModelSeriesCRUDSaver() {
         super();
     }
 
-    public static synchronized SeriesCRUDSaver getInstance() {
+    public static synchronized ModelSeriesCRUDSaver getInstance() {
         if (instance == null) {
-            instance = new SeriesCRUDSaver();
+            instance = new ModelSeriesCRUDSaver();
         }
         return instance;
     }

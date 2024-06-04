@@ -1,17 +1,17 @@
 package dyds.tvseriesinfo.presenter.storage;
 
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.database.crud.series.SeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDSaver;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
 public class PresenterSaveChangesSeries implements Presenter {
     private final ViewPanelStorage viewPanelStorage;
-    private final SeriesCRUDSaver seriesSaver;
+    private final ModelSeriesCRUDSaver seriesSaver;
     private Thread taskThread;
 
-    public PresenterSaveChangesSeries(ViewPanelStorage viewPanelStorage, SeriesCRUDSaver seriesSaver) {
+    public PresenterSaveChangesSeries(ViewPanelStorage viewPanelStorage, ModelSeriesCRUDSaver seriesSaver) {
         this.viewPanelStorage = viewPanelStorage;
         this.seriesSaver = seriesSaver;
         this.viewPanelStorage.setPresenterSaveChangesSeries(this);
