@@ -11,6 +11,7 @@ import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.entities.SeriesServices;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.utils.HTMLTextConverter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -18,8 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModelWikipediaAPI extends SeriesCRUD {
-    public static final String SEARCH_FAILED = "No fue posible realizar la búsqueda. Intente nuevamente.";
-    private final WikipediaAPIService wikipediaAPIService;
+    private static final String TV_SERIES_ARTICLETOPIC_TELEVISION = " (Tv series) articletopic:\"television\"";
+    private static final String SEARCH_FAILED = "No fue posible realizar la búsqueda. Intente nuevamente.";
+    private static final String SEARCH_EMPTY = "No se encontraron resultados para la búsqueda. Intente con otro término.";
+    @Setter
+    private WikipediaAPIService wikipediaAPIService;
     private final Map<String, Series> lastSearchResult;
     private static ModelWikipediaAPI instance;
 
@@ -46,7 +50,7 @@ public class ModelWikipediaAPI extends SeriesCRUD {
     }
 
     public void searchAmountOfSeries(String seriesToSearch, int amount) throws SeriesSearchException {
-        searchSeries(seriesToSearch, amount);
+        searchSeries(seriesToSearch + TV_SERIES_ARTICLETOPIC_TELEVISION, amount);
         notifyListenersSuccess(OperationType.WIKIPEDIA_SEARCH);
     }
 
@@ -61,6 +65,8 @@ public class ModelWikipediaAPI extends SeriesCRUD {
     }
 
     private void processSearchResults(JsonArray jsonResultsSeries) throws SeriesSearchException {
+        if (jsonResultsSeries.isEmpty())
+            throw new SeriesSearchException(SEARCH_EMPTY);
         for (JsonElement jsonSeries : jsonResultsSeries) {
             JsonObject jsonObject = jsonSeries.getAsJsonObject();
             Series series = SeriesServices.createSearchResultFromJsonObject(jsonObject);

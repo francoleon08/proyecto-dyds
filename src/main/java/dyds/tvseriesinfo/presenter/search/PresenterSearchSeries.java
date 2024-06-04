@@ -10,7 +10,6 @@ import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import javax.swing.*;
 
 public class PresenterSearchSeries implements Presenter {
-    public static final String TV_SERIES_ARTICLETOPIC_TELEVISION = " (Tv series) articletopic:\"television\"";
     public static final int LIMIT_RESULT = 5;
     private final ViewPanelSearch viewPanelSearch;
     private final ModelWikipediaAPI modelWikipediaAPI;
@@ -37,7 +36,7 @@ public class PresenterSearchSeries implements Presenter {
 
     private void doSearchSeries() {
         try {
-            String termToSearch = viewPanelSearch.getSeriesToSearchTextField().getText() + TV_SERIES_ARTICLETOPIC_TELEVISION;
+            String termToSearch = viewPanelSearch.getSeriesToSearchTextField().getText();
             modelWikipediaAPI.searchAmountOfSeries(termToSearch, LIMIT_RESULT);
         } catch (SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
