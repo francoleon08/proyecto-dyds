@@ -12,10 +12,10 @@ public class PresenterSavePuntuaction implements Presenter {
     private final RatedSeriesCRUDSaver ratedSeriesCRUDSaver;
     private Thread taskThread;
 
-    public PresenterSavePuntuaction(ViewPanelSearch viewPanelSearch, ViewPanelPuntuaction viewPanelPuntuaction) {
+    public PresenterSavePuntuaction(ViewPanelSearch viewPanelSearch, ViewPanelPuntuaction viewPanelPuntuaction, RatedSeriesCRUDSaver ratedSeriesCRUDSaver) {
         this.viewPanelSearch = viewPanelSearch;
         this.viewPanelPuntuaction = viewPanelPuntuaction;
-        this.ratedSeriesCRUDSaver = RatedSeriesCRUDSaver.getInstance();
+        this.ratedSeriesCRUDSaver = ratedSeriesCRUDSaver;
         this.viewPanelSearch.setPresenterSavePuntuaction(this);
         this.viewPanelPuntuaction.setPresenterSearchRatingSeries(this);
         initListener();

@@ -15,10 +15,10 @@ public class PresenterSearchSeries implements Presenter {
     private final ModelWikipediaAPI modelWikipediaAPI;
     private Thread taskThread;
 
-    public PresenterSearchSeries(ViewPanelSearch viewPanelSearch) {
+    public PresenterSearchSeries(ViewPanelSearch viewPanelSearch, ModelWikipediaAPI modelWikipediaAPI) {
         this.viewPanelSearch = viewPanelSearch;
         this.viewPanelSearch.setPresenterSearchSeries(this);
-        this.modelWikipediaAPI = ModelWikipediaAPI.getInstance();
+        this.modelWikipediaAPI = modelWikipediaAPI;
         initListener();
     }
 
@@ -37,6 +37,9 @@ public class PresenterSearchSeries implements Presenter {
     private void doSearchSeries() {
         try {
             String termToSearch = viewPanelSearch.getSeriesToSearchTextField().getText();
+            if (termToSearch.isEmpty()) {
+                throw new SeriesSearchException("Please enter a series to search");
+            }
             modelWikipediaAPI.searchAmountOfSeries(termToSearch, LIMIT_RESULT);
         } catch (SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());

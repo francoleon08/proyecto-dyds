@@ -8,8 +8,8 @@ import java.sql.Statement;
 public class DatabaseConnectionManager {
     private static final String DATABASE_URL = "jdbc:sqlite:./dictionary.db";
     private static final int QUERY_TIMEOUT = 30;
-    public static final String DATABASE_CATALOG = "CREATE TABLE IF NOT EXISTS catalog (title TEXT PRIMARY KEY, extract TEXT)";
-    public static final String DATABASE_PUNTACTION = "CREATE TABLE IF NOT EXISTS rated_series (title TEXT PRIMARY KEY, puntaction INTEGER, rating_date TEXT, rating_time TEXT)";
+    private static final String DATABASE_CATALOG = "CREATE TABLE IF NOT EXISTS catalog (title TEXT PRIMARY KEY, extract TEXT)";
+    private static final String DATABASE_PUNTACTION = "CREATE TABLE IF NOT EXISTS rated_series (title TEXT PRIMARY KEY, puntaction INTEGER, rating_date TEXT, rating_time TEXT)";
 
     public static Connection createConnection() {
         try {

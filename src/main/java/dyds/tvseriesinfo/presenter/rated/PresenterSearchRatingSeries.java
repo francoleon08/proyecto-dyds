@@ -16,8 +16,8 @@ public class PresenterSearchRatingSeries implements Presenter {
     private Thread taskThread;
     private final GeneralView generalView;
 
-    public PresenterSearchRatingSeries(GeneralView generalView) {
-        this.modelWikipediaAPI = ModelWikipediaAPI.getInstance();
+    public PresenterSearchRatingSeries(GeneralView generalView, ModelWikipediaAPI modelWikipediaAPI) {
+        this.modelWikipediaAPI = modelWikipediaAPI;
         this.generalView = generalView;
         this.viewPanelPuntuaction = generalView.getViewPanelPuntuaction();
         this.viewPanelSearch = generalView.getViewPanelSearch();

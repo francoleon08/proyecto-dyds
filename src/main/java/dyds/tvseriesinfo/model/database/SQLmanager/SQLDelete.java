@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class SQLDelete {
     private static final String DELETE_FROM_CATALOG_WHERE_TITLE = "DELETE FROM catalog WHERE title = ?";
-    public static final String ERROR_DELETE_SERIES = "Error al eliminar la serie";
+    private static final String ERROR_DELETE_SERIES = "Error al eliminar la serie";
 
     public static void deleteSeriesByTitle(String title) throws SeriesDeleteException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {

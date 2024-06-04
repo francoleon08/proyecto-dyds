@@ -11,9 +11,9 @@ public class PresenterLoadLocalSeries implements Presenter {
     private final SeriesCRUDGetter seriesGetter;
     private Thread taskThread;
 
-    public PresenterLoadLocalSeries(ViewPanelStorage viewPanelStorage) {
+    public PresenterLoadLocalSeries(ViewPanelStorage viewPanelStorage, SeriesCRUDGetter seriesGetter) {
         this.viewPanelStorage = viewPanelStorage;
-        this.seriesGetter = SeriesCRUDGetter.getInstance();
+        this.seriesGetter = seriesGetter;
         initListener();
         onEvent();
     }

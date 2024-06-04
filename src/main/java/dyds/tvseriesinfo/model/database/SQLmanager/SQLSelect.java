@@ -13,7 +13,7 @@ public class SQLSelect {
     private static final String SELECT_FROM_RATED_SERIES = "select * from rated_series";
     private static final String SELECT_FROM_RATED_SERIES_BY_TITLE = "select * from rated_series WHERE  title = ?";
     private static final String COLUMN_LABEL_EXTRACT = "extract";
-    public static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
+    private static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
 
     public static ArrayList<String> getTitlesSeries() throws SeriesSearchException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {

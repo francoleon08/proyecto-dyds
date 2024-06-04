@@ -15,8 +15,8 @@ public class PresenterLoadLocalRatedSeries implements Presenter {
     private final ViewPanelPuntuaction viewPanelPuntuaction;
     private Thread taskThread;
 
-    public PresenterLoadLocalRatedSeries(ViewPanelPuntuaction viewPanelPuntuaction) {
-        this.ratedSeriesCRUDGetter = RatedSeriesCRUDGetter.getInstance();
+    public PresenterLoadLocalRatedSeries(ViewPanelPuntuaction viewPanelPuntuaction, RatedSeriesCRUDGetter ratedSeriesCRUDGetter) {
+        this.ratedSeriesCRUDGetter = ratedSeriesCRUDGetter;
         this.viewPanelPuntuaction = viewPanelPuntuaction;
         initListener();
         onEvent();

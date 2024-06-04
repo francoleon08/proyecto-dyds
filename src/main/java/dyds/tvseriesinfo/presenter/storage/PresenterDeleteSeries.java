@@ -16,9 +16,9 @@ public class PresenterDeleteSeries implements Presenter {
     private final SeriesCRUDDeleter seriesDeleter;
     private Thread taskThread;
 
-    public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage) {
+    public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage, SeriesCRUDDeleter seriesDeleter) {
         this.viewPanelStorage = viewPanelStorage;
-        this.seriesDeleter = SeriesCRUDDeleter.getInstance();
+        this.seriesDeleter = seriesDeleter;
         this.viewPanelStorage.setPresenterDeleteSeries(this);
         initListener();
     }

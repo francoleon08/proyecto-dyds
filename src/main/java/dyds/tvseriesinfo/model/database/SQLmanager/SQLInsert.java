@@ -7,8 +7,8 @@ import java.sql.*;
 public class SQLInsert {
     private static final String REPLACE_INTO_CATALOG = "replace into catalog values(?, ?)";
     private static final String REPLACE_INTO_RATED_SERIES = "replace into rated_series values(?,?,?,?)";
-    public static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
-    public static final String ERROR_SAVE_SERIES = "Error al guardar la serie.";
+    private static final String ERROR_DATABASE_CONNECTION = "Error de conexión con la base de datos.";
+    private static final String ERROR_SAVE_SERIES = "Error al guardar la serie.";
 
     public static void savePuntuaction(String title, int puntuaction) throws SeriesSaveException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {

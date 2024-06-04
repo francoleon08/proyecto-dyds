@@ -11,9 +11,9 @@ public class PresenterSaveChangesSeries implements Presenter {
     private final SeriesCRUDSaver seriesSaver;
     private Thread taskThread;
 
-    public PresenterSaveChangesSeries(ViewPanelStorage viewPanelStorage) {
+    public PresenterSaveChangesSeries(ViewPanelStorage viewPanelStorage, SeriesCRUDSaver seriesSaver) {
         this.viewPanelStorage = viewPanelStorage;
-        this.seriesSaver = SeriesCRUDSaver.getInstance();
+        this.seriesSaver = seriesSaver;
         this.viewPanelStorage.setPresenterSaveChangesSeries(this);
         initListener();
     }

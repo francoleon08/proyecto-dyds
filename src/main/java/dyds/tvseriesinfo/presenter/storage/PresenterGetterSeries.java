@@ -11,9 +11,9 @@ public class PresenterGetterSeries implements Presenter {
     private final SeriesCRUDGetter seriesGetter;
     private Thread taskThread;
 
-    public PresenterGetterSeries(ViewPanelStorage viewPanelStorage) {
+    public PresenterGetterSeries(ViewPanelStorage viewPanelStorage, SeriesCRUDGetter seriesGetter) {
         this.viewPanelStorage = viewPanelStorage;
-        this.seriesGetter = SeriesCRUDGetter.getInstance();
+        this.seriesGetter = seriesGetter;
         this.viewPanelStorage.setPresenterGetterSeries(this);
         initListener();
     }

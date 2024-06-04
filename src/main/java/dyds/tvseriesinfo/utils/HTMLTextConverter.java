@@ -33,9 +33,9 @@ public class HTMLTextConverter {
         return "<a href=\"" + url + "\">" + text + "</a>";
     }
 
-    public static String getURLtoTextHTML(String textHTML) {
-        String[] parts = textHTML.split("href=\"");
-        String[] parts2 = parts[1].split("\">");
-        return parts2[0];
+    public static String getURLWikipediaToTextHTML(String textHTML) {
+        String[] splitTextLeftHref = textHTML.split("href=\"");
+        String[] splitTextRightHref = splitTextLeftHref[1].split("\">");
+        return splitTextRightHref[0];
     }
 }
