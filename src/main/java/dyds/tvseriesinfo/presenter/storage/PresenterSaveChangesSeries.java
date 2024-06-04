@@ -35,18 +35,26 @@ public class PresenterSaveChangesSeries implements Presenter {
 
     private void doSaveChangesSeries() {
         try {
-            seriesSaver.saveChangesSeries(viewPanelStorage.getItemSelectedComboBox().replace("'", "`"), viewPanelStorage.getDetailsSeries());
+            seriesSaver.saveChangesSeries(getTitleSeriesForSave(), getDetailsSeriesForSave());
         } catch (SeriesSaveException e) {
             hasFinishedOperationError(e.getMessage());
         } catch (Exception e) {
-            hasFinishedOperationError("No seleccionó una serie para guardar.");
+            hasFinishedOperationError("You did not select a series to save.");
         }
+    }
+
+    private String getDetailsSeriesForSave() {
+        return viewPanelStorage.getDetailsSeries();
+    }
+
+    private String getTitleSeriesForSave() {
+        return viewPanelStorage.getItemSelectedComboBox().replace("'", "`");
     }
 
     @Override
     public void hasFinishedOperationSucces() {
         viewPanelStorage.setWorkingState(false);
-        viewPanelStorage.showMessageDialog("Los cambios se han guardado correctamente.");
+        viewPanelStorage.showMessageDialog("The changes have been saved successfully.");
     }
 
     public void hasFinishedOperationError(String messageError) {

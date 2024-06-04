@@ -10,8 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class PresenterDeleteSeries implements Presenter {
-    @Setter
-    @Getter
+    @Setter @Getter
     private ViewPanelStorage viewPanelStorage;
     private final SeriesCRUDDeleter seriesDeleter;
     private Thread taskThread;
@@ -38,7 +37,7 @@ public class PresenterDeleteSeries implements Presenter {
         if (thereIsASerieSelected()) {
             doDeleteSeries();
         } else {
-            hasFinishedOperationError("No seleccionó una serie para eliminar.");
+            hasFinishedOperationError("You did not select a series to delete.");
         }
     }
 
@@ -63,6 +62,6 @@ public class PresenterDeleteSeries implements Presenter {
     public void hasFinishedOperationSucces() {
         viewPanelStorage.setDetailsSeries("");
         viewPanelStorage.setWorkingState(false);
-        viewPanelStorage.showMessageDialog("La serie se ha eliminado correctamente.");
+        viewPanelStorage.showMessageDialog("The series was deleted successfully.");
     }
 }

@@ -2,25 +2,21 @@ package dyds.tvseriesinfo.presenter.rated;
 
 import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
-import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.GeneralView;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
-import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
-
 public class PresenterSearchRatingSeries implements Presenter {
     private final ModelWikipediaAPI modelWikipediaAPI;
     private final ViewPanelPuntuaction viewPanelPuntuaction;
-    private final ViewPanelSearch viewPanelSearch;
-    private Thread taskThread;
     private final GeneralView generalView;
+    private Thread taskThread;
+
 
     public PresenterSearchRatingSeries(GeneralView generalView, ModelWikipediaAPI modelWikipediaAPI) {
         this.modelWikipediaAPI = modelWikipediaAPI;
         this.generalView = generalView;
         this.viewPanelPuntuaction = generalView.getViewPanelPuntuaction();
-        this.viewPanelSearch = generalView.getViewPanelSearch();
         this.viewPanelPuntuaction.setPresenterSearchRatingSeries(this);
         initListener();
     }
@@ -44,12 +40,12 @@ public class PresenterSearchRatingSeries implements Presenter {
         try {
             modelWikipediaAPI.searchOneSeries(viewPanelPuntuaction.getTitleRatedSeriesSelected());
         } catch (SeriesSearchException e) {
-            hasFinishedOperationError("Error, intente de nuevo mas tarde.");
+            hasFinishedOperationError("Error, please try again later.");
         }
     }
 
-    private void hasFinishedOperationError(String message) {
-        viewPanelPuntuaction.showMessageDialog(message);
+    private void hasFinishedOperationError(String messageError) {
+        viewPanelPuntuaction.showMessageDialog(messageError);
         viewPanelPuntuaction.setWorkingState(false);
     }
 

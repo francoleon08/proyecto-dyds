@@ -59,12 +59,16 @@ public class PresenterSearchSeries implements Presenter {
     @Override
     public void hasFinishedOperationSucces() {
         for (Series series : modelWikipediaAPI.getLastSearchResult()) {
-            setRatedSeries(series);
-            viewPanelSearch.addOptionSearchResult(series);
-            initListenerSearchResult(series);
+            configureRatedSeries(series);
         }
         viewPanelSearch.showOptionsMenu();
         viewPanelSearch.setWorkingState(false);
+    }
+
+    private void configureRatedSeries(Series series) {
+        setRatedSeries(series);
+        viewPanelSearch.addOptionSearchResult(series);
+        initListenerSearchResult(series);
     }
 
     private void setRatedSeries(Series series) {

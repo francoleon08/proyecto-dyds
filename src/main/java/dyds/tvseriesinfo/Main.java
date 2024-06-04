@@ -11,14 +11,7 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         setLookAndFel();
-        DatabaseConnectionManager.initializeDatabases();
-
-        ViewFactory viewFactory = new ViewFactory();
-        ModelFactory modelFactory = new ModelFactory();
-        PresenterFactory presenterFactory = new PresenterFactory(viewFactory, modelFactory);
-        presenterFactory.initPresenters();
-
-        SwingUtilities.invokeLater(viewFactory.getGeneralView()::initView);
+        initApplication();
     }
 
     private static void setLookAndFel() {
@@ -26,8 +19,15 @@ public class Main {
             UIManager.setLookAndFeel(new FlatDarkLaf());
             UIManager.put("OptionPane.messageFont", UIManager.getFont("Label.font").deriveFont(16f));
             UIManager.put("OptionPane.buttonFont", UIManager.getFont("Label.font").deriveFont(16f));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        } catch (Exception ignored) {}
+    }
+
+    private static void initApplication() {
+        DatabaseConnectionManager.initializeDatabases();
+        ViewFactory viewFactory = new ViewFactory();
+        ModelFactory modelFactory = new ModelFactory();
+        PresenterFactory presenterFactory = new PresenterFactory(viewFactory, modelFactory);
+        presenterFactory.initPresenters();
+        SwingUtilities.invokeLater(viewFactory.getGeneralView()::initView);
     }
 }

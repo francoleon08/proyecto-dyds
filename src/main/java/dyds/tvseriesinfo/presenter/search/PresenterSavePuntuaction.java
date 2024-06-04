@@ -27,20 +27,20 @@ public class PresenterSavePuntuaction implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleSavePuntuaction);
+        taskThread = new Thread(this::handleSaveRating);
         taskThread.start();
     }
 
-    private void handleSavePuntuaction() {
+    private void handleSaveRating() {
         viewPanelPuntuaction.setWorkingState(true);
         if (viewPanelSearch.isCheckBoxSelected()) {
-            doSavePuntuaction();
+            doSaveRating();
         } else {
-            hasFinishedOperationError("No seleccionó una serie para guardar la puntuación.");
+            hasFinishedOperationError("You did not select a series to save the rating.");
         }
     }
 
-    private void doSavePuntuaction() {
+    private void doSaveRating() {
         try {
             ratedSeriesCRUDSaver.saveRatedSeries(viewPanelSearch.getSelectedResultTitle(), Integer.parseInt(viewPanelSearch.getSelectedPuntuaction()));
         } catch (Exception e) {
@@ -48,14 +48,14 @@ public class PresenterSavePuntuaction implements Presenter {
         }
     }
 
-    private void hasFinishedOperationError(String s) {
-        viewPanelPuntuaction.showMessageDialog(s);
+    private void hasFinishedOperationError(String messageError) {
+        viewPanelPuntuaction.showMessageDialog(messageError);
         viewPanelPuntuaction.setWorkingState(false);
     }
 
     @Override
     public void hasFinishedOperationSucces() {
-        viewPanelPuntuaction.showMessageDialog("Puntuación guardada con éxito.");
+        viewPanelPuntuaction.showMessageDialog("The rating was saved successfully.");
         viewPanelPuntuaction.setWorkingState(false);
     }
 }

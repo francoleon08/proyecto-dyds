@@ -41,23 +41,23 @@ public class PresenterLoadLocalRatedSeries implements Presenter {
         }
     }
 
-    private void hasFinishedOperationError(String message) {
+    private void hasFinishedOperationError(String messageError) {
         viewPanelPuntuaction.setWorkingState(false);
-        viewPanelPuntuaction.showMessageDialog(message);
+        viewPanelPuntuaction.showMessageDialog(messageError);
     }
 
     @Override
     public void hasFinishedOperationSucces() {
         ArrayList<RatedSeries> ratedSeries = ratedSeriesCRUDGetter.getLastRatedSeries();
-        DefaultListModel<RatedSeries> listModel = createItemsToRatedSeriesList(ratedSeries);
+        DefaultListModel<RatedSeries> listModel = createModelListToRatedSeriesList(ratedSeries);
         viewPanelPuntuaction.setRatedSeriesList(listModel);
         viewPanelPuntuaction.setWorkingState(false);
     }
 
-    private DefaultListModel<RatedSeries> createItemsToRatedSeriesList(ArrayList<RatedSeries> ratedSeries) {
+    private DefaultListModel<RatedSeries> createModelListToRatedSeriesList(ArrayList<RatedSeries> ratedSeries) {
         DefaultListModel<RatedSeries> listModel = new DefaultListModel<>();
-        for (RatedSeries ratedSerie : ratedSeries) {
-            listModel.addElement(ratedSerie);
+        for (RatedSeries itemRatedSeries : ratedSeries) {
+            listModel.addElement(itemRatedSeries);
         }
         return listModel;
     }

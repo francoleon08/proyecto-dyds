@@ -36,7 +36,7 @@ public class PresenterSaveSeries implements Presenter {
         if (isValidForSave(resultTextToSearch)) {
             doSaveSeries(resultTextToSearch);
         } else {
-            hasFinishedOperationError("No seleccionó ninguna serie para guardar");
+            hasFinishedOperationError("You did not select any series to save.");
         }
     }
 
@@ -58,7 +58,7 @@ public class PresenterSaveSeries implements Presenter {
 
     @Override
     public void hasFinishedOperationSucces() {
-        viewPanelSearch.showMessageDialog("La serie se ha guardado correctamente.");
+        viewPanelSearch.showMessageDialog("The series has been saved successfully.");
     }
 
     private void hasFinishedOperationError(String messageError) {

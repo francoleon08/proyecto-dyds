@@ -39,7 +39,11 @@ public class PresenterLoadLocalSeries implements Presenter {
 
     @Override
     public void hasFinishedOperationSucces() {
-        viewPanelStorage.setSeriesComboBox(seriesGetter.getLastTitlesSeries().stream().sorted().toArray());
+        viewPanelStorage.setSeriesComboBox(getSavedSeries());
+    }
+
+    private Object[] getSavedSeries() {
+        return seriesGetter.getLastTitlesSeries().stream().sorted().toArray();
     }
 
     private void hasFinishedOperationError(String messageError) {
