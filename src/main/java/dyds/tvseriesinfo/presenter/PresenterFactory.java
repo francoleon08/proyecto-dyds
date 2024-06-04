@@ -1,14 +1,21 @@
 package dyds.tvseriesinfo.presenter;
 
 import dyds.tvseriesinfo.model.ModelFactory;
-import dyds.tvseriesinfo.presenter.search.*;
-import dyds.tvseriesinfo.presenter.rated.*;
-import dyds.tvseriesinfo.presenter.storage.*;
+import dyds.tvseriesinfo.presenter.rated.PresenterLoadLocalRatedSeries;
+import dyds.tvseriesinfo.presenter.rated.PresenterSearchRatingSeries;
+import dyds.tvseriesinfo.presenter.search.PresenterOpenHyperLink;
+import dyds.tvseriesinfo.presenter.search.PresenterSavePuntuaction;
+import dyds.tvseriesinfo.presenter.search.PresenterSaveSeries;
+import dyds.tvseriesinfo.presenter.search.PresenterSearchSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterDeleteSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterGetterSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterLoadLocalSeries;
+import dyds.tvseriesinfo.presenter.storage.PresenterSaveChangesSeries;
 import dyds.tvseriesinfo.view.ViewFactory;
 
 public class PresenterFactory {
-    private ViewFactory viewFactory;
-    private ModelFactory modelFactory;
+    private final ViewFactory viewFactory;
+    private final ModelFactory modelFactory;
 
     public PresenterFactory(ViewFactory viewFactory, ModelFactory modelFactory) {
         this.viewFactory = viewFactory;

@@ -33,7 +33,7 @@ public class PresenterOpenHyperLink implements Presenter {
 
     private void handleOpeningBrowser(String URL) throws IOException {
         Desktop desktop = Desktop.getDesktop();
-        if(isDesktopBrowseSupported(desktop)) {
+        if (isDesktopBrowseSupported(desktop)) {
             desktop.browse(URI.create(URL));
         } else {
             new ProcessBuilder("xdg-open", URL).start();

@@ -4,9 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaAPIService;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
-import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.entities.SeriesServices;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
@@ -70,7 +70,7 @@ public class ModelWikipediaAPI extends ModelSeriesCRUD {
         for (JsonElement jsonSeries : jsonResultsSeries) {
             JsonObject jsonObject = jsonSeries.getAsJsonObject();
             Series series = SeriesServices.createSearchResultFromJsonObject(jsonObject);
-            series.setRated(SQLSelect.setRatedSeriesByTitle(series.getTitle()));
+            series.setRated(SQLSelectManager.setRatedSeriesByTitle(series.getTitle()));
             JsonElement extractElement = getSeriesExtractByPageID(series.getPageID());
             addSeriesToMap(series, extractElement);
         }

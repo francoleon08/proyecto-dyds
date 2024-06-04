@@ -10,7 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class PresenterDeleteSeries implements Presenter {
-    @Setter @Getter
+    @Setter
+    @Getter
     private ViewPanelStorage viewPanelStorage;
     private final ModelSeriesCRUDDeleter seriesDeleter;
     private Thread taskThread;

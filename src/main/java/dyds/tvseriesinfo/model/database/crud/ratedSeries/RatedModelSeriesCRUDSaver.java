@@ -1,8 +1,8 @@
 package dyds.tvseriesinfo.model.database.crud.ratedSeries;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLInsert;
-import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 

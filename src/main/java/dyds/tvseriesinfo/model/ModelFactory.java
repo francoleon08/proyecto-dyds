@@ -1,8 +1,11 @@
 package dyds.tvseriesinfo.model;
 
-import dyds.tvseriesinfo.model.database.crud.ratedSeries.*;
+import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDDeleter;
+import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDSaver;
 import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
-import dyds.tvseriesinfo.model.database.crud.series.*;
 
 public class ModelFactory {
     public RatedModelSeriesCRUDGetter getRatedSeriesCRUDGetter() {

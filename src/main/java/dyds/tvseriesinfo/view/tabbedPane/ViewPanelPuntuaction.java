@@ -5,7 +5,6 @@ import dyds.tvseriesinfo.presenter.Presenter;
 import lombok.Setter;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ViewPanelPuntuaction extends ViewTabbedPane {
     private JPanel puntuactionPanel;

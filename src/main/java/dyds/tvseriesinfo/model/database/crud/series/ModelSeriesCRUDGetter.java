@@ -1,8 +1,8 @@
 package dyds.tvseriesinfo.model.database.crud.series;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect;
-import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
+import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import lombok.Getter;
 
@@ -28,12 +28,12 @@ public class ModelSeriesCRUDGetter extends ModelSeriesCRUD {
     }
 
     public synchronized void getTitlesSeries() throws SeriesSearchException {
-        lastTitlesSeries = SQLSelect.getTitlesSeries();
+        lastTitlesSeries = SQLSelectManager.getTitlesSeries();
         notifyListenersSuccess(OperationType.LOAD_LOCAL_SERIES);
     }
 
     public synchronized void getExtractSeriesByTitle(String title) throws SeriesSearchException {
-        lastSeriesExtactByTitle = SQLSelect.getExtractSeriesByTitle(title);
+        lastSeriesExtactByTitle = SQLSelectManager.getExtractSeriesByTitle(title);
         notifyListenersSuccess(OperationType.GET_SERIES);
     }
 }

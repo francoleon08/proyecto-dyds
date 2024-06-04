@@ -1,11 +1,12 @@
 package dyds.tvseriesinfo.presenter.rated;
 
-import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.GeneralView;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
+
 public class PresenterSearchRatingSeries implements Presenter {
     private final ModelWikipediaAPI modelWikipediaAPI;
     private final ViewPanelPuntuaction viewPanelPuntuaction;

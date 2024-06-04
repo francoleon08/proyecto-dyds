@@ -1,9 +1,11 @@
 package dyds.tvseriesinfo.view;
 
-import dyds.tvseriesinfo.view.tabbedPane.*;
+import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
+import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
+import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 
 public class ViewFactory {
-    private GeneralView generalView;
+    private final GeneralView generalView;
 
     public ViewFactory() {
         this.generalView = new GeneralView();

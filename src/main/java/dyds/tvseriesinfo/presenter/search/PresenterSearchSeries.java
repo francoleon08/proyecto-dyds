@@ -1,7 +1,7 @@
 package dyds.tvseriesinfo.presenter.search;
 
-import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
 import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
