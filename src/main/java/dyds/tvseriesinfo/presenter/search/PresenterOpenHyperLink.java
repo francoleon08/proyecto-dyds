@@ -4,7 +4,10 @@ import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.utils.HTMLTextConverter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class PresenterOpenHyperLink implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
@@ -22,9 +25,14 @@ public class PresenterOpenHyperLink implements Presenter {
 
     private void doOpeningDefaultBrowser(String URL) {
         try {
-            new ProcessBuilder("xdg-open", URL).start();
+            Desktop desktop = Desktop.getDesktop();
+            if(Desktop.isDesktopSupported() && desktop.isSupported(Desktop.Action.BROWSE)) {
+                desktop.browse(URI.create(URL));
+            } else {
+                new ProcessBuilder("xdg-open", URL).start();
+            }
             hasFinishedOperationSucces();
-        } catch (IOException e) {
+        } catch (Exception e) {
             hasFinishedOperationError("Error opening the browser: " + e.getMessage());
         }
     }
