@@ -37,6 +37,9 @@ public class RatedSeriesCRUDGetter extends SeriesCRUD {
     }
 
     private void orderRatedSeriesByRating() {
-        lastRatedSeries = lastRatedSeries.stream().sorted(Comparator.comparingInt(RatedSeries::getRating)).collect(Collectors.toCollection(ArrayList::new));
+        lastRatedSeries = lastRatedSeries.stream().sorted(
+                Comparator.comparingInt(RatedSeries::getRating))
+                .collect(Collectors.toCollection(ArrayList::new)
+                );
     }
 }

@@ -44,17 +44,17 @@ public class ModelWikipediaAPI extends SeriesCRUD {
         return lastSearchResult.values();
     }
 
-    public void searchOneSeries(String seriesToSearch) throws SeriesSearchException {
-        searchSeries(seriesToSearch, 1);
+    public void searchSingleSeries(String seriesToSearch) throws SeriesSearchException {
+        searchSeriesWithLimit(seriesToSearch, 1);
         notifyListenersSuccess(OperationType.GET_RATED_SERIES_BY_TITLE);
     }
 
-    public void searchAmountOfSeries(String seriesToSearch, int amount) throws SeriesSearchException {
-        searchSeries(seriesToSearch + TV_SERIES_ARTICLETOPIC_TELEVISION, amount);
+    public void searchMultipleOfSeries(String seriesToSearch, int amount) throws SeriesSearchException {
+        searchSeriesWithLimit(seriesToSearch + TV_SERIES_ARTICLETOPIC_TELEVISION, amount);
         notifyListenersSuccess(OperationType.WIKIPEDIA_SEARCH);
     }
 
-    private void searchSeries(String seriesToSearch, int limitResult) throws SeriesSearchException {
+    private void searchSeriesWithLimit(String seriesToSearch, int limitResult) throws SeriesSearchException {
         try {
             lastSearchResult.clear();
             JsonArray jsonResultsSeries = wikipediaAPIService.searchForTerm(seriesToSearch, limitResult);
@@ -93,7 +93,7 @@ public class ModelWikipediaAPI extends SeriesCRUD {
     private String formatSeriesExtractToHTML(Series series, JsonElement extractElement) {
         String title = HTMLTextConverter.formatTitle(series.getTitle());
         String content = HTMLTextConverter.formatContent(extractElement.getAsString());
-        String url = HTMLTextConverter.formatHyperlink(wikipediaAPIService.getWikipediaURL(series.getTitle()), "ABRIR EN EL NAVEGADOR!");
+        String url = HTMLTextConverter.formatHyperlink(wikipediaAPIService.getWikipediaURL(series.getTitle()), "OPEN IN BROWSER!");
         return HTMLTextConverter.textToHtml(title + content + url);
     }
 }

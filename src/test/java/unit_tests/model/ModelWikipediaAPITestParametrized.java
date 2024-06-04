@@ -56,7 +56,7 @@ public class ModelWikipediaAPITestParametrized {
         JsonElement jsonElement = JsonParser.parseString(extractElement).deepCopy();
         Mockito.when(wikipediaAPIServiceMock.searchForTerm(anyString(), anyInt())).thenReturn(jsonResultsSeries);
         Mockito.when(wikipediaAPIServiceMock.getSeriesExtractByPageID(anyString())).thenReturn(jsonElement);
-        modelWikipediaAPI.searchAmountOfSeries(searchTerm, limit);
+        modelWikipediaAPI.searchMultipleOfSeries(searchTerm, limit);
         assertTrue(modelWikipediaAPI.getLastSearchResult()
                 .stream()
                 .anyMatch(series -> series.getTitle().equals(searchTerm)));

@@ -38,7 +38,7 @@ public class PresenterSearchRatingSeries implements Presenter {
 
     private void doGetExtractSeries() {
         try {
-            modelWikipediaAPI.searchOneSeries(viewPanelPuntuaction.getTitleRatedSeriesSelected());
+            modelWikipediaAPI.searchSingleSeries(viewPanelPuntuaction.getTitleRatedSeriesSelected());
         } catch (SeriesSearchException e) {
             hasFinishedOperationError("Error, please try again later.");
         }

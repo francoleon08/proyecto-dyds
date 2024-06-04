@@ -40,7 +40,7 @@ public class PresenterSearchSeries implements Presenter {
             if (termToSearch.isEmpty()) {
                 throw new SeriesSearchException("Please enter a series to search");
             }
-            modelWikipediaAPI.searchAmountOfSeries(termToSearch, LIMIT_RESULT);
+            modelWikipediaAPI.searchMultipleOfSeries(termToSearch, LIMIT_RESULT);
         } catch (SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
         }
