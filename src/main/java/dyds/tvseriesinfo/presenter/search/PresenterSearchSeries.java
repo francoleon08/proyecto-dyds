@@ -37,13 +37,17 @@ public class PresenterSearchSeries implements Presenter {
     private void doSearchSeries() {
         try {
             String termToSearch = viewPanelSearch.getSeriesToSearchTextField().getText();
-            if (termToSearch.isEmpty()) {
-                throw new SeriesSearchException("Please enter a series to search");
+            if (isTermToSearchInvalid(termToSearch)) {
+                throw new SeriesSearchException("The term to search is invalid. Please enter a valid term.");
             }
             modelWikipediaAPI.searchMultipleOfSeries(termToSearch, LIMIT_RESULT);
         } catch (SeriesSearchException e) {
             hasFinishedOperationError(e.getMessage());
         }
+    }
+
+    private static boolean isTermToSearchInvalid(String termToSearch) {
+        return termToSearch.isEmpty() || termToSearch.length() > 50;
     }
 
     private void initListener() {

@@ -1,4 +1,4 @@
-package unit_tests.model;
+package unit_tests.model.wikiApi;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -38,7 +39,7 @@ public class ModelWikipediaAPITestParametrized {
 
     @Parameterized.Parameters(name = "{index}: testSearchTerm({0})")
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
+        return Arrays.asList(new Object[][]{
                 {"The 100 (TV series)"},
                 {"Monk (TV series)"},
                 {"Batman (TV series)"},

@@ -1,6 +1,6 @@
 package dyds.tvseriesinfo.model.database.crud.ratedSeries;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelect.SQLSelectManager;
+import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
