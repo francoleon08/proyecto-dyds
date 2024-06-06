@@ -11,7 +11,8 @@ public class ViewPanelStorage extends ViewTabbedPane {
     private JPanel storagePanel;
     @Getter
     private JComboBox seriesComboBox;
-    private JTextPane detailsSeries;
+    @Getter
+    private JTextPane textPaneDetailsSeries;
     private JPopupMenu storedInfoPopup;
     private JMenuItem deleteItem;
     private JMenuItem saveChangesSeries;
@@ -30,7 +31,7 @@ public class ViewPanelStorage extends ViewTabbedPane {
     }
 
     private void initConfig() {
-        detailsSeries.setContentType("text/html");
+        textPaneDetailsSeries.setContentType("text/html");
         initConfigPopupMenu();
     }
 
@@ -51,7 +52,7 @@ public class ViewPanelStorage extends ViewTabbedPane {
         for (Component component : this.storagePanel.getComponents()) {
             component.setEnabled(!working);
         }
-        detailsSeries.setEnabled(!working);
+        textPaneDetailsSeries.setEnabled(!working);
     }
 
     public boolean isItemSelected() {
@@ -63,11 +64,11 @@ public class ViewPanelStorage extends ViewTabbedPane {
     }
 
     public void setDetailsSeries(String text) {
-        detailsSeries.setText(text);
+        textPaneDetailsSeries.setText(text);
     }
 
     public String getDetailsSeries() {
-        return detailsSeries.getText();
+        return textPaneDetailsSeries.getText();
     }
 
     public void setSeriesComboBox(Object[] series) {
@@ -81,6 +82,6 @@ public class ViewPanelStorage extends ViewTabbedPane {
         saveChangesSeries = new JMenuItem("Save Changes!");
         storedInfoPopup.add(saveChangesSeries);
         storedInfoPopup.add(deleteItem);
-        detailsSeries.setComponentPopupMenu(storedInfoPopup);
+        textPaneDetailsSeries.setComponentPopupMenu(storedInfoPopup);
     }
 }
