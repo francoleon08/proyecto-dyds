@@ -14,7 +14,6 @@ public class PresenterDeleteSeries implements Presenter {
     @Getter
     private ViewPanelStorage viewPanelStorage;
     private final ModelSeriesCRUDDeleter seriesDeleter;
-    private Thread taskThread;
 
     public PresenterDeleteSeries(ViewPanelStorage viewPanelStorage, ModelSeriesCRUDDeleter seriesDeleter) {
         this.viewPanelStorage = viewPanelStorage;
@@ -29,11 +28,6 @@ public class PresenterDeleteSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleDeleteSeries);
-        taskThread.start();
-    }
-
-    private void handleDeleteSeries() {
         viewPanelStorage.setWorkingState(true);
         if (thereIsASerieSelected()) {
             doDeleteSeries();

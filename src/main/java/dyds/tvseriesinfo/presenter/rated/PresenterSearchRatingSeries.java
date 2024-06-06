@@ -11,8 +11,6 @@ public class PresenterSearchRatingSeries implements Presenter {
     private final ModelWikipediaAPI modelWikipediaAPI;
     private final ViewPanelPuntuaction viewPanelPuntuaction;
     private final GeneralView generalView;
-    private Thread taskThread;
-
 
     public PresenterSearchRatingSeries(GeneralView generalView, ModelWikipediaAPI modelWikipediaAPI) {
         this.modelWikipediaAPI = modelWikipediaAPI;
@@ -28,11 +26,6 @@ public class PresenterSearchRatingSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleGetExtractSeries);
-        taskThread.start();
-    }
-
-    private void handleGetExtractSeries() {
         viewPanelPuntuaction.setWorkingState(true);
         doGetExtractSeries();
     }

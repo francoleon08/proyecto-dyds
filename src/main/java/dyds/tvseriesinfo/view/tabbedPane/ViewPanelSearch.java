@@ -20,9 +20,12 @@ public class ViewPanelSearch extends ViewTabbedPane {
     private JButton searchButton;
     private JButton saveLocallyButton;
     private JPanel punctuationPanel;
+    @Getter
     private JCheckBox checkBoxEnablePuntuaction;
+    @Getter
     private JComboBox comboBoxPuntaction;
     private JButton savePuntuactionButton;
+    @Getter
     private JPopupMenu searchOptionsMenu;
 
     @Setter

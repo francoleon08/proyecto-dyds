@@ -1,6 +1,7 @@
 package dyds.tvseriesinfo.view.tabbedPane;
 
 import dyds.tvseriesinfo.presenter.Presenter;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.*;
 
 public class ViewPanelStorage extends ViewTabbedPane {
     private JPanel storagePanel;
+    @Getter
     private JComboBox seriesComboBox;
     private JTextPane detailsSeries;
     private JPopupMenu storedInfoPopup;

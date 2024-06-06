@@ -35,43 +35,43 @@ public class PresenterFactory {
         createPresenterOpenHyperLink();
     }
 
-    private void createPresenterSavePuntuaction() {
-        new PresenterSavePuntuaction(viewFactory.getViewPanelSearch(), viewFactory.getViewPanelPuntuaction(), modelFactory.getRatedSeriesCRUDSaver());
+    public Presenter createPresenterSavePuntuaction() {
+        return new PresenterSavePuntuaction(viewFactory.getViewPanelSearch(), viewFactory.getViewPanelPuntuaction(), modelFactory.getRatedSeriesCRUDSaver());
     }
 
-    private void createPresenterGetterSeries() {
-        new PresenterGetterSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDGetter());
+    public Presenter createPresenterGetterSeries() {
+        return new PresenterGetterSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDGetter());
     }
 
-    private void createPresenterLoadLocalSeries() {
-        new PresenterLoadLocalSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDGetter());
+    public Presenter createPresenterLoadLocalSeries() {
+        return new PresenterLoadLocalSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDGetter());
     }
 
-    private void createPresenterDeleteSeries() {
-        new PresenterDeleteSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDDeleter());
+    public Presenter createPresenterDeleteSeries() {
+        return new PresenterDeleteSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDDeleter());
     }
 
-    private void createPresenterSaveChangesSeries() {
-        new PresenterSaveChangesSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDSaver());
+    public Presenter createPresenterSaveChangesSeries() {
+        return new PresenterSaveChangesSeries(viewFactory.getViewPanelStorage(), modelFactory.getSeriesCRUDSaver());
     }
 
-    private void createPresenterSaveSeries() {
-        new PresenterSaveSeries(viewFactory.getViewPanelSearch(), modelFactory.getSeriesCRUDSaver());
+    public Presenter createPresenterSaveSeries() {
+        return new PresenterSaveSeries(viewFactory.getViewPanelSearch(), modelFactory.getSeriesCRUDSaver());
     }
 
-    private void createPresenterSearchSeries() {
-        new PresenterSearchSeries(viewFactory.getViewPanelSearch(), modelFactory.getModelWikipediaAPI());
+    public Presenter createPresenterSearchSeries() {
+        return new PresenterSearchSeries(viewFactory.getViewPanelSearch(), modelFactory.getModelWikipediaAPI());
     }
 
-    private void createPresenterGetterRatedSeries() {
-        new PresenterSearchRatingSeries(viewFactory.getGeneralView(), modelFactory.getModelWikipediaAPI());
+    public Presenter createPresenterGetterRatedSeries() {
+        return new PresenterSearchRatingSeries(viewFactory.getGeneralView(), modelFactory.getModelWikipediaAPI());
     }
 
-    private void createPresenterLoadLocalRatedSeries() {
-        new PresenterLoadLocalRatedSeries(viewFactory.getViewPanelPuntuaction(), modelFactory.getRatedSeriesCRUDGetter());
+    public Presenter createPresenterLoadLocalRatedSeries() {
+        return new PresenterLoadLocalRatedSeries(viewFactory.getViewPanelPuntuaction(), modelFactory.getRatedSeriesCRUDGetter());
     }
 
-    private void createPresenterOpenHyperLink() {
-        new PresenterOpenHyperLink(viewFactory.getViewPanelSearch());
+    public Presenter createPresenterOpenHyperLink() {
+        return new PresenterOpenHyperLink(viewFactory.getViewPanelSearch());
     }
 }

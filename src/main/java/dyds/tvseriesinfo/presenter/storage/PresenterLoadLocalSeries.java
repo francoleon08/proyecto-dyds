@@ -20,16 +20,11 @@ public class PresenterLoadLocalSeries implements Presenter {
 
     private void initListener() {
         seriesGetter.addListener(OperationType.LOAD_LOCAL_SERIES, this);
-        seriesGetter.addListener(OperationType.LOAD_LOCAL_SERIES_AFTER_CHANGE, this::handleLoadLocalSeries);
+        seriesGetter.addListener(OperationType.LOAD_LOCAL_SERIES_AFTER_CHANGE, this::onEvent);
     }
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleLoadLocalSeries);
-        taskThread.start();
-    }
-
-    private void handleLoadLocalSeries() {
         try {
             seriesGetter.getTitlesSeries();
         } catch (SeriesSearchException e) {

@@ -6,13 +6,14 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@Setter
 public class PresenterSaveSeries implements Presenter {
-    private final ViewPanelSearch viewPanelSearch;
-    private final ModelSeriesCRUDSaver seriesSaver;
-    private Thread taskThread;
+    private ViewPanelSearch viewPanelSearch;
+    private ModelSeriesCRUDSaver seriesSaver;
 
     public PresenterSaveSeries(ViewPanelSearch viewPanelSearch, ModelSeriesCRUDSaver seriesSaver) {
         this.viewPanelSearch = viewPanelSearch;
@@ -27,11 +28,6 @@ public class PresenterSaveSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleSaveSeries);
-        taskThread.start();
-    }
-
-    private void handleSaveSeries() {
         String resultTextToSearch = viewPanelSearch.getResultTextToSearchHTML().getText();
         if (isValidForSave(resultTextToSearch)) {
             doSaveSeries(resultTextToSearch);

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class PresenterLoadLocalRatedSeries implements Presenter {
     private final RatedModelSeriesCRUDGetter ratedSeriesCRUDGetter;
     private final ViewPanelPuntuaction viewPanelPuntuaction;
-    private Thread taskThread;
 
     public PresenterLoadLocalRatedSeries(ViewPanelPuntuaction viewPanelPuntuaction, RatedModelSeriesCRUDGetter ratedSeriesCRUDGetter) {
         this.ratedSeriesCRUDGetter = ratedSeriesCRUDGetter;
@@ -28,11 +27,6 @@ public class PresenterLoadLocalRatedSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleLoadRatedSeries);
-        taskThread.start();
-    }
-
-    private void handleLoadRatedSeries() {
         try {
             viewPanelPuntuaction.setWorkingState(true);
             ratedSeriesCRUDGetter.getRatedSeries();

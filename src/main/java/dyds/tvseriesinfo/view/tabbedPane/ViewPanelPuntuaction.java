@@ -2,12 +2,14 @@ package dyds.tvseriesinfo.view.tabbedPane;
 
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.presenter.Presenter;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
 
 public class ViewPanelPuntuaction extends ViewTabbedPane {
     private JPanel puntuactionPanel;
+    @Getter
     private JList<RatedSeries> listRatedSeriesPanel;
     @Setter
     private Presenter presenterSearchRatingSeries;

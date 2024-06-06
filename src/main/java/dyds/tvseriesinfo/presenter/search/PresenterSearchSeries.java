@@ -6,14 +6,15 @@ import dyds.tvseriesinfo.model.entities.Series;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
+import lombok.Getter;
 
 import javax.swing.*;
 
 public class PresenterSearchSeries implements Presenter {
     public static final int LIMIT_RESULT = 5;
     private final ViewPanelSearch viewPanelSearch;
-    private final ModelWikipediaAPI modelWikipediaAPI;
-    private Thread taskThread;
+    @Getter
+    private ModelWikipediaAPI modelWikipediaAPI;
 
     public PresenterSearchSeries(ViewPanelSearch viewPanelSearch, ModelWikipediaAPI modelWikipediaAPI) {
         this.viewPanelSearch = viewPanelSearch;
@@ -24,11 +25,6 @@ public class PresenterSearchSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleSearchSeries);
-        taskThread.start();
-    }
-
-    public void handleSearchSeries() {
         viewPanelSearch.setWorkingState(true);
         viewPanelSearch.clearOptionsMenu();
         doSearchSeries();

@@ -1,11 +1,14 @@
 package dyds.tvseriesinfo.model.database.crud.ratedSeries;
 
+import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
+import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUDImpl;
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,10 +20,13 @@ public class RatedModelSeriesCRUDGetter extends ModelSeriesCRUD {
     @Getter
     private RatedSeries lastRatedSerieByTitle;
     private static RatedModelSeriesCRUDGetter instance;
+    @Setter
+    private SQLCRUD sqlCRUD;
 
     private RatedModelSeriesCRUDGetter() {
         super();
         lastRatedSeries = new ArrayList<>();
+        sqlCRUD = new SQLCRUDImpl();
     }
 
     public static synchronized RatedModelSeriesCRUDGetter getInstance() {
@@ -31,7 +37,7 @@ public class RatedModelSeriesCRUDGetter extends ModelSeriesCRUD {
     }
 
     public void getRatedSeries() throws SearchRatedSeriesException {
-        lastRatedSeries = SQLSelectManager.getRatedSeries();
+        lastRatedSeries = sqlCRUD.getRatedSeries();
         orderRatedSeriesByRating();
         notifyListenersSuccess(OperationType.LOAD_RATED_SERIES);
     }

@@ -10,7 +10,6 @@ public class PresenterSavePuntuaction implements Presenter {
     private final ViewPanelSearch viewPanelSearch;
     private final ViewPanelPuntuaction viewPanelPuntuaction;
     private final RatedModelSeriesCRUDSaver ratedSeriesCRUDSaver;
-    private Thread taskThread;
 
     public PresenterSavePuntuaction(ViewPanelSearch viewPanelSearch, ViewPanelPuntuaction viewPanelPuntuaction, RatedModelSeriesCRUDSaver ratedSeriesCRUDSaver) {
         this.viewPanelSearch = viewPanelSearch;
@@ -27,11 +26,6 @@ public class PresenterSavePuntuaction implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleSaveRating);
-        taskThread.start();
-    }
-
-    private void handleSaveRating() {
         viewPanelPuntuaction.setWorkingState(true);
         if (viewPanelSearch.isCheckBoxSelected()) {
             doSaveRating();

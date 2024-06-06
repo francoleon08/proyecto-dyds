@@ -11,7 +11,7 @@ public class SQLDelete {
     private static final String DELETE_FROM_CATALOG_WHERE_TITLE = "DELETE FROM catalog WHERE title = ?";
     private static final String ERROR_DELETE_SERIES = "Error deleting the series.";
 
-    public static void deleteSeriesByTitle(String title) throws SeriesDeleteException {
+    static void deleteSeriesByTitle(String title) throws SeriesDeleteException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {
             executeUpdateSeries(title, connection);
         } catch (SQLException | DatabaseSQLException e) {

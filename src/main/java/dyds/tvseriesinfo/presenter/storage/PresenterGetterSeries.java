@@ -9,7 +9,6 @@ import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 public class PresenterGetterSeries implements Presenter {
     private final ViewPanelStorage viewPanelStorage;
     private final ModelSeriesCRUDGetter seriesGetter;
-    private Thread taskThread;
 
     public PresenterGetterSeries(ViewPanelStorage viewPanelStorage, ModelSeriesCRUDGetter seriesGetter) {
         this.viewPanelStorage = viewPanelStorage;
@@ -24,11 +23,6 @@ public class PresenterGetterSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleGetExtractSeries);
-        taskThread.start();
-    }
-
-    private void handleGetExtractSeries() {
         viewPanelStorage.setWorkingState(true);
         doGetExtractSeries();
     }
@@ -50,4 +44,5 @@ public class PresenterGetterSeries implements Presenter {
     private void hasFinishedOperationError(String messageError) {
         viewPanelStorage.showMessageDialog(messageError);
     }
+
 }

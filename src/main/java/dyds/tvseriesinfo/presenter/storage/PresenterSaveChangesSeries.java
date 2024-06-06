@@ -9,7 +9,6 @@ import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 public class PresenterSaveChangesSeries implements Presenter {
     private final ViewPanelStorage viewPanelStorage;
     private final ModelSeriesCRUDSaver seriesSaver;
-    private Thread taskThread;
 
     public PresenterSaveChangesSeries(ViewPanelStorage viewPanelStorage, ModelSeriesCRUDSaver seriesSaver) {
         this.viewPanelStorage = viewPanelStorage;
@@ -24,11 +23,6 @@ public class PresenterSaveChangesSeries implements Presenter {
 
     @Override
     public void onEvent() {
-        taskThread = new Thread(this::handleSaveChangesSeries);
-        taskThread.start();
-    }
-
-    public void handleSaveChangesSeries() {
         viewPanelStorage.setWorkingState(true);
         doSaveChangesSeries();
     }
