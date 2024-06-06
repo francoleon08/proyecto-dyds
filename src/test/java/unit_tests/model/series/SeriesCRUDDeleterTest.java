@@ -1,7 +1,6 @@
 package unit_tests.model.series;
 
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLDelete;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLInsert;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDDeleter;
 import org.junit.BeforeClass;
@@ -10,7 +9,6 @@ import org.junit.Test;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mockStatic;
 
@@ -20,9 +18,8 @@ public class SeriesCRUDDeleterTest {
     @BeforeClass
     public static void setUp() throws Exception {
         modelSeriesCRUDDeleter = ModelSeriesCRUDDeleter.getInstance();
-        mockStatic(SQLInsert.class);
-        doNothing().when(SQLInsert.class);
-        SQLDelete.deleteSeriesByTitle(anyString());
+        mockStatic(SQLDelete.class);
+        doNothing().when(SQLDelete.class);
     }
 
     @Test
