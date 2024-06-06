@@ -34,6 +34,7 @@ public class PresenterSaveChangesSeriesTest {
         presenterSaveChangesSeries = (PresenterSaveChangesSeries) presenterFactory.createPresenterSaveChangesSeries();
         viewPanelStorage = viewFactory.getViewPanelStorage();
         presenterFactory.createPresenterLoadLocalSeries();
+        presenterFactory.createPresenterGetterSeries();
     }
 
     @Test
