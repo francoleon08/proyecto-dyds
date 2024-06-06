@@ -1,5 +1,6 @@
-package dyds.tvseriesinfo.model.database.SQLmanager;
+package dyds.tvseriesinfo.model.database.SQLmanager.crud;
 
+import dyds.tvseriesinfo.model.database.SQLmanager.DatabaseConnectionManager;
 import dyds.tvseriesinfo.model.exceptions.DatabaseSQLException;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
 
@@ -11,7 +12,7 @@ public class SQLDelete {
     private static final String DELETE_FROM_CATALOG_WHERE_TITLE = "DELETE FROM catalog WHERE title = ?";
     private static final String ERROR_DELETE_SERIES = "Error deleting the series.";
 
-    static void deleteSeriesByTitle(String title) throws SeriesDeleteException {
+    public static void deleteSeriesByTitle(String title) throws SeriesDeleteException {
         try (Connection connection = DatabaseConnectionManager.createConnection()) {
             executeUpdateSeries(title, connection);
         } catch (SQLException | DatabaseSQLException e) {

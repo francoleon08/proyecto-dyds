@@ -1,5 +1,8 @@
 package dyds.tvseriesinfo.model.database.SQLmanager;
 
+import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLDelete;
+import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLInsert;
+import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLSelectManager;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;

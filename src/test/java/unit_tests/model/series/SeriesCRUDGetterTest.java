@@ -1,11 +1,12 @@
 package unit_tests.model.series;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelectManager;
+import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockedStatic;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -18,13 +19,10 @@ public class SeriesCRUDGetterTest {
     private static ModelSeriesCRUDGetter modelSeriesCRUDGetter;
     private static ArrayList<String> lastTitlesSeriesTest;
 
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         modelSeriesCRUDGetter = ModelSeriesCRUDGetter.getInstance();
-        mockStatic(SQLSelectManager.class);
         loadArrayListTitles();
-        when(SQLSelectManager.getTitlesSeries()).thenReturn(lastTitlesSeriesTest);
-        when(SQLSelectManager.getExtractSeriesByTitle(anyString())).thenReturn("extract");
     }
 
     private static void loadArrayListTitles() {
@@ -37,14 +35,22 @@ public class SeriesCRUDGetterTest {
 
     @Test
     public void testGetLastSeries() throws SeriesSearchException {
-        modelSeriesCRUDGetter.getTitlesSeries();
+        try (MockedStatic<SQLSelectManager> mock = mockStatic(SQLSelectManager.class)) {
+            mock.when(SQLSelectManager::getTitlesSeries).thenReturn(lastTitlesSeriesTest);
+            mock.when(() -> SQLSelectManager.getExtractSeriesByTitle(anyString())).thenReturn("extract");
+            modelSeriesCRUDGetter.getTitlesSeries();
+        }
         ArrayList<String> lastTitlesSeries = modelSeriesCRUDGetter.getLastTitlesSeries();
         assertEquals(lastTitlesSeriesTest, lastTitlesSeries);
     }
 
     @Test
     public void testGetSeriesByTitle() throws SeriesSearchException {
-        modelSeriesCRUDGetter.getExtractSeriesByTitle("24 (TV series)");
+        try (MockedStatic<SQLSelectManager> mock = mockStatic(SQLSelectManager.class)) {
+            mock.when(SQLSelectManager::getTitlesSeries).thenReturn(lastTitlesSeriesTest);
+            mock.when(() -> SQLSelectManager.getExtractSeriesByTitle(anyString())).thenReturn("extract");
+            modelSeriesCRUDGetter.getExtractSeriesByTitle("24 (TV series)");
+        }
         String actual = modelSeriesCRUDGetter.getLastSeriesExtactByTitle();
         String expected = "extract";
         assertEquals(expected, actual);
@@ -54,7 +60,11 @@ public class SeriesCRUDGetterTest {
     public void testNotifiedGetLastSeries() throws SeriesSearchException {
         AtomicBoolean isNotified = new AtomicBoolean(false);
         modelSeriesCRUDGetter.addListener(OperationType.LOAD_LOCAL_SERIES, () -> isNotified.set(true));
-        modelSeriesCRUDGetter.getTitlesSeries();
+        try (MockedStatic<SQLSelectManager> mock = mockStatic(SQLSelectManager.class)) {
+            mock.when(SQLSelectManager::getTitlesSeries).thenReturn(lastTitlesSeriesTest);
+            mock.when(() -> SQLSelectManager.getExtractSeriesByTitle(anyString())).thenReturn("extract");
+            modelSeriesCRUDGetter.getTitlesSeries();
+        }
         assertTrue(isNotified.get());
     }
 
@@ -62,7 +72,11 @@ public class SeriesCRUDGetterTest {
     public void testNotifiedGetSeriesByTitle() throws SeriesSearchException {
         AtomicBoolean isNotified = new AtomicBoolean(false);
         modelSeriesCRUDGetter.addListener(OperationType.GET_SERIES, () -> isNotified.set(true));
-        modelSeriesCRUDGetter.getExtractSeriesByTitle("title");
+        try (MockedStatic<SQLSelectManager> mock = mockStatic(SQLSelectManager.class)) {
+            mock.when(SQLSelectManager::getTitlesSeries).thenReturn(lastTitlesSeriesTest);
+            mock.when(() -> SQLSelectManager.getExtractSeriesByTitle(anyString())).thenReturn("extract");
+            modelSeriesCRUDGetter.getExtractSeriesByTitle("title");
+        }
         assertTrue(isNotified.get());
     }
 }

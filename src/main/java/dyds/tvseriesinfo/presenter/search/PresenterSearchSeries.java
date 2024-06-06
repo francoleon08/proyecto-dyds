@@ -7,12 +7,14 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 
 public class PresenterSearchSeries implements Presenter {
     public static final int LIMIT_RESULT = 5;
-    private final ViewPanelSearch viewPanelSearch;
+    @Setter
+    private ViewPanelSearch viewPanelSearch;
     @Getter
     private ModelWikipediaAPI modelWikipediaAPI;
 

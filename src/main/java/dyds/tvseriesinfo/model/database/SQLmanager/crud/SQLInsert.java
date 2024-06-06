@@ -1,5 +1,6 @@
-package dyds.tvseriesinfo.model.database.SQLmanager;
+package dyds.tvseriesinfo.model.database.SQLmanager.crud;
 
+import dyds.tvseriesinfo.model.database.SQLmanager.DatabaseConnectionManager;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 
 import java.sql.*;

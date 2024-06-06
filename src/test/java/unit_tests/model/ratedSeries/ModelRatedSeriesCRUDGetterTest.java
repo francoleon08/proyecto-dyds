@@ -1,12 +1,14 @@
 package unit_tests.model.ratedSeries;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelectManager;
+import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
+import org.junit.Before;
+import org.mockito.MockedStatic;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -20,12 +22,10 @@ public class ModelRatedSeriesCRUDGetterTest {
     private static RatedModelSeriesCRUDGetter modelRatedSeriesCRUDGetter;
     private static ArrayList<RatedSeries> ratedSeriesTest;
 
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         modelRatedSeriesCRUDGetter = RatedModelSeriesCRUDGetter.getInstance();
-        mockStatic(SQLSelectManager.class);
         loadArrayListRatedSeries();
-        when(SQLSelectManager.getRatedSeries()).thenReturn(ratedSeriesTest);
     }
 
     private static void loadArrayListRatedSeries() {
@@ -60,13 +60,19 @@ public class ModelRatedSeriesCRUDGetterTest {
     public void testNotifiedListenerGetSeries() throws Exception {
         AtomicBoolean isNotified = new AtomicBoolean(false);
         modelRatedSeriesCRUDGetter.addListener(OperationType.LOAD_RATED_SERIES, () -> isNotified.set(true));
-        modelRatedSeriesCRUDGetter.getRatedSeries();
+        try (MockedStatic<SQLSelectManager> mock = mockStatic(SQLSelectManager.class)) {
+            when(SQLSelectManager.getRatedSeries()).thenReturn(ratedSeriesTest);
+            modelRatedSeriesCRUDGetter.getRatedSeries();
+        }
         assertTrue(isNotified.get());
     }
 
     @Test
     public void testGetterRatedSeriesOrderByRating() throws SearchRatedSeriesException {
-        modelRatedSeriesCRUDGetter.getRatedSeries();
+        try (MockedStatic<SQLSelectManager> mock = mockStatic(SQLSelectManager.class)) {
+            when(SQLSelectManager.getRatedSeries()).thenReturn(ratedSeriesTest);
+            modelRatedSeriesCRUDGetter.getRatedSeries();
+        }
         ArrayList<RatedSeries> ratedSeries = modelRatedSeriesCRUDGetter.getLastRatedSeries();
         assertEquals(ratedSeries.get(0), ratedSeriesTest.get(2));
         assertEquals(ratedSeries.get(1), ratedSeriesTest.get(0));
@@ -75,7 +81,10 @@ public class ModelRatedSeriesCRUDGetterTest {
 
     @Test
     public void testSizeGetterRatedSeries() throws SearchRatedSeriesException {
-        modelRatedSeriesCRUDGetter.getRatedSeries();
+        try (MockedStatic<SQLSelectManager> mock = mockStatic(SQLSelectManager.class)) {
+            when(SQLSelectManager.getRatedSeries()).thenReturn(ratedSeriesTest);
+            modelRatedSeriesCRUDGetter.getRatedSeries();
+        }
         ArrayList<RatedSeries> ratedSeries = modelRatedSeriesCRUDGetter.getLastRatedSeries();
         assertEquals(ratedSeries.size(), ratedSeriesTest.size());
     }

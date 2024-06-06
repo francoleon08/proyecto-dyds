@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaAPIService;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLSelectManager;
+import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.entities.Series;
