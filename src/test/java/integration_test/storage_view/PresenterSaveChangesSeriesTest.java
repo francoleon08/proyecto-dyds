@@ -33,6 +33,7 @@ public class PresenterSaveChangesSeriesTest {
         seriesSaver.setSqlCRUD(sqlCRUDStub);
         presenterSaveChangesSeries = (PresenterSaveChangesSeries) presenterFactory.createPresenterSaveChangesSeries();
         viewPanelStorage = viewFactory.getViewPanelStorage();
+        viewPanelStorage.setActiveMessageDialog(false);
         presenterFactory.createPresenterLoadLocalSeries();
         presenterFactory.createPresenterGetterSeries();
     }

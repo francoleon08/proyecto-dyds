@@ -43,6 +43,8 @@ public class PresenterSaveSeriesTest {
         presenterSaveSeries = (PresenterSaveSeries) presenterFactory.createPresenterSaveSeries();
         viewPanelSearch = viewFactory.getViewPanelSearch();
         viewPanelStorage = viewFactory.getViewPanelStorage();
+        viewPanelSearch.setActiveMessageDialog(false);
+        viewPanelStorage.setActiveMessageDialog(false);
         presenterFactory.createPresenterLoadLocalSeries();
     }
 

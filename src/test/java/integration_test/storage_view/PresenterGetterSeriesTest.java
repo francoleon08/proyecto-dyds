@@ -29,6 +29,7 @@ public class PresenterGetterSeriesTest {
         modelSeriesCRUDGetter = modelFactory.getSeriesCRUDGetter();
         modelSeriesCRUDGetter.setSqlCRUD(sqlCRUDStub);
         viewPanelStorage = viewFactory.getViewPanelStorage();
+        viewPanelStorage.setActiveMessageDialog(false);
         presenterGetterSeries = presenterFactory.createPresenterGetterSeries();
         presenterFactory.createPresenterLoadLocalSeries();
     }

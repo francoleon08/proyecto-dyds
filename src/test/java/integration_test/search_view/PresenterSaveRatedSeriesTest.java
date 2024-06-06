@@ -42,6 +42,8 @@ public class PresenterSaveRatedSeriesTest {
         presenterSavePuntuaction = (PresenterSavePuntuaction) presenterFactory.createPresenterSavePuntuaction();
         viewPanelSearch = viewFactory.getViewPanelSearch();
         viewPanelPuntuaction = viewFactory.getViewPanelPuntuaction();
+        viewPanelSearch.setActiveMessageDialog(false);
+        viewPanelPuntuaction.setActiveMessageDialog(false);
         presenterFactory.createPresenterLoadLocalRatedSeries();
     }
 

@@ -35,6 +35,7 @@ public class PresenterDeleteSeriesTest {
         seriesDeleter.setSqlCRUD(sqlCRUDStub);
         seriesGetter.setSqlCRUD(sqlCRUDStub);
         viewPanelStorage = viewFactory.getViewPanelStorage();
+        viewPanelStorage.setActiveMessageDialog(false);
         presenterDeleteSeries = presenterFactory.createPresenterDeleteSeries();
         presenterFactory.createPresenterLoadLocalSeries();
         presenterFactory.createPresenterGetterSeries();
