@@ -5,9 +5,8 @@ import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
-
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.MockedStatic;
 
 import java.util.ArrayList;

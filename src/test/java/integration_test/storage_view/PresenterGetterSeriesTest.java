@@ -24,7 +24,7 @@ public class PresenterGetterSeriesTest {
     private SQLCRUD sqlCRUDStub;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         sqlCRUDStub = new StubSQLCRUD();
         modelSeriesCRUDGetter = modelFactory.getSeriesCRUDGetter();
         modelSeriesCRUDGetter.setSqlCRUD(sqlCRUDStub);

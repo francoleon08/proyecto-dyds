@@ -37,14 +37,13 @@ public class PresenterSearchSeriesTest {
     private ViewPanelSearch viewPanelSearch;
 
 
-
     @Before
     public void setUp() {
         modelWikipediaAPI = modelFactory.getModelWikipediaAPI();
         wikipediaAPIServiceMock = mock(WikipediaAPIService.class);
         modelWikipediaAPI.setWikipediaAPIService(wikipediaAPIServiceMock);
 
-        viewPanelSearch =  viewFactory.getViewPanelSearch();
+        viewPanelSearch = viewFactory.getViewPanelSearch();
         viewPanelSearch.setActiveMessageDialog(false);
 
         presenterSearchSeries = (PresenterSearchSeries) presenterFactory.createPresenterSearchSeries();
@@ -81,6 +80,7 @@ public class PresenterSearchSeriesTest {
     private void executedSearchSeries() {
         try {
             presenterSearchSeries.onEvent();
-        } catch (IllegalComponentStateException ignored) {}
+        } catch (IllegalComponentStateException ignored) {
+        }
     }
 }

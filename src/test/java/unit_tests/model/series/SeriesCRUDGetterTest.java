@@ -13,7 +13,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mockStatic;
 
 public class SeriesCRUDGetterTest {
     private static ModelSeriesCRUDGetter modelSeriesCRUDGetter;

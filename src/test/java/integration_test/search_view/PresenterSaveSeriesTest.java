@@ -2,7 +2,6 @@ package integration_test.search_view;
 
 import dyds.tvseriesinfo.model.ModelFactory;
 import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
-import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDSaver;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
@@ -10,16 +9,11 @@ import dyds.tvseriesinfo.presenter.search.PresenterSaveSeries;
 import dyds.tvseriesinfo.view.ViewFactory;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
-
 import org.junit.Before;
-
 import org.junit.Test;
 import stubs.StubSQLCRUD;
 
 import javax.swing.*;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import static org.junit.Assert.assertTrue;
 
 public class PresenterSaveSeriesTest {
     private static final ViewFactory viewFactory = new ViewFactory();

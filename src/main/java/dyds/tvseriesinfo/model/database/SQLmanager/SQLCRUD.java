@@ -10,11 +10,18 @@ import java.util.ArrayList;
 
 public interface SQLCRUD {
     void deleteSeriesByTitle(String title) throws SeriesDeleteException;
+
     void savePuntuaction(String title, int puntuaction) throws SeriesSaveException;
+
     void saveSeries(String title, String extract) throws SeriesSaveException;
+
     ArrayList<String> getTitlesSeries() throws SeriesSearchException;
+
     String getExtractSeriesByTitle(String title) throws SeriesSearchException;
+
     ArrayList<RatedSeries> getRatedSeries() throws SearchRatedSeriesException;
+
     RatedSeries getRatedSeriesByTitle(String title) throws SearchRatedSeriesException;
+
     int setRatedSeriesByTitle(String title);
 }

@@ -9,7 +9,6 @@ import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 public class PresenterLoadLocalSeries implements Presenter {
     private final ViewPanelStorage viewPanelStorage;
     private final ModelSeriesCRUDGetter seriesGetter;
-    private Thread taskThread;
 
     public PresenterLoadLocalSeries(ViewPanelStorage viewPanelStorage, ModelSeriesCRUDGetter seriesGetter) {
         this.viewPanelStorage = viewPanelStorage;
