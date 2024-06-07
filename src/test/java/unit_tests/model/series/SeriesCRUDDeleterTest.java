@@ -1,8 +1,8 @@
 package unit_tests.model.series;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLDelete;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDDeleter;
+import dyds.tvseriesinfo.model.database.repository.crudSQL.SQLDelete;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.MockedStatic;

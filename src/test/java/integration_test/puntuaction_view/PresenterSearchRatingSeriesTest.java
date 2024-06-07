@@ -5,8 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import dyds.tvseriesinfo.model.ModelFactory;
 import dyds.tvseriesinfo.model.apiConsummer.WikipediaAPIService;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
 import dyds.tvseriesinfo.model.database.crud.series.ModelWikipediaAPI;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
 import dyds.tvseriesinfo.view.ViewFactory;
@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import stubs.StubSQLCRUD;
+import stubs.StubSeriesRepository;
 
 import java.io.IOException;
 
@@ -37,12 +37,12 @@ public class PresenterSearchRatingSeriesTest {
     private ViewPanelPuntuaction viewPanelPuntuaction;
     private ViewPanelSearch viewPanelSearch;
 
-    private SQLCRUD sqlcrud;
+    private SeriesRepository seriesRepository;
 
     @Before
     public void setUp() {
-        sqlcrud = new StubSQLCRUD();
-        modelFactory.getRatedSeriesCRUDGetter().setSqlCRUD(sqlcrud);
+        seriesRepository = new StubSeriesRepository();
+        modelFactory.getRatedSeriesCRUDGetter().setSeriesRepository(seriesRepository);
 
         modelWikipediaAPI = modelFactory.getModelWikipediaAPI();
         wikipediaAPIServiceMock = mock(WikipediaAPIService.class);

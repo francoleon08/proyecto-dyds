@@ -1,8 +1,8 @@
 package integration_test.puntuaction_view;
 
 import dyds.tvseriesinfo.model.ModelFactory;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
 import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
@@ -10,7 +10,7 @@ import dyds.tvseriesinfo.view.ViewFactory;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelPuntuaction;
 import org.junit.Before;
 import org.junit.Test;
-import stubs.StubSQLCRUD;
+import stubs.StubSeriesRepository;
 
 import javax.swing.*;
 
@@ -25,13 +25,13 @@ public class PresenterLoadLocalRatedSeriesTest {
     private RatedModelSeriesCRUDGetter ratedSeriesCRUDGetter;
     private ViewPanelPuntuaction viewPanelPuntuaction;
 
-    private static SQLCRUD sqlcrudStub;
+    private static SeriesRepository seriesRepositoryStub;
 
     @Before
     public void setUp() {
-        sqlcrudStub = new StubSQLCRUD();
+        seriesRepositoryStub = new StubSeriesRepository();
         ratedSeriesCRUDGetter = modelFactory.getRatedSeriesCRUDGetter();
-        ratedSeriesCRUDGetter.setSqlCRUD(sqlcrudStub);
+        ratedSeriesCRUDGetter.setSeriesRepository(seriesRepositoryStub);
         viewPanelPuntuaction = viewFactory.getViewPanelPuntuaction();
         viewPanelPuntuaction.setActiveMessageDialog(false);
         presenterLoadLocalRatedSeries = presenterFactory.createPresenterLoadLocalRatedSeries();

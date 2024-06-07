@@ -1,9 +1,9 @@
 package dyds.tvseriesinfo.model.database.crud.series;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUDImpl;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepositoryImpl;
 import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,12 +17,12 @@ public class ModelSeriesCRUDGetter extends ModelSeriesCRUD {
     private String lastSeriesExtactByTitle;
     private static ModelSeriesCRUDGetter instance;
     @Setter
-    private SQLCRUD sqlCRUD;
+    private SeriesRepository seriesRepository;
 
     private ModelSeriesCRUDGetter() {
         super();
         lastTitlesSeries = new ArrayList<>();
-        sqlCRUD = new SQLCRUDImpl();
+        seriesRepository = new SeriesRepositoryImpl();
     }
 
     public static synchronized ModelSeriesCRUDGetter getInstance() {
@@ -33,12 +33,12 @@ public class ModelSeriesCRUDGetter extends ModelSeriesCRUD {
     }
 
     public synchronized void getTitlesSeries() throws SeriesSearchException {
-        lastTitlesSeries = sqlCRUD.getTitlesSeries();
+        lastTitlesSeries = seriesRepository.getTitlesSeries();
         notifyListenersSuccess(OperationType.LOAD_LOCAL_SERIES);
     }
 
     public synchronized void getExtractSeriesByTitle(String title) throws SeriesSearchException {
-        lastSeriesExtactByTitle = sqlCRUD.getExtractSeriesByTitle(title);
+        lastSeriesExtactByTitle = seriesRepository.getExtractSeriesByTitle(title);
         notifyListenersSuccess(OperationType.GET_SERIES);
     }
 }

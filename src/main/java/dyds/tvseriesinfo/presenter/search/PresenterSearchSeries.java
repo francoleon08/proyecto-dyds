@@ -25,6 +25,11 @@ public class PresenterSearchSeries implements Presenter {
         initListener();
     }
 
+    private void initListener() {
+        modelWikipediaAPI.addListener(OperationType.WIKIPEDIA_SEARCH, this);
+        modelWikipediaAPI.addListener(OperationType.GET_RATED_SERIES_BY_TITLE, this::handleLoadRatedSeriesByTitle);
+    }
+
     @Override
     public void onEvent() {
         viewPanelSearch.setWorkingState(true);
@@ -46,11 +51,6 @@ public class PresenterSearchSeries implements Presenter {
 
     private static boolean isTermToSearchInvalid(String termToSearch) {
         return termToSearch.isEmpty() || termToSearch.length() > 50;
-    }
-
-    private void initListener() {
-        modelWikipediaAPI.addListener(OperationType.WIKIPEDIA_SEARCH, this);
-        modelWikipediaAPI.addListener(OperationType.GET_RATED_SERIES_BY_TITLE, this::handleLoadRatedSeriesByTitle);
     }
 
     private void handleLoadRatedSeriesByTitle() {

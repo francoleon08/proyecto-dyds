@@ -1,16 +1,16 @@
 package integration_test.storage_view;
 
 import dyds.tvseriesinfo.model.ModelFactory;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
 import dyds.tvseriesinfo.presenter.storage.PresenterSaveChangesSeries;
 import dyds.tvseriesinfo.view.ViewFactory;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import org.junit.Before;
 import org.junit.Test;
-import stubs.StubSQLCRUD;
+import stubs.StubSeriesRepository;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -24,13 +24,13 @@ public class PresenterSaveChangesSeriesTest {
     private static PresenterSaveChangesSeries presenterSaveChangesSeries;
     private static ModelSeriesCRUDSaver seriesSaver;
     private static ViewPanelStorage viewPanelStorage;
-    private static SQLCRUD sqlCRUDStub;
+    private static SeriesRepository sqlCRUDStub;
 
     @Before
     public void setUp() {
-        sqlCRUDStub = new StubSQLCRUD();
+        sqlCRUDStub = new StubSeriesRepository();
         seriesSaver = modelFactory.getSeriesCRUDSaver();
-        seriesSaver.setSqlCRUD(sqlCRUDStub);
+        seriesSaver.setSeriesRepository(sqlCRUDStub);
         presenterSaveChangesSeries = (PresenterSaveChangesSeries) presenterFactory.createPresenterSaveChangesSeries();
         viewPanelStorage = viewFactory.getViewPanelStorage();
         viewPanelStorage.setActiveMessageDialog(false);

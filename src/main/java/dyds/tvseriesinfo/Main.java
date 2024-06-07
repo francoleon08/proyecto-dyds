@@ -2,7 +2,7 @@ package dyds.tvseriesinfo;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import dyds.tvseriesinfo.model.ModelFactory;
-import dyds.tvseriesinfo.model.database.SQLmanager.DatabaseConnectionManager;
+import dyds.tvseriesinfo.model.database.repository.DatabaseConnectionManager;
 import dyds.tvseriesinfo.model.exceptions.DatabaseSQLException;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
 import dyds.tvseriesinfo.view.ViewFactory;

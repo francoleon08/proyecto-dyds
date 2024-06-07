@@ -1,8 +1,8 @@
 package unit_tests.model.ratedSeries;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLSelectManager;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.ratedSeries.RatedModelSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.repository.crudSQL.SQLSelectManager;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import org.junit.Before;

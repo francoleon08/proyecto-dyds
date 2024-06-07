@@ -1,4 +1,4 @@
-package dyds.tvseriesinfo.model.database.SQLmanager.crud;
+package dyds.tvseriesinfo.model.database.repository.crudSQL;
 
 
 import dyds.tvseriesinfo.model.entities.RatedSeries;

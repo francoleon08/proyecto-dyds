@@ -1,8 +1,8 @@
-package dyds.tvseriesinfo.model.database.SQLmanager;
+package dyds.tvseriesinfo.model.database.repository;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLDelete;
-import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLInsert;
-import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLSelectManager;
+import dyds.tvseriesinfo.model.database.repository.crudSQL.SQLDelete;
+import dyds.tvseriesinfo.model.database.repository.crudSQL.SQLInsert;
+import dyds.tvseriesinfo.model.database.repository.crudSQL.SQLSelectManager;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
@@ -11,7 +11,7 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
 import java.util.ArrayList;
 
-public class SQLCRUDImpl implements SQLCRUD {
+public class SeriesRepositoryImpl implements SeriesRepository {
     @Override
     public void deleteSeriesByTitle(String title) throws SeriesDeleteException {
         SQLDelete.deleteSeriesByTitle(title);

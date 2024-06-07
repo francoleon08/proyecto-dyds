@@ -1,9 +1,9 @@
 package integration_test.search_view;
 
 import dyds.tvseriesinfo.model.ModelFactory;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDGetter;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
 import dyds.tvseriesinfo.presenter.search.PresenterSaveSeries;
 import dyds.tvseriesinfo.view.ViewFactory;
@@ -11,7 +11,7 @@ import dyds.tvseriesinfo.view.tabbedPane.ViewPanelSearch;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import org.junit.Before;
 import org.junit.Test;
-import stubs.StubSQLCRUD;
+import stubs.StubSeriesRepository;
 
 import javax.swing.*;
 
@@ -25,15 +25,15 @@ public class PresenterSaveSeriesTest {
     private static ModelSeriesCRUDGetter seriesGetter;
     private static ViewPanelSearch viewPanelSearch;
     private static ViewPanelStorage viewPanelStorage;
-    private static SQLCRUD sqlcrudStub;
+    private static SeriesRepository seriesRepositoryStub;
 
     @Before
     public void setUp() {
-        sqlcrudStub = new StubSQLCRUD();
+        seriesRepositoryStub = new StubSeriesRepository();
         seriesGetter = modelFactory.getSeriesCRUDGetter();
         seriesSaver = modelFactory.getSeriesCRUDSaver();
-        seriesGetter.setSqlCRUD(sqlcrudStub);
-        seriesSaver.setSqlCRUD(sqlcrudStub);
+        seriesGetter.setSeriesRepository(seriesRepositoryStub);
+        seriesSaver.setSeriesRepository(seriesRepositoryStub);
         presenterSaveSeries = (PresenterSaveSeries) presenterFactory.createPresenterSaveSeries();
         viewPanelSearch = viewFactory.getViewPanelSearch();
         viewPanelStorage = viewFactory.getViewPanelStorage();

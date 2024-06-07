@@ -1,17 +1,17 @@
 package integration_test.storage_view;
 
 import dyds.tvseriesinfo.model.ModelFactory;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDDeleter;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
 import dyds.tvseriesinfo.view.ViewFactory;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import org.junit.Before;
 import org.junit.Test;
-import stubs.StubSQLCRUD;
+import stubs.StubSeriesRepository;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -25,15 +25,15 @@ public class PresenterDeleteSeriesTest {
     private ModelSeriesCRUDDeleter seriesDeleter;
     private ModelSeriesCRUDGetter seriesGetter;
     private ViewPanelStorage viewPanelStorage;
-    private SQLCRUD sqlCRUDStub;
+    private SeriesRepository sqlCRUDStub;
 
     @Before
     public void setUp() {
-        sqlCRUDStub = new StubSQLCRUD();
+        sqlCRUDStub = new StubSeriesRepository();
         seriesDeleter = modelFactory.getSeriesCRUDDeleter();
         seriesGetter = modelFactory.getSeriesCRUDGetter();
-        seriesDeleter.setSqlCRUD(sqlCRUDStub);
-        seriesGetter.setSqlCRUD(sqlCRUDStub);
+        seriesDeleter.setSeriesRepository(sqlCRUDStub);
+        seriesGetter.setSeriesRepository(sqlCRUDStub);
         viewPanelStorage = viewFactory.getViewPanelStorage();
         viewPanelStorage.setActiveMessageDialog(false);
         presenterDeleteSeries = presenterFactory.createPresenterDeleteSeries();

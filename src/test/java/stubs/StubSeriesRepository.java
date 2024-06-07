@@ -1,6 +1,6 @@
 package stubs;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.model.exceptions.SeriesDeleteException;
@@ -9,7 +9,7 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
 import java.util.ArrayList;
 
-public class StubSQLCRUD implements SQLCRUD {
+public class StubSeriesRepository implements SeriesRepository {
     @Override
     public void deleteSeriesByTitle(String title) throws SeriesDeleteException {
 

@@ -1,9 +1,9 @@
 package dyds.tvseriesinfo.model.database.crud.ratedSeries;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUDImpl;
 import dyds.tvseriesinfo.model.database.crud.ModelSeriesCRUD;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepositoryImpl;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
 import dyds.tvseriesinfo.model.exceptions.SeriesSaveException;
 import lombok.Setter;
@@ -12,12 +12,12 @@ public class RatedModelSeriesCRUDSaver extends ModelSeriesCRUD {
     private final RatedModelSeriesCRUDGetter seriesGetter;
     private static RatedModelSeriesCRUDSaver instance;
     @Setter
-    private SQLCRUD sqlCRUD;
+    private SeriesRepository seriesRepository;
 
     private RatedModelSeriesCRUDSaver() {
         super();
         seriesGetter = RatedModelSeriesCRUDGetter.getInstance();
-        sqlCRUD = new SQLCRUDImpl();
+        seriesRepository = new SeriesRepositoryImpl();
     }
 
     public static synchronized RatedModelSeriesCRUDSaver getInstance() {
@@ -28,7 +28,7 @@ public class RatedModelSeriesCRUDSaver extends ModelSeriesCRUD {
     }
 
     public synchronized void saveRatedSeries(String title, int rated) throws SeriesSaveException, SearchRatedSeriesException {
-        sqlCRUD.savePuntuaction(title, rated);
+        seriesRepository.savePuntuaction(title, rated);
         notifyListenersSuccess(OperationType.SAVE_RATED);
         seriesGetter.getRatedSeries();
     }

@@ -1,8 +1,8 @@
 package unit_tests.model.series;
 
-import dyds.tvseriesinfo.model.database.SQLmanager.crud.SQLInsert;
 import dyds.tvseriesinfo.model.database.crud.OperationType;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDSaver;
+import dyds.tvseriesinfo.model.database.repository.crudSQL.SQLInsert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockedStatic;

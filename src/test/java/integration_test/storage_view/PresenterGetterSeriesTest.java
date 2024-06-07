@@ -1,15 +1,15 @@
 package integration_test.storage_view;
 
 import dyds.tvseriesinfo.model.ModelFactory;
-import dyds.tvseriesinfo.model.database.SQLmanager.SQLCRUD;
 import dyds.tvseriesinfo.model.database.crud.series.ModelSeriesCRUDGetter;
+import dyds.tvseriesinfo.model.database.repository.SeriesRepository;
 import dyds.tvseriesinfo.presenter.Presenter;
 import dyds.tvseriesinfo.presenter.PresenterFactory;
 import dyds.tvseriesinfo.view.ViewFactory;
 import dyds.tvseriesinfo.view.tabbedPane.ViewPanelStorage;
 import org.junit.Before;
 import org.junit.Test;
-import stubs.StubSQLCRUD;
+import stubs.StubSeriesRepository;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,13 +21,13 @@ public class PresenterGetterSeriesTest {
     private Presenter presenterGetterSeries;
     private ViewPanelStorage viewPanelStorage;
     private ModelSeriesCRUDGetter modelSeriesCRUDGetter;
-    private SQLCRUD sqlCRUDStub;
+    private SeriesRepository sqlCRUDStub;
 
     @Before
     public void setUp() {
-        sqlCRUDStub = new StubSQLCRUD();
+        sqlCRUDStub = new StubSeriesRepository();
         modelSeriesCRUDGetter = modelFactory.getSeriesCRUDGetter();
-        modelSeriesCRUDGetter.setSqlCRUD(sqlCRUDStub);
+        modelSeriesCRUDGetter.setSeriesRepository(sqlCRUDStub);
         viewPanelStorage = viewFactory.getViewPanelStorage();
         viewPanelStorage.setActiveMessageDialog(false);
         presenterGetterSeries = presenterFactory.createPresenterGetterSeries();

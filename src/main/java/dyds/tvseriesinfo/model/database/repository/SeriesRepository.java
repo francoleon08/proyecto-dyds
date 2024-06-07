@@ -1,4 +1,4 @@
-package dyds.tvseriesinfo.model.database.SQLmanager;
+package dyds.tvseriesinfo.model.database.repository;
 
 import dyds.tvseriesinfo.model.entities.RatedSeries;
 import dyds.tvseriesinfo.model.exceptions.SearchRatedSeriesException;
@@ -8,7 +8,7 @@ import dyds.tvseriesinfo.model.exceptions.SeriesSearchException;
 
 import java.util.ArrayList;
 
-public interface SQLCRUD {
+public interface SeriesRepository {
     void deleteSeriesByTitle(String title) throws SeriesDeleteException;
 
     void savePuntuaction(String title, int puntuaction) throws SeriesSaveException;

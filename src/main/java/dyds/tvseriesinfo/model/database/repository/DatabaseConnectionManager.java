@@ -1,4 +1,4 @@
-package dyds.tvseriesinfo.model.database.SQLmanager;
+package dyds.tvseriesinfo.model.database.repository;
 
 import dyds.tvseriesinfo.model.exceptions.DatabaseSQLException;
 
