@@ -78,3 +78,6 @@ Sigue estos pasos para instalar y utilizar la aplicación:
    ```bash
    gradle run
    ```
+
+## Licencia
+Enunciado provisto por la cátedra del profesor Sebastian Gottifredi.
